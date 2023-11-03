@@ -1,5 +1,5 @@
 import s from '../../styles/Contacts.module.scss'
-import Map from '../components/Map';
+import Map from '../../components/Map';
 const Contacts = () => {
   return (
     <div className={s.container}>

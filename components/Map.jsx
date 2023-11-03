@@ -1,4 +1,4 @@
-import s from '../../styles/Map.module.scss'
+import s from '../styles/Map.module.scss'
 const Map = () => {
   return (
     <div className={s.map_container}>
