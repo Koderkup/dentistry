@@ -4,6 +4,7 @@ import { useState, useContext, useEffect } from "react";
 import valid from "@/utils/valid";
 import { DataContext } from "@/store/GlobalState";
 import { postData } from "@/utils/fetchData";
+
 function Register() {
   const initialState = { name: "", email: "", password: "", cf_password: "" };
   const [userData, setUserData] = useState(initialState);
