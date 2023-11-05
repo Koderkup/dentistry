@@ -3,8 +3,16 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import s from "../styles/Header.module.scss";
 import { FaUserAlt } from "react-icons/fa";
+
 const Header = () => {
   const router = useRouter();
+  const isActive = (r) => {
+    if (r === router.pathname) {
+      return ` ${s.active}`;
+    } else {
+      return "";
+    }
+  };
   return (
     <nav className="navbar navbar-expand-lg bg-primary">
       <header className="container-fluid">
@@ -59,6 +67,7 @@ const Header = () => {
                   router.pathname === "/works" ? s.active : ""
                 }`}
                 href="/works"
+                style={{ whiteSpace: "nowrap" }}
               >
                 Наши работы
               </Link>
@@ -89,6 +98,7 @@ const Header = () => {
                   router.pathname === "/about" ? s.active : ""
                 }`}
                 href="/about"
+                style={{ whiteSpace: "nowrap" }}
               >
                 О нас
               </Link>
@@ -135,11 +145,20 @@ const Header = () => {
                     Все статьи
                   </Link>
                 </li>
+                <li>
+                  <Link className="dropdown-item fs-4" href="/question">
+                    Задайте нам вопрос
+                  </Link>
+                </li>
               </ul>
             </li>
           </ul>
           <div className={s.login_button}>
-            <Link className="nav-link fs-4" href="/login">
+            <Link
+              className={"nav-link fs-4" + isActive("/login")}
+              href="/login"
+              style={{ whiteSpace: "nowrap" }}
+            >
               <FaUserAlt />
               Sign In
             </Link>
