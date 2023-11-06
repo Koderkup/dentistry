@@ -2,7 +2,10 @@ import bcrypt from "bcrypt";
 const mysql = require("mysql2");
 import connectDB from "@/utils/connectDB";
 import valid from "@/utils/valid";
+
 connectDB();
+
+
 export default async (req, res) => {
   switch (req.method) {
     case "POST":

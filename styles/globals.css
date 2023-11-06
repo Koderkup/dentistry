@@ -10,4 +10,12 @@ body {
         /* Светлоголубой цвет фона */
         background-image: linear-gradient(to bottom right, #E3F3FD, #87CEFA, #D3D3D3, #E3F3FD);
         /* Градиент с указанными цветами */
+        -webkit-user-select: none;
+            /* Safari */
+            -moz-user-select: none;
+            /* Firefox */
+            -ms-user-select: none;
+            /* IE/Edge */
+            user-select: none;
+            /* Standard */
 }

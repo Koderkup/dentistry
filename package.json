@@ -22,6 +22,8 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.1",
+    "@types/js-cookie": "^3.0.5",
+    "@types/jsonwebtoken": "^9.0.4",
     "@types/react": "^18.2.34",
     "autoprefixer": "^10.0.1",
     "postcss": "^8",

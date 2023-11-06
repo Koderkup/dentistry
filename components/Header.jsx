@@ -1,17 +1,113 @@
+import React, { useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import s from "../styles/Header.module.scss";
 import { FaUserAlt } from "react-icons/fa";
-
+import { DataContext } from "../store/GlobalState";
+import Cookie from "js-cookie";
 const Header = () => {
   const router = useRouter();
+  const { state, dispatch } = useContext(DataContext);
+  const { auth } = state;
   const isActive = (r) => {
     if (r === router.pathname) {
       return ` ${s.active}`;
     } else {
       return "";
     }
+  };
+  const handleLogout = () => {
+    Cookie.remove("refreshtoken", { path: "api/auth/accessToken" });
+    localStorage.removeItem("firstLogin");
+    dispatch({ type: "AUTH", payload: {} });
+    dispatch({ type: "NOTIFY", payload: { success: "Logged out!" } });
+    return router.push("/");
+  };
+  const adminRouter = () => {
+    return (
+      <>
+        <div className="d-flex align-items-center">
+          <div className="nav-item dropdown">
+            <div
+              className={`nav-link dropdown-toggle fs-4`}
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+             Admin menu
+            </div>
+
+            <div
+              className="dropdown-menu"
+              aria-labelledby="navbarDropdownMenuLink"
+              data-bs-auto-close="outside"
+            >
+              <Link href="/create" className="dropdown-item fs-4">
+                Создать контент
+              </Link>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  };
+
+  const loggedRouter = () => {
+    const handleMenuClick = (e) => {
+      e.stopPropagation();
+    };
+
+    return (
+      <>
+        <div className="d-flex align-items-center">
+          <div className="nav-item dropdown">
+            <div
+              className={`nav-link dropdown-toggle fs-4`}
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              onClick={handleMenuClick}
+            >
+              <Image
+                src={auth.user.avatar}
+                alt={auth.user.avatar}
+                width={20}
+                height={20}
+                style={{
+                  borderRadius: "50%",
+                  width: "30px",
+                  height: "30px",
+                  transform: "translateY(-3px)",
+                  marginRight: "3px",
+                }}
+              />
+              {auth.user.name}
+            </div>
+
+            <div
+              className="dropdown-menu"
+              aria-labelledby="navbarDropdownMenuLink"
+              data-bs-auto-close="outside"
+              onClick={handleMenuClick}
+            >
+              <Link href="/profile" className="dropdown-item fs-4">
+                Profile
+              </Link>
+              <button className="dropdown-item fs-4" onClick={handleLogout}>
+                Logout
+              </button>
+              <div className="dropdown-divider"></div>
+              <div className="dropdown-item fs-4">
+                {Object.keys(auth).length !== 0 &&
+                  auth.user.role === "admin" &&
+                  adminRouter()}
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+    );
   };
   return (
     <nav className="navbar navbar-expand-lg bg-primary">
@@ -154,14 +250,18 @@ const Header = () => {
             </li>
           </ul>
           <div className={s.login_button}>
-            <Link
-              className={"nav-link fs-4" + isActive("/login")}
-              href="/login"
-              style={{ whiteSpace: "nowrap" }}
-            >
-              <FaUserAlt />
-              Sign In
-            </Link>
+            {Object.keys(auth).length === 0 ? (
+              <Link
+                className={"nav-link fs-4" + isActive("/login")}
+                href="/login"
+                style={{ whiteSpace: "nowrap" }}
+              >
+                <FaUserAlt />
+                Sign In
+              </Link>
+            ) : (
+              loggedRouter()
+            )}
           </div>
         </div>
       </header>

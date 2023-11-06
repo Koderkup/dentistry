@@ -2,9 +2,17 @@
     text-decoration: underline;
 }
 .login_button {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
     color: darkgray;
+    margin-right: 8%;
+    gap: 30px;
 }
 .useful {
     color: darkgray;
 }
 
+.admin_menu {
+    color: darkgray;
+}

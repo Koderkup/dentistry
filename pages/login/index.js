@@ -50,6 +50,7 @@ function Login() {
   useEffect(() => {
     if (Object.keys(auth).length !== 0) router.push("/");
   }, [auth]);
+  
   return (
     <div>
       <Head>
