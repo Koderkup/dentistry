@@ -30,14 +30,13 @@ const Header = () => {
         <div className="d-flex align-items-center">
           <div className="nav-item dropdown">
             <div
-              className={`nav-link dropdown-toggle fs-4`}
+              className={`nav-link dropdown-toggle`}
               role="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-             Admin menu
+              Admin menu
             </div>
-
             <div
               className="dropdown-menu"
               aria-labelledby="navbarDropdownMenuLink"
@@ -94,6 +93,7 @@ const Header = () => {
               <Link href="/profile" className="dropdown-item fs-4">
                 Profile
               </Link>
+              <div className="dropdown-divider"></div>
               <button className="dropdown-item fs-4" onClick={handleLogout}>
                 Logout
               </button>
@@ -110,7 +110,7 @@ const Header = () => {
     );
   };
   return (
-    <nav className="navbar navbar-expand-lg bg-primary">
+    <nav className="navbar navbar-expand-xl bg-primary">
       <header className="container-fluid">
         <Link className="navbar-brand" href="/">
           <Image
@@ -218,6 +218,7 @@ const Header = () => {
                     href="/articles/article-1"
                   >
                     Перед посещением
+                    <div className="dropdown-divider"></div>
                   </Link>
                 </li>
                 <li>
@@ -226,6 +227,7 @@ const Header = () => {
                     href="/articles/article-2"
                   >
                     Анастезия плюсы и минусы
+                    <div className="dropdown-divider"></div>
                   </Link>
                 </li>
                 <li>
@@ -234,11 +236,13 @@ const Header = () => {
                     href="/articles/article-3"
                   >
                     Профилактика кариеса
+                    <div className="dropdown-divider"></div>
                   </Link>
                 </li>
                 <li>
                   <Link className="dropdown-item fs-4" href="/articles">
                     Все статьи
+                    <div className="dropdown-divider"></div>
                   </Link>
                 </li>
                 <li>

@@ -5,7 +5,7 @@ import { FaViber, FaTelegram, FaInstagram } from "react-icons/fa";
 const Footer = () => {
   return (
     <footer className="text-center text-lg-start bg-gray text-muted">
-      <section className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+      <section className="d-flex justify-content-center p-4 border-bottom">
         <div className="me-5 d-none d-lg-block">
           <i className="fab fa-linkedin">
             <span style={{ fontSize: "24px", fontWeight: "bold" }}>
