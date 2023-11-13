@@ -2,11 +2,12 @@ export const ACTIONS = {
   NOTIFY: "NOTIFY",
   AUTH: "AUTH",
   ADD_MODAL: "ADD_MODAL",
-  ADD_DOCTORS: "ADD_DOCTORS",
-  ADD_USERS: "ADD_USERS",
-  ADD_SERVICES: "ADD_SERVICES",
-  ADD_USEFUL: "ADD_USEFUL",
-  ADD_REVIEWS: "ADD_REVIEWS",
+  ADD_DOCTOR: "ADD_DOCTOR",
+  ADD_USER: "ADD_USER",
+  ADD_SERVICE: "ADD_SERVICE",
+  ADD_ARTICLE: "ADD_ARTICLE",
+  ADD_REVIEW: "ADD_REVIEW",
+  ADD_ACTION: "ADD_ACTION",
 };
 export const deleteItem = (data, id, type) => {
   const newData = data.filter((item) => item._id !== id);

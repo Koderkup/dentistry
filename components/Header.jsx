@@ -69,8 +69,8 @@ const Header = () => {
               onClick={handleMenuClick}
             >
               <Image
-                src={auth.user.avatar}
-                alt={auth.user.avatar}
+                src={auth.user.avatar.url ? auth.user.avatar.url : process.env.DEFAULT_USER_IMAGE}
+                alt={auth.user.avatar.url}
                 width={20}
                 height={20}
                 style={{

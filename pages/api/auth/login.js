@@ -5,8 +5,8 @@ import {
   createAccessToken,
   createRefreshToken,
 } from "../../../utils/generateToken";
-
-connectDB()
+import DatabaseConnection from "@/utils/DataBaseConnection";
+connectDB();
 
 export default async (req, res) => {
   switch (req.method) {
@@ -19,17 +19,7 @@ export default async (req, res) => {
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-
-    const connection = mysql.createConnection({
-      host: process.env.DB_HOST,
-      port: process.env.DB_PORT,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
-    });
-
-    connection.connect();
-
+    const connection = DatabaseConnection.getInstance().getConnection();
     const checkUserQuery = `SELECT * FROM users WHERE email = ?`;
     const [rows] = await connection.promise().query(checkUserQuery, [email]);
     const user = rows[0];

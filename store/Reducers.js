@@ -16,27 +16,27 @@ const reducers = (state, action) => {
         ...state,
         modal: action.payload,
       };
-    case ACTIONS.ADD_DOCTORS:
+    case ACTIONS.ADD_DOCTOR:
       return {
         ...state,
         doctors: action.payload,
       };
-    case ACTIONS.ADD_USERS:
+    case ACTIONS.ADD_USER:
       return {
         ...state,
         users: action.payload,
       };
-    case ACTIONS.ADD_SERVICES:
+    case ACTIONS.ADD_SERVICE:
       return {
         ...state,
         services: action.payload,
       };
-    case ACTIONS.ADD_USEFUL:
+    case ACTIONS.ADD_ARTICLE:
       return {
         ...state,
-        usefuls: action.payload,
+        articles: action.payload,
       };
-    case ACTIONS.ADD_REVIEWS:
+    case ACTIONS.ADD_REVIEW:
       return {
         ...state,
         reviews: action.payload,

@@ -6,11 +6,12 @@ export const DataContext = createContext();
     const initialState = {
       notify: {},
       auth: {},
-      modal: [],
+      modal: {},
       services: [],
       users: [],
       doctors: [],
-      usefuls: [],
+      articles: [],
+      actions: [],
       reviews: [],
     };
 

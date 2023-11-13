@@ -1,13 +1,40 @@
+import { useContext } from "react";
+import { Inter } from "next/font/google";
+import { useState } from "react";
+import { getData } from "../utils/fetchData";
+import DoctorPerson from "@/components/doctor/DoctorPerson";
+import { DoctorPersonDefault } from "@/components/doctor/DoctorPerson";
+import s from "../styles/Home.module.scss";
+import { DataContext } from "../store/GlobalState";
+const inter = Inter({ subsets: ["latin"] });
 
-import { Inter } from 'next/font/google'
-import Loading from '@/components/Loading';
-import Toast from '@/components/Toast';
-const inter = Inter({ subsets: ['latin'] })
-
-export default function Home() {
+function Home({ doctorProps }) {
+  const [doctors, setDoctors] = useState(doctorProps);
+  const { state, dispatch } = useContext(DataContext);
+  const { auth } = state;
   return (
     <>
-      <p>home</p>
+      <div className={s.doctor_wrapper}>
+        <h1>Наши специалисты</h1>
+        <div className={s.doctors_list}>
+          {doctors.map((doctor, i) => (
+            <DoctorPerson key={doctor.id} doctor={doctor} />
+          ))}
+          {auth.user && auth.user.role === "admin" && <DoctorPersonDefault />}
+        </div>
+      </div>
     </>
   );
 }
+
+export async function getServerSideProps(context) {
+  const res = await getData("doctors");
+  return {
+    props: {
+      doctorProps: res.doctors,
+      results: res.result,
+    },
+  };
+}
+
+export default Home;
