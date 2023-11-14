@@ -13,6 +13,11 @@ export default async (req, res) => {
       break;
   }
 };
+
+const DEFAULT_IMG_URL = {
+ public_id: "user_default_x6y6up",
+ url: "https://res.cloudinary.com/dlr2olc8r/image/upload/v1699090090/test/user_default_x6y6up.png",
+};
 const register = async (req, res) => {
   try {
     const { name, email, password, cf_password } = req.body;
@@ -30,10 +35,10 @@ const register = async (req, res) => {
 
     const passwordHash = await bcrypt.hash(password, 12);
 
-    const insertUserQuery = `INSERT INTO users (name, email, password) VALUES (?, ?, ?)`;
+    const insertUserQuery = `INSERT INTO users (name, email, password, avatar) VALUES (?, ?, ?, ?)`;
     await connection
       .promise()
-      .query(insertUserQuery, [name, email, passwordHash]);
+      .query(insertUserQuery, [name, email, passwordHash, JSON.stringify(DEFAULT_IMG_URL)]);
 
     connection.end();
 

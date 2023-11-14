@@ -69,7 +69,11 @@ const Header = () => {
               onClick={handleMenuClick}
             >
               <Image
-                src={auth.user.avatar.url ? auth.user.avatar.url : process.env.DEFAULT_USER_IMAGE}
+                src={
+                  auth.user.avatar.url
+                    ? auth.user.avatar.url
+                    : process.env.DEFAULT_USER_IMAGE
+                }
                 alt={auth.user.avatar.url}
                 width={20}
                 height={20}
@@ -94,6 +98,15 @@ const Header = () => {
                 Profile
               </Link>
               <div className="dropdown-divider"></div>
+              {auth.users && auth.users.role === "admin" && (
+                <>
+                  <Link href="/users" className="dropdown-item fs-4">
+                    Users
+                  </Link>
+                  <div className="dropdown-divider"></div>
+                </>
+              )}
+
               <button className="dropdown-item fs-4" onClick={handleLogout}>
                 Logout
               </button>

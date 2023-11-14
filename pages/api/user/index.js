@@ -12,6 +12,8 @@ export default async (req, res) => {
     case "GET":
       await getUsers(req, res);
       break;
+    case "DELETE":
+      await deleteUser(req, res);
   }
 };
 
@@ -50,6 +52,19 @@ const uploadInfo = async (req, res) => {
         email: result.email,
         role: result.role,
       },
+    });
+  } catch (err) {
+    return res.status(500).json({ err: err.message });
+  }
+};
+
+const deleteUser = async (req, res) => {
+  try {
+    const result = await auth(req, res);
+    const connection = DatabaseConnection.getInstance().getConnection();
+    connection.execute("DELETE FROM users WHERE id = ?", [result.id]);
+    res.json({
+      msg: "User`s delete is Success!",
     });
   } catch (err) {
     return res.status(500).json({ err: err.message });

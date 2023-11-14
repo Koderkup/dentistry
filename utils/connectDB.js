@@ -46,9 +46,9 @@ const createTables = async () => {
       name VARCHAR(255) NOT NULL,
       email VARCHAR(255) NOT NULL UNIQUE,
       password VARCHAR(255) NOT NULL,
+      avatar JSON,
       role VARCHAR(255) DEFAULT 'user',
       root BOOLEAN DEFAULT false,
-      avatar VARCHAR(255) DEFAULT 'https://res.cloudinary.com/dlr2olc8r/image/upload/v1699090090/test/user_default_x6y6up.png',
       timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )`;
 

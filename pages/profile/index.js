@@ -5,7 +5,7 @@ import Image from "next/image";
 import s from "../../styles/Profile.module.scss";
 import { FaCamera } from "react-icons/fa";
 import valid from "@/utils/valid";
-import { patchData } from "@/utils/fetchData";
+import { patchData, deleteData } from "@/utils/fetchData";
 import { imageUpload } from "../../utils/imagesUpload";
 
 const Profile = () => {
@@ -57,6 +57,22 @@ const Profile = () => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
     dispatch({ type: "NOTIFY", payload: {} });
+  };
+
+  const handleDeleteProfile = (e) => {
+    e.preventDefault();
+    dispatch({ type: "NOTIFY", payload: { loading: true } });
+    if (auth.user) {
+      deleteData("user", auth.token).then((res) => {
+        if (res.err)
+          return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+          dispatch({
+            type: "AUTH",
+            payload: {},
+          });
+          return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
+      });
+    }
   };
 
   const handleUpdateProfile = (e) => {
@@ -224,7 +240,7 @@ const Profile = () => {
               name="password"
               value={password}
               className="form-control"
-              placeholder="ваш новый пароль"
+              placeholder="Ваш новый пароль"
               onChange={handleChange}
             />
           </div>
@@ -235,18 +251,33 @@ const Profile = () => {
               name="cf_password"
               value={cf_password}
               className="form-control"
-              placeholder="Потвердите Ваш новый пароль"
+              placeholder="подтвердите Ваш новый пароль"
               onChange={handleChange}
             />
           </div>
           <p></p>
-          <button
-            className="btn btn-info"
-            disabled={notify.loading}
-            onClick={handleUpdateProfile}
+          <div
+            style={{
+              display: "flex",
+              flexFlow: "row wrap",
+              justifyContent: "space-between",
+            }}
           >
-            Обновить
-          </button>
+            <button
+              className="btn btn-info"
+              disabled={notify.loading}
+              onClick={handleUpdateProfile}
+            >
+              Обновить
+            </button>
+            <button
+              className="btn btn-danger"
+              disabled={notify.loading}
+              onClick={handleDeleteProfile}
+            >
+              Удалить
+            </button>
+          </div>
         </div>
         <div className="col-md-8">
           <h3>Дополнительная информация</h3>
