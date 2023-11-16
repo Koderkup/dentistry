@@ -1,7 +1,7 @@
 import connectDB from "../../../utils/connectDB";
 import DatabaseConnection from "@/utils/DataBaseConnection";
 import auth from "../../../middleware/auth";
-
+import mysql from 'mysql2'
 connectDB();
 
 export default async (req, res) => {
@@ -20,15 +20,28 @@ export default async (req, res) => {
 const getUsers = async (req, res) => {
   try {
     const result = await auth(req, res);
-    if (result.role !== "admin")
+    if (result.role !== "admin") {
       return res.status(400).json({ err: "Authentication is not valid" });
-    const connection = DatabaseConnection.getInstance().getConnection();
-    const [rows] = await connection.execute("SELECT * FROM users");
-    const users = rows.map((row) => {
-      const { id, name, avatar, email, role } = row;
-      return { id, name, avatar, email, role };
+    }
+    const connection = mysql.createConnection({
+      host: process.env.DB_HOST,
+      port: process.env.DB_PORT,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
     });
-    res.json({ users });
+
+    connection.connect();
+    const selectUsersQuery = `SELECT * FROM users`;
+   connection.query(selectUsersQuery, (error, results) => {
+     if (error) {
+       throw error;
+     }
+     const users = results;
+     res.json(users);
+    connection.end();
+   });
+    
   } catch (err) {
     return res.status(500).json({ err: err.message });
   }

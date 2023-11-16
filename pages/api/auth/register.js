@@ -40,7 +40,7 @@ const register = async (req, res) => {
       .promise()
       .query(insertUserQuery, [name, email, passwordHash, JSON.stringify(DEFAULT_IMG_URL)]);
 
-    connection.end();
+    // connection.end();
 
     res.json({ msg: "Register Success!" });
   } catch (err) {

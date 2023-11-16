@@ -2,7 +2,9 @@ import Head from "next/head";
 import { useContext } from "react";
 import { DataContext } from "../../store/GlobalState";
 import Link from "next/link";
-
+import Image from "next/image";
+import { FaCheck, FaTimes, FaEdit, FaTrashAlt } from "react-icons/fa";
+import { AiOutlineDelete } from "react-icons/ai";
 const Users = () => {
   const { state, dispatch } = useContext(DataContext);
   const { users, auth, modal } = state;
@@ -29,19 +31,19 @@ const Users = () => {
 
         <tbody>
           {users.map((user, index) => (
-            <tr key={user._id} style={{ cursor: "pointer" }}>
+            <tr key={user.id} style={{ cursor: "pointer" }}>
               <th>{index + 1}</th>
-              <th>{user._id}</th>
+              <th>{user.id}</th>
               <th>
-                <img
-                  src={user.avatar}
-                  alt={user.avatar}
+                <Image
+                  src={user.avatar.url}
+                  alt={user.avatar.url}
                   style={{
-                    width: "30px",
-                    height: "30px",
                     overflow: "hidden",
                     objectFit: "cover",
                   }}
+                  width={30}
+                  height={30}
                 />
               </th>
               <th>{user.name}</th>
@@ -49,52 +51,63 @@ const Users = () => {
               <th>
                 {user.role === "admin" ? (
                   user.root ? (
-                    <i className="fas fa-check text-success"> Root</i>
+                    <i>
+                      <FaCheck className="text-success" />
+                      Root
+                    </i>
                   ) : (
-                    <i className="fas fa-check text-success"></i>
+                    <i>
+                      <FaCheck className="text-success" />
+                    </i>
                   )
                 ) : (
-                  <i className="fas fa-times text-danger"></i>
+                  <i>
+                    <FaTimes className="text-danger" />
+                  </i>
                 )}
               </th>
               <th>
                 <Link
                   href={
                     auth.user.root && auth.user.email !== user.email
-                      ? `/edit_user/${user._id}`
+                      ? `/edit_user/${user.id}`
                       : "#!"
                   }
                 >
-                  <a>
-                    <i className="fas fa-edit text-info mr-2" title="Edit"></i>
-                  </a>
+                  <i>
+                    <FaEdit className="text-info mr-2" title="Edit" />
+                  </i>
                 </Link>
-
+                <i> </i>
                 {auth.user.root && auth.user.email !== user.email ? (
-                  <i
-                    className="fas fa-trash-alt text-danger ml-2"
-                    title="Remove"
-                    data-toggle="modal"
-                    data-target="#exampleModal"
-                    onClick={() =>
-                      dispatch({
-                        type: "ADD_MODAL",
-                        payload: [
-                          {
-                            data: users,
-                            id: user._id,
-                            title: user.name,
-                            type: "ADD_USERS",
-                          },
-                        ],
-                      })
-                    }
-                  ></i>
+                  <i>
+                    <FaTrashAlt
+                      className="text-danger ml-2"
+                      title="Remove"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                      onClick={() =>
+                        dispatch({
+                          type: "ADD_MODAL",
+                          payload: [
+                            {
+                              data: users,
+                              id: user.id,
+                              title: user.name,
+                              type: "ADD_USER",
+                            },
+                          ],
+                        })
+                      }
+                    />
+                  </i>
                 ) : (
-                  <i
-                    className="fas fa-trash-alt text-danger ml-2"
-                    title="Remove"
-                  ></i>
+                  <i>
+                    <AiOutlineDelete
+                      className="text-danger ml-2"
+                      title="Remove"
+                    />
+                  </i>
                 )}
               </th>
             </tr>

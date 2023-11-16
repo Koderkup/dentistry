@@ -3,6 +3,7 @@ export const ACTIONS = {
   AUTH: "AUTH",
   ADD_MODAL: "ADD_MODAL",
   ADD_DOCTOR: "ADD_DOCTOR",
+  DELETE_DOCTOR: "DELETE_DOCTOR",
   ADD_USER: "ADD_USER",
   ADD_SERVICE: "ADD_SERVICE",
   ADD_ARTICLE: "ADD_ARTICLE",
@@ -10,11 +11,11 @@ export const ACTIONS = {
   ADD_ACTION: "ADD_ACTION",
 };
 export const deleteItem = (data, id, type) => {
-  const newData = data.filter((item) => item._id !== id);
+  const newData = data.filter((item) => item.id !== id);
   return { type, payload: newData };
 };
 
 export const updateItem = (data, id, post, type) => {
-  const newData = data.map((item) => (item._id === id ? post : item));
+  const newData = data.map((item) => (item.id === id ? post : item));
   return { type, payload: newData };
 };

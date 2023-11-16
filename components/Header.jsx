@@ -98,7 +98,7 @@ const Header = () => {
                 Profile
               </Link>
               <div className="dropdown-divider"></div>
-              {auth.users && auth.users.role === "admin" && (
+              {auth.user && auth.user.role === "admin" && (
                 <>
                   <Link href="/users" className="dropdown-item fs-4">
                     Users
