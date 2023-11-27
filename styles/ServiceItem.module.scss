@@ -1,0 +1,30 @@
+.service_item {
+    box-shadow:
+        8px 4px 2px rgba(211, 211, 211, 0.5),
+        14px 8px 6px rgba(128, 128, 128, 0.6),
+        20px 12px 10px rgba(0, 0, 0, 0.3);
+    background-color: white;
+    border: 24px;
+    transition: transform 0.3s ease;
+}
+
+.service_item:hover {
+    cursor: pointer;
+}
+
+.admin_link {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (min-width: 768px) {
+    .service_default_item {
+        min-width: 540px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .service_default_item {
+        min-width: 100%;
+    }
+}

@@ -1,0 +1,16 @@
+.user_review_form {
+    margin: 12px auto;
+    border: 3px solid #88CEFA;
+}
+
+.autosize {
+    height: auto;
+    overflow-y: auto;
+}
+
+@media (max-width: 500px) {
+    .autosize {
+        max-height: 200px;
+        overflow-y: auto;
+    }
+}
