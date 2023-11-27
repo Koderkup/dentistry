@@ -1,0 +1,12 @@
+.data_inputs {
+    max-width: 480px;
+    display: flex;
+    justify-content: space-between;
+
+    input {
+        margin: 1%;
+        width: 180px;
+        background-color: #DCE6EB;
+        border: 1px solid #0078D7;
+    }
+}

@@ -1,0 +1,14 @@
+.service_wrapper {
+    margin: auto;
+    padding: auto;
+
+    .services_list {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-items: space-between;
+        width: 100%;
+        gap: 40px;
+        margin-top: 12px;
+    }
+}

@@ -41,6 +41,11 @@ const reducers = (state, action) => {
         ...state,
         reviews: action.payload,
       };
+    case ACTIONS.DELETE_REVIEW:
+      return {
+        ...state,
+        reviews: action.payload,
+      };
     default:
       return state;
   }

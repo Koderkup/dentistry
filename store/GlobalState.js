@@ -17,6 +17,7 @@ const DataProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(reducers, initialState);
   const { auth } = state;
+  
   useEffect(() => {
     const firstLogin = localStorage.getItem("firstLogin");
     if (firstLogin) {

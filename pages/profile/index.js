@@ -279,9 +279,6 @@ const Profile = () => {
             </button>
           </div>
         </div>
-        <div className="col-md-8">
-          <h3>Дополнительная информация</h3>
-        </div>
       </section>
     </div>
   );

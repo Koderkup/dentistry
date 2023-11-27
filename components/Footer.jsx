@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { MdLocationOn, MdEmail } from "react-icons/md";
 import { FaViber, FaTelegram, FaInstagram } from "react-icons/fa";
+import s from '../styles/Footer.module.scss'
 const Footer = () => {
   return (
     <footer className="text-center text-lg-start bg-gray text-muted">
@@ -55,7 +56,7 @@ const Footer = () => {
         <div className="container text-center text-md-start mt-5">
           <div className="row mt-3">
             <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-              <h6 className="text-uppercase fw-bold mb-4">
+              <h6 className={`text-uppercase fw-bold mb-4 ${s.paragraph}`}>
                 <Image
                   src="./assets/logo_mirastom.svg"
                   width={30}
@@ -73,7 +74,9 @@ const Footer = () => {
               </div>
             </div>
             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-              <h6 className="text-uppercase fw-bold mb-4">Ждем Вас!</h6>
+              <h6 className={`text-uppercase fw-bold mb-4 ${s.paragraph}`}>
+                Ждем Вас!
+              </h6>
               <p>
                 <Link href="/" className="text-reset">
                   Главная
@@ -106,7 +109,9 @@ const Footer = () => {
               </p>
             </div>
             <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-              <h6 className="text-uppercase fw-bold mb-4">Полезные статьи</h6>
+              <h6 className={`text-uppercase fw-bold mb-4 ${s.paragraph}`}>
+                Полезные статьи
+              </h6>
               <p>
                 <Link href="/articles" className="text-reset">
                   Перед посещением
@@ -129,7 +134,9 @@ const Footer = () => {
               </p>
             </div>
             <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-              <h6 className="text-uppercase fw-bold mb-4">Контакты:</h6>
+              <h6 className={`text-uppercase fw-bold mb-4 ${s.paragraph}`}>
+                Контакты:
+              </h6>
               <p>
                 <MdLocationOn
                   className="header-top__icon"

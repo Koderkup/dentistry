@@ -119,7 +119,7 @@ const createTables = async () => {
   const checkReviewsTableQuery = `CREATE TABLE IF NOT EXISTS reviews (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
-  text TEXT NOT NULL,
+  comment TEXT NOT NULL,
   avatar JSON,
   rating INT NOT NULL,
   checked BOOLEAN DEFAULT false,

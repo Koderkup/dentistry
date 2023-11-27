@@ -60,7 +60,21 @@ export const deleteData = async (url, token) => {
       Authorization: token,
     },
   });
-
   const data = await res.json();
   return data;
 };
+
+
+  export const deleteDataArray = async (url, post, token) => {
+    const res = await fetch(`${baseUrl}/api/${url}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+      body: JSON.stringify({ ids: post }),
+    });
+    const data = await res.json();
+    return data;
+  };
+

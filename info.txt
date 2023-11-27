@@ -1,136 +1,83 @@
- //===============================================================
-// const avatarData = [
-//   {
-//     public_id: "test/Screenshot_7_q0xqrb",
-//     url: "https://res.cloudinary.com/dlr2olc8r/image/upload/v1699361326/test/Screenshot_7_q0xqrb.png",
-//   },
-// ];
+ 
 
-// // Преобразуйте данные avatar в JSON-строку
-// const avatarJson = JSON.stringify(avatarData);
-// const insertQuery = `INSERT INTO doctors (sirname, fullname, avatar, proff, description) VALUES ('Лекторова', 'Вероника Леонидовна', '${avatarJson}', 'стоматолог-терапевт', 'врач высшей категории с большим опытом')`;
+// Фильтрация отзывов на основе выбранных дат
+let filteredReviews = reviews.filter((review) => {
+  const reviewDate = new Date(review.timestamp);
+  const startDateValue = startDate ? new Date(startDate) : null;
+  const endDateValue = endDate ? new Date(endDate) : null;
 
-// connection.query(insertQuery, (error, results) => {
-//   if (error) {
-//     throw error;
-//   }
-//   console.log("Data inserted successfully");
-// });
-//=================================================================
-
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-              Launch demo modal
-          </button>
-
-
-
-
-          import jwt from "jsonwebtoken";
-import connectDB from "../utils/connectDB";
-const mysql = require("mysql2");
-const util = require("util");
-
-connectDB();
-
-const auth = async (req, res) => {
-  const connection = mysql.createConnection({
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-  });
-  const query = util.promisify(connection.query).bind(connection);
-
-  try {
-    const token = req.headers.authorization;
-    if (!token) return res.status(400).json({ err: "Invalid Authentication." });
-
-    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-    if (!decoded) return res.status(400).json({ err: "Invalid Authentication." });
-
-    const checkUserQuery = `SELECT * FROM users WHERE id = ?`;
-    const result = await query(checkUserQuery, [decoded.id]);
-
-    if (result.length === 0) {
-      return res.status(400).json({ err: "User not found." });
-    }
-
-    const user = result[0];
-    return { id: user.id, role: user.role, email: user.email };
-  } catch (err) {
-    return res.status(500).json({ err: err.message });
-  } finally {
-    connection.end();
+  // Проверка, попадает ли дата отзыва в выбранный диапазон
+  if (startDateValue && endDateValue) {
+    return reviewDate >= startDateValue && reviewDate <= endDateValue;
+  } else if (startDateValue) {
+    return reviewDate >= startDateValue;
+  } else if (endDateValue) {
+    return reviewDate <= endDateValue;
   }
-};
 
-export default auth;
-https://api.cloudinary.com/v1_1/dlr2olc8r
+  return true;
+});
+
+// Сортировка отфильтрованных отзывов по дате (timestamp) сначала новые
+filteredReviews.sort((a, b) => {
+  const dateA = new Date(a.timestamp);
+  const dateB = new Date(b.timestamp);
+  return dateB - dateA;
+});
 
 
-const reader = new FileReader();
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setPreview(reader.result);
+
+
+
+
+{filteredReviews.map((review) => {
+  return (
+    <UserReviewForm
+      key={review.id}
+      review={review}
+      handleDelete={() => handleDelete(review.id)}
+    />
+  );
+})}
+
+
+
+function Reviews({ reviewsProps }) {
+  const initialState = { name: "", comment: "", rating: 5, avatar: "woman" };
+  
+  // Остальной код компонента...
+  
+  const [filteredReviews, setFilteredReviews] = useState(reviewsProps);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  
+  // Фильтрация отзывов на основе выбранных дат
+  useEffect(() => {
+    let filteredReviews = reviewsProps.filter((review) => {
+      const reviewDate = new Date(review.timestamp);
+      const startDateValue = startDate ? new Date(startDate) : null;
+      const endDateValue = endDate ? new Date(endDate) : null;
+
+      if (startDateValue && endDateValue) {
+        return reviewDate >= startDateValue && reviewDate <= endDateValue;
+      } else if (startDateValue) {
+        return reviewDate >= startDateValue;
+      } else if (endDateValue) {
+        return reviewDate <= endDateValue;
       }
-    };
-    reader.readAsDataURL(file);
-=======================================
-   / useEffect(() => {
-  //   return () => {
-  //     if (preview) {
-  //       URL.revokeObjectURL(preview);
-  //     }
-  //   };
-  // }, [preview]);
 
-((((((((((((((((((((((((((((()))))))))))))))))))))))))))))
+      return true;
+    });
 
-  import mysql from "mysql2";
+    // Сортировка отфильтрованных отзывов по дате (timestamp) сначала новые
+    filteredReviews.sort((a, b) => {
+      const dateA = new Date(a.timestamp);
+      const dateB = new Date(b.timestamp);
+      return dateB - dateA;
+    });
 
-class DatabaseConnection {
-  static instance;
-  static connection;
+    setFilteredReviews(filteredReviews);
+  }, [reviewsProps, startDate, endDate]);
 
-  static getInstance() {
-    if (!DatabaseConnection.instance) {
-      DatabaseConnection.instance = new DatabaseConnection();
-    }
-    return DatabaseConnection.instance;
-  }
-
-  static async getConnection() {
-    if (
-      !DatabaseConnection.connection ||
-      DatabaseConnection.connection.state === "disconnected"
-    ) {
-      DatabaseConnection.connection = await mysql.createConnection({
-        host: process.env.DB_HOST,
-        port: process.env.DB_PORT,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_NAME,
-      });
-    }
-    return DatabaseConnection.connection;
-  }
-
-  static async closeConnection() {
-    if (
-      DatabaseConnection.connection &&
-      DatabaseConnection.connection.state !== "disconnected"
-    ) {
-      await DatabaseConnection.connection.end();
-    }
-  }
-}
-
-export default DatabaseConnection;
-(((((((((((((((((((((((((((((((((((())))))))))))))))))))))))))))))))))))
-
-
-{
-  "public_id": "user_default_x6y6up",
-  "url": "https://res.cloudinary.com/dlr2olc8r/image/upload/v1699090090/test/user_default_x6y6up.png"
+  // Остальной код компонента...
 }
