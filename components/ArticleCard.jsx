@@ -4,7 +4,7 @@ import dataArticles from "@/data/dataArticles";
 const ArticleCard = ({ order }) => {
   const [content, setContent] = useState({});
   useEffect(() => {
-    const filling = dataArticles.filter((article) => article.slug === order);
+    const filling = dataArticles.filter((article) => article.id === order);
     setContent(filling[0]);
   }, [order]);
   if (!content || !content.imageUrl) {

@@ -2,10 +2,10 @@ import { useRouter } from "next/router";
 import ArticleCard from "@/components/ArticleCard";
 const ArticlePage = () => {
   const router = useRouter();
-  const { slug } = router.query;
+  const { id } = router.query;
   return (
     <>
-      <ArticleCard order={slug} />
+      <ArticleCard order={id} />
     </>
   );
 };
