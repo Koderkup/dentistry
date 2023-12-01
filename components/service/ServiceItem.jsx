@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useLayoutEffect, useState } from "react";
 import s from "../../styles/ServiceItem.module.scss";
 import Link from "next/link";
 import Image from "next/image";
@@ -8,6 +8,19 @@ import Loading from "../Loading";
 const ServiceItem = ({ service }) => {
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
+  const [isDesktop, setIsDesktop] = useState(false)
+  useLayoutEffect(() => {
+    function handleResize() {
+      setIsDesktop(window.innerWidth >= 768); 
+    }
+    window.addEventListener("resize", handleResize);
+    handleResize(); 
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const objectFitValue = isDesktop ? 250 : 350;
   const serviceLink = () => {
     return (
       <>
@@ -66,7 +79,8 @@ const ServiceItem = ({ service }) => {
             className="card-img-top"
             alt="service`s photo"
             width={400}
-            height={250}
+            height={objectFitValue}
+            objectFit="scale-down"
           />
         </div>
         <div className="col-md-8">
@@ -76,9 +90,9 @@ const ServiceItem = ({ service }) => {
               {service.intro}
             </p>
             <div className="card-text">
-                {!auth.user || (auth.user && auth.user.role !== "admin")
-                  ? serviceLink()
-                  : adminLink()}
+              {!auth.user || (auth.user && auth.user.role !== "admin")
+                ? serviceLink()
+                : adminLink()}
             </div>
           </div>
         </div>
@@ -113,7 +127,7 @@ export const ServiceItemDefault = () => {
             <h5 className="card-title"></h5>
             <p className="card-text" style={{ minHeight: "120px" }}></p>
             <p className="card-text" style={{ textAlign: "center" }}>
-                <Link href={`/create`} className="btn btn-success" style={{minWidth: '160px'}}>
+                <Link href={`services/create`} className="btn btn-success" style={{minWidth: '160px'}}>
                   Добавить
                 </Link>
             </p>

@@ -81,3 +81,5 @@ function Reviews({ reviewsProps }) {
 
   // Остальной код компонента...
 }
+
+ssh -R 80:localhost:3000 serveo.net

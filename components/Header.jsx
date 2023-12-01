@@ -228,7 +228,7 @@ const Header = () => {
                 <li>
                   <Link
                     className="dropdown-item fs-4"
-                    href="/articles/article-1"
+                    href="/articles/1"
                   >
                     Перед посещением
                     <div className="dropdown-divider"></div>
@@ -237,7 +237,7 @@ const Header = () => {
                 <li>
                   <Link
                     className="dropdown-item fs-4"
-                    href="/articles/article-2"
+                    href="/articles/2"
                   >
                     Анастезия плюсы и минусы
                     <div className="dropdown-divider"></div>
@@ -246,7 +246,7 @@ const Header = () => {
                 <li>
                   <Link
                     className="dropdown-item fs-4"
-                    href="/articles/article-3"
+                    href="/articles/3"
                   >
                     Профилактика кариеса
                     <div className="dropdown-divider"></div>

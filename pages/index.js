@@ -6,6 +6,8 @@ import DoctorPerson from "@/components/doctor/DoctorPerson";
 import { DoctorPersonDefault } from "@/components/doctor/DoctorPerson";
 import s from "../styles/Home.module.scss";
 import { DataContext } from "../store/GlobalState";
+import Welcom from "@/components/Welcom";
+import ActionAd from "@/components/ActionAd";
 const inter = Inter({ subsets: ["latin"] });
 
 function Home({ doctorProps }) {
@@ -14,7 +16,11 @@ function Home({ doctorProps }) {
   const { auth } = state;
   return (
     <>
-      <div className={s.doctor_wrapper}>
+      <div style={{ backgroundColor: "#DBF0FC", padding: "1%" }}>
+        <ActionAd />
+      </div>
+      <Welcom />
+      <div className={`${s.doctor_wrapper}`}>
         <h1>Наши специалисты</h1>
         <div className={s.doctors_list}>
           {doctors.map((doctor, i) => (

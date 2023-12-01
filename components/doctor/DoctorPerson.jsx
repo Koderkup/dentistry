@@ -19,7 +19,7 @@ export const DoctorPersonDefault = () => {
       />
       <div className="card-body d-flex flex-column justify-content-center align-items-center">
         <Link
-          href={`/create`}
+          href={`doctors/create`}
           className="btn btn-success"
         >
           Добавить
