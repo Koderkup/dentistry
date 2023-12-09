@@ -9,7 +9,7 @@ import Cookie from "js-cookie";
 const Header = () => {
   const router = useRouter();
   const { state, dispatch } = useContext(DataContext);
-  const { auth } = state;
+  const { auth, articles } = state;
   const isActive = (r) => {
     if (r === router.pathname) {
       return ` ${s.active}`;
@@ -153,105 +153,90 @@ const Header = () => {
               className={`nav-item ${router.pathname === "/" ? s.active : ""}`}
             >
               <Link
-                className="nav-link active fs-4"
+                className="nav-link fs-4 active"
                 aria-current="page"
                 href="/"
               >
                 Главная
               </Link>
             </li>
-            <li className="nav-item">
-              <Link
-                className={`nav-link fs-4 ${
-                  router.pathname === "/services" ? s.active : ""
-                }`}
-                href="/services"
-              >
+            <li
+              className={`nav-item ${
+                router.pathname === "/services" ? s.active : ""
+              }`}
+            >
+              <Link className={`nav-link fs-4`} href="/services">
                 Услуги
               </Link>
             </li>
-            <li className="nav-item">
+            <li
+              className={`nav-item ${
+                router.pathname === "/works" ? s.active : ""
+              }`}
+            >
               <Link
-                className={`nav-link fs-4 ${
-                  router.pathname === "/works" ? s.active : ""
-                }`}
+                className={`nav-link fs-4 `}
                 href="/works"
                 style={{ whiteSpace: "nowrap" }}
               >
                 Наши работы
               </Link>
             </li>
-            <li className="nav-item">
-              <Link
-                className={`nav-link fs-4 ${
-                  router.pathname === "/contacts" ? s.active : ""
-                }`}
-                href="/contacts"
-              >
+            <li
+              className={`nav-item ${
+                router.pathname === "/contacts" ? s.active : ""
+              }`}
+            >
+              <Link className={`nav-link fs-4`} href="/contacts">
                 Контакты
               </Link>
             </li>
-            <li className="nav-item">
-              <Link
-                className={`nav-link fs-4 ${
-                  router.pathname === "/reviews" ? s.active : ""
-                }`}
-                href="/reviews"
-              >
+            <li
+              className={`nav-item ${
+                router.pathname === "/reviews" ? s.active : ""
+              }`}
+            >
+              <Link className={`nav-link fs-4`} href="/reviews">
                 Отзывы
               </Link>
             </li>
-            <li className="nav-item">
+            <li
+              className={`nav-item ${
+                router.pathname === "/about" ? s.active : ""
+              }`}
+            >
               <Link
-                className={`nav-link fs-4 ${
-                  router.pathname === "/about" ? s.active : ""
-                }`}
+                className={`nav-link fs-4 `}
                 href="/about"
                 style={{ whiteSpace: "nowrap" }}
               >
                 О нас
               </Link>
             </li>
-            <li className="nav-item dropdown">
+            <li className={`nav-item dropdown`}>
               <Link
-                className={`nav-link dropdown-toggle fs-4 ${
-                  router.pathname === "/articles" ? s.active : ""
-                } ${s.useful}`}
+                className={`nav-link dropdown-toggle fs-4 ${s.useful}`}
                 href="/articles passHref"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
+                style={{ color: "darkgray" }}
               >
                 Полезное
               </Link>
-              <ul className="dropdown-menu">
-                <li>
-                  <Link
-                    className="dropdown-item fs-4"
-                    href="/articles/1"
-                  >
-                    Перед посещением
-                    <div className="dropdown-divider"></div>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="dropdown-item fs-4"
-                    href="/articles/2"
-                  >
-                    Анастезия плюсы и минусы
-                    <div className="dropdown-divider"></div>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="dropdown-item fs-4"
-                    href="/articles/3"
-                  >
-                    Профилактика кариеса
-                    <div className="dropdown-divider"></div>
-                  </Link>
-                </li>
+              <ul className="dropdown-menu" style={{ maxWidth: '500px'}}>
+                {articles.map((article) => (
+                  <li key={article.id}>
+                    <Link
+                    style={{ maxWidth: '100%', overflow: 'hidden', whiteSpace: 'wrap'}}
+                      className="dropdown-item fs-4"
+                      href={`/articles/${article.id}`}
+                    >
+                      {article.header}
+                      <div className="dropdown-divider"></div>
+                    </Link>
+                  </li>
+                ))}
                 <li>
                   <Link className="dropdown-item fs-4" href="/articles">
                     Все статьи

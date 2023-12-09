@@ -4,17 +4,16 @@ import { DataContext } from "../../../store/GlobalState";
 import { imageUpload } from "../../../utils/imagesUpload";
 import { postData, getData, putData } from "../../../utils/fetchData";
 import { useRouter } from "next/router";
-import s from "../../../styles/DoctorsManager.module.scss";
+import s from "../../../styles/ArticlesManager.module.scss";
 import { MdClose } from "react-icons/md";
 
-const ServicesManager = () => {
+const ArticlesManager = () => {
   const initialState = {
-    title: "",
-    intro: "",
-    description: "",
+    header: "",
+    content: "",
   };
-  const [service, setService] = useState(initialState);
-  const { title, intro, description } = service;
+  const [article, setArticle] = useState(initialState);
+  const { header, content } = article;
 
   const [image, setImage] = useState([]);
 
@@ -28,19 +27,19 @@ const ServicesManager = () => {
   useEffect(() => {
     if (id) {
       setOnEdit(true);
-      getData(`services/${id}`, auth.token).then((res) => {
-        setService(res.service[0]);
-        setImage(res.service[0].image);
+      getData(`articles/${id}`, auth.token).then((res) => {
+        setArticle(res.article[0]);
+        setImage(res.article[0].image);
       });
     } else {
       setOnEdit(false);
-      setService(initialState);
+      setArticle(initialState);
       setImage([]);
     }
   }, [id]);
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
-    setService({ ...service, [name]: value });
+    setArticle({ ...article, [name]: value });
     dispatch({ type: "NOTIFY", payload: {} });
   };
 
@@ -94,7 +93,7 @@ const ServicesManager = () => {
         payload: { error: "Authentication is not valid." },
       });
 
-    if (!title || !intro || !description || image.length === 0)
+    if (!header || !content || image.length === 0)
       return dispatch({
         type: "NOTIFY",
         payload: { error: "Please add all the fields." },
@@ -110,16 +109,16 @@ const ServicesManager = () => {
     let res;
     if (onEdit) {
       res = await putData(
-        `services/${id}`,
-        { ...service, image: [...imgOldURL, ...media] },
+        `articles/${id}`,
+        { ...article, image: [...imgOldURL, ...media] },
         auth.token
       );
       if (res.err)
         return dispatch({ type: "NOTIFY", payload: { error: res.err } });
     } else {
       res = await postData(
-        "services",
-        { ...service, image: [...imgOldURL, ...media] },
+        "articles",
+        { ...article, image: [...imgOldURL, ...media] },
         auth.token
       );
       if (res.err)
@@ -128,50 +127,38 @@ const ServicesManager = () => {
 
     return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
   };
+
   return (
-    <div className={`container`}>
+    <div className={`${s.doctors_manager} container`}>
       <Head>
-        <title>Services Manager</title>
+        <title>Articles Manager</title>
       </Head>
       <form className="row" onSubmit={handleSubmit}>
         <div className="col-md-6">
           <div className="row">
-            <div className="col-sm-6">
-              <label htmlFor="title">Название</label>
+            <div className="col-md-6">
+              <label htmlFor="header">Заголовок статьи</label>
               <input
                 type="text"
-                name="title"
-                id="title"
-                value={title}
+                name="header"
+                value={header}
+                id="header"
                 placeholder="Название"
                 className="d-block w-100 p-2"
                 onChange={handleChangeInput}
               />
             </div>
-
-            <div className="col-sm-6">
-              <label htmlFor="intro">Краткое описание</label>
-              <input
-                type="text"
-                name="intro"
-                value={intro}
-                id="intro"
-                placeholder="Краткое описание"
-                className="d-block w-100 p-2"
-                onChange={handleChangeInput}
-              />
-            </div>
           </div>
-          <label htmlFor="description">Описание</label>
+          <label htmlFor="content">Описание</label>
           <textarea
-            name="description"
-            id="description"
+            name="content"
+            id="content"
             cols="50"
             rows="6"
             placeholder="Описание"
             onChange={handleChangeInput}
             className="d-block my-4 w-100 p-2"
-            value={description}
+            value={content}
           />
           <button type="submit" className="btn btn-info my-2 px-4">
             {onEdit ? "Обновить" : "Создать"}
@@ -212,4 +199,4 @@ const ServicesManager = () => {
   );
 };
 
-export default ServicesManager;
+export default ArticlesManager;

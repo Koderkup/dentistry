@@ -2,15 +2,20 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 const ActionAd = () => {
+   const blurDataURL = "data:image/svg+xml;base64,...";
   return (
     <div className="container">
       <div className="card bg-dark">
         <Image
-          src="/assets/action.jpg"
+          src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1701685505/test/action_to0h7a.jpg"
           className="card-img"
           alt="action-ad"
           width={800}
           height={500}
+          rel="preload"
+          as="image"
+          blurDataURL={blurDataURL}
+          placeholder="blur"
         />
         <div className="card-img-overlay" style={{ color: "#5F5F5F" }}>
           <h2 className="card-title" style={{ color: "#5F5F5F" }}>

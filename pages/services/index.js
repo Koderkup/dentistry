@@ -1,6 +1,5 @@
-import { useContext } from "react";
 import { Inter } from "next/font/google";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { getData } from "../../utils/fetchData";
 import ServiceItem from "@/components/service/ServiceItem";
 import { ServiceItemDefault } from "@/components/service/ServiceItem";

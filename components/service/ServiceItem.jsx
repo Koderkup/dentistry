@@ -34,7 +34,7 @@ const ServiceItem = ({ service }) => {
     return (
       <div className={s.admin_link}>
         <Link
-          href={`create/${service.id}`}
+          href={`services/create/${service.id}`}
           className="btn btn-info"
           style={{ width: "160px"}}
         >
@@ -75,7 +75,7 @@ const ServiceItem = ({ service }) => {
       <div className="row g-0">
         <div className="col-md-4" style={{ padding: "1%" }}>
           <Image
-            src={service.image.url}
+            src={service.image[0].url}
             className="card-img-top"
             alt="service`s photo"
             width={400}

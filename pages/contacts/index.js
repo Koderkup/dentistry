@@ -46,11 +46,11 @@ const Contacts = () => {
           <div className="carousel-inner">
             <div className="carousel-item active">
               <Image
-                src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1699188678/test/Screenshot_5_rdtckm.png"
+                src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1701784681/test/enter_ifnkmi.jpg"
                 className="d-block w-100"
                 alt="location"
-                width={500}
-                height={500}
+                width={400}
+                height={600}
               />
             </div>
             <div className="carousel-item">

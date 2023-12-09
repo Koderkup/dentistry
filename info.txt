@@ -1,85 +1,18 @@
- 
+[{"url": "https://res.cloudinary.com/dlr2olc8r/image/upload/v1697875495/test/ylqnjhil3egbb0sifh0v.png", "public_id": "test/ylqnjhil3egbb0sifh0v"}]
 
-// Фильтрация отзывов на основе выбранных дат
-let filteredReviews = reviews.filter((review) => {
-  const reviewDate = new Date(review.timestamp);
-  const startDateValue = startDate ? new Date(startDate) : null;
-  const endDateValue = endDate ? new Date(endDate) : null;
+[{"url": "https://res.cloudinary.com/dlr2olc8r/image/upload/v1697875495/test/ylqnjhil3egbb0sifh0v.png", "public_id": "test/ylqnjhil3egbb0sifh0v"}]
 
-  // Проверка, попадает ли дата отзыва в выбранный диапазон
-  if (startDateValue && endDateValue) {
-    return reviewDate >= startDateValue && reviewDate <= endDateValue;
-  } else if (startDateValue) {
-    return reviewDate >= startDateValue;
-  } else if (endDateValue) {
-    return reviewDate <= endDateValue;
-  }
+[{"url": "https://res.cloudinary.com/dlr2olc8r/image/upload/v1697875495/test/ylqnjhil3egbb0sifh0v.png", "public_id": "test/ylqnjhil3egbb0sifh0v"}]
 
-  return true;
-});
+[{"url": "https://res.cloudinary.com/dlr2olc8r/image/upload/v1697875495/test/ylqnjhil3egbb0sifh0v.png", "public_id": "test/ylqnjhil3egbb0sifh0v"}]
 
-// Сортировка отфильтрованных отзывов по дате (timestamp) сначала новые
-filteredReviews.sort((a, b) => {
-  const dateA = new Date(a.timestamp);
-  const dateB = new Date(b.timestamp);
-  return dateB - dateA;
-});
-
-
-
-
-
-
-{filteredReviews.map((review) => {
-  return (
-    <UserReviewForm
-      key={review.id}
-      review={review}
-      handleDelete={() => handleDelete(review.id)}
-    />
-  );
-})}
-
-
-
-function Reviews({ reviewsProps }) {
-  const initialState = { name: "", comment: "", rating: 5, avatar: "woman" };
-  
-  // Остальной код компонента...
-  
-  const [filteredReviews, setFilteredReviews] = useState(reviewsProps);
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  
-  // Фильтрация отзывов на основе выбранных дат
-  useEffect(() => {
-    let filteredReviews = reviewsProps.filter((review) => {
-      const reviewDate = new Date(review.timestamp);
-      const startDateValue = startDate ? new Date(startDate) : null;
-      const endDateValue = endDate ? new Date(endDate) : null;
-
-      if (startDateValue && endDateValue) {
-        return reviewDate >= startDateValue && reviewDate <= endDateValue;
-      } else if (startDateValue) {
-        return reviewDate >= startDateValue;
-      } else if (endDateValue) {
-        return reviewDate <= endDateValue;
-      }
-
-      return true;
-    });
-
-    // Сортировка отфильтрованных отзывов по дате (timestamp) сначала новые
-    filteredReviews.sort((a, b) => {
-      const dateA = new Date(a.timestamp);
-      const dateB = new Date(b.timestamp);
-      return dateB - dateA;
-    });
-
-    setFilteredReviews(filteredReviews);
-  }, [reviewsProps, startDate, endDate]);
-
-  // Остальной код компонента...
-}
+[{"url": "https://res.cloudinary.com/dlr2olc8r/image/upload/v1697875495/test/ylqnjhil3egbb0sifh0v.png", "public_id": "test/ylqnjhil3egbb0sifh0v"}]
 
 ssh -R 80:localhost:3000 serveo.net
+
+ {/* <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          /> */}
+          {/* <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> */}
+          {/* <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> */}

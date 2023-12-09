@@ -1,10 +1,12 @@
 import Head from "next/head";
 import { useState, useContext, useEffect } from "react";
-import { DataContext } from "../../store/GlobalState";
-import { imageUpload } from "../../utils/imageUpload";
-import { postData, getData, putData } from "../../utils/fetchData";
+import { DataContext } from "../../../store/GlobalState";
+import { imageUpload } from "../../../utils/imagesUpload";
+import { postData, getData, putData } from "../../../utils/fetchData";
 import { useRouter } from "next/router";
 import s from '../../../styles/DoctorsManager.module.scss'
+import { MdClose } from "react-icons/md";
+
 const DoctorsManager = () => {
   const initialState = {
     sirname: "",
@@ -15,7 +17,7 @@ const DoctorsManager = () => {
   const [doctor, setDoctor] = useState(initialState);
   const { sirname, fullname, proff, description } = doctor;
 
-  const [images, setImages] = useState([]);
+  const [avatar, setAvatar] = useState([]);
 
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
@@ -27,17 +29,16 @@ const DoctorsManager = () => {
   useEffect(() => {
     if (id) {
       setOnEdit(true);
-      getData(`product/${id}`).then((res) => {
-        setDoctor(res.doctor);
-        setImages(res.doctor.images);
+      getData(`doctors/${id}`, auth.token).then((res) => {
+        setDoctor(res.doctor[0]);
+        setAvatar(res.doctor[0].avatar);
       });
     } else {
       setOnEdit(false);
       setDoctor(initialState);
-      setImages([]);
+      setAvatar([]);
     }
   }, [id]);
-
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
     setDoctor({ ...doctor, [name]: value });
@@ -71,19 +72,19 @@ const DoctorsManager = () => {
 
     if (err) dispatch({ type: "NOTIFY", payload: { error: err } });
 
-    const imgCount = images.length;
+    const imgCount = avatar.length;
     if (imgCount + newImages.length > 5)
       return dispatch({
         type: "NOTIFY",
         payload: { error: "Select up to 5 images." },
       });
-    setImages([...images, ...newImages]);
+    setAvatar([...avatar, ...newImages]);
   };
 
   const deleteImage = (index) => {
-    const newArr = [...images];
+    const newArr = [...avatar];
     newArr.splice(index, 1);
-    setImages(newArr);
+    setAvatar(newArr);
   };
 
   const handleSubmit = async (e) => {
@@ -99,7 +100,7 @@ const DoctorsManager = () => {
       !fullname ||
       !proff ||
       !description ||
-      images.length === 0
+      avatar.length === 0
     )
       return dispatch({
         type: "NOTIFY",
@@ -108,24 +109,24 @@ const DoctorsManager = () => {
 
     dispatch({ type: "NOTIFY", payload: { loading: true } });
     let media = [];
-    const imgNewURL = images.filter((img) => !img.url);
-    const imgOldURL = images.filter((img) => img.url);
+    const imgNewURL = avatar.filter((img) => !img.url);
+    const imgOldURL = avatar.filter((img) => img.url);
 
     if (imgNewURL.length > 0) media = await imageUpload(imgNewURL);
 
     let res;
     if (onEdit) {
       res = await putData(
-        `doctor/${id}`,
-        { ...doctor, images: [...imgOldURL, ...media] },
+        `doctors/${id}`,
+        { ...doctor, avatar: [...imgOldURL, ...media] },
         auth.token
       );
       if (res.err)
         return dispatch({ type: "NOTIFY", payload: { error: res.err } });
     } else {
       res = await postData(
-        "doctor",
-        { ...doctor, images: [...imgOldURL, ...media] },
+        "doctors",
+        { ...doctor, avatar: [...imgOldURL, ...media] },
         auth.token
       );
       if (res.err)
@@ -136,21 +137,12 @@ const DoctorsManager = () => {
   };
 
   return (
-    <div className={s.doctors_manager}>
+    <div className={`${s.doctors_manager} container`}>
       <Head>
         <title>Doctors Manager</title>
       </Head>
       <form className="row" onSubmit={handleSubmit}>
         <div className="col-md-6">
-          <input
-            type="text"
-            name="sirname"
-            value={sirname}
-            placeholder="фамилия"
-            className="d-block my-4 w-100 p-2"
-            onChange={handleChangeInput}
-          />
-
           <div className="row">
             <div className="col-sm-6">
               <label htmlFor="sirname">Фамилия</label>
@@ -195,22 +187,22 @@ const DoctorsManager = () => {
           <textarea
             name="description"
             id="description"
-            cols="30"
-            rows="4"
+            cols="50"
+            rows="6"
             placeholder="Описание"
             onChange={handleChangeInput}
             className="d-block my-4 w-100 p-2"
             value={description}
           />
           <button type="submit" className="btn btn-info my-2 px-4">
-            {onEdit ? "Update" : "Create"}
+            {onEdit ? "Обновить" : "Создать"}
           </button>
         </div>
 
         <div className="col-md-6 my-4">
           <div className="input-group mb-3">
             <div className="input-group-prepend">
-              <span className="input-group-text">Upload</span>
+              {/* <span className="input-group-text">Загрузить</span> */}
             </div>
             <div className="custom-file border rounded">
               <input
@@ -224,17 +216,18 @@ const DoctorsManager = () => {
           </div>
 
           <div className="row img-up mx-0">
-            {images.map((img, index) => (
+             {avatar.map((ava, index) => (
               <div key={index} className="file_img my-1">
                 <img
-                  src={img.url ? img.url : URL.createObjectURL(img)}
+                  src={ava.url ? ava.url : URL.createObjectURL(ava)}
                   alt=""
                   className="img-thumbnail rounded"
                 />
-
-                <span onClick={() => deleteImage(index)}>X</span>
+                <p onClick={() => deleteImage(index)}>
+                  <MdClose style={{fontSize: '32px', color: 'red'}} />
+                </p>
               </div>
-            ))}
+            ))} 
           </div>
         </div>
       </form>
