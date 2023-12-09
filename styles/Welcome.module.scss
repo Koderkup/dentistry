@@ -42,12 +42,19 @@
     .text {
         width: 100%;
     }
+    .image {
+        height: 800px;
+    }
 }
 
 @media screen and (max-width: 768px) {
     .image,
     .text {
         width: 100%;
+    }
+
+    .image {
+        height: 800px;
     }
 }
 

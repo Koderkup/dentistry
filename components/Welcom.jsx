@@ -29,11 +29,10 @@ const Welcom = () => {
         </div>
         <div className={s.image_container}>
           <Image
-            src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1696941703/test/y0j8vh3wniwmojcjzkss.png"
+            src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1701785172/test/%D0%92%D1%81%D0%B5_%D0%B4%D0%BE%D0%BF_115_odfurb.jpg"
             alt="mirastom_team"
             width={680}
-            height={450}
-            objectFit="cover"
+            height={550}
             className={s.image}
           />
         </div>

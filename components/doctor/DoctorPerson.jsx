@@ -47,7 +47,7 @@ const DoctorPerson = ({ doctor }) => {
   const adminLink = () => {
     return (
       <>
-        <Link href={`create/${doctor.id}`} className="btn btn-info flex-fill">
+        <Link href={`doctors/create/${doctor.id}`} className="btn btn-info flex-fill">
           Редактактировать
         </Link>
         <button
@@ -81,7 +81,7 @@ const DoctorPerson = ({ doctor }) => {
         alt="doctor`s photo"
         width={300}
         height={300}
-        style={{ border: "1.5px solid gray" }}
+        style={{ border: "3px solid white" }}
       />
       <div className="card-body d-flex flex-column justify-content-between align-items-center">
         <h5 className="card-title text-center">{doctor.sirname}</h5>

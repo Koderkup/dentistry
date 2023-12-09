@@ -1,3 +1,8 @@
 .doctors_manager {
-    
+    max-width: 800px;
+    margin: 20px auto;
+
+    input,  textarea {
+        width: 100%;
+    }
 }

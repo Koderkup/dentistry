@@ -51,6 +51,19 @@ const DataProvider = ({ children }) => {
       }
     }
   }, [auth.token, auth.user]);
+
+  useEffect(() => {
+    // Получение данных статей из базы данных
+    getData("articles").then((res) => {
+      if (res.err) {
+        // Обработка ошибки, если не удалось получить данные
+        dispatch({ type: "NOTIFY", payload: { error: res.err } });
+      } else {
+        // Обновление состояния с полученными данными статей
+        dispatch({ type: "ADD_ARTICLES", payload: res.articles });
+      }
+    });
+  }, []);
   return (
     <DataContext.Provider value={{ state, dispatch }}>
       {children}

@@ -5,17 +5,17 @@ connectDB();
 export default async (req, res) => {
   switch (req.method) {
     case "GET":
-      await getDoctors(req, res);
+      await getArticles(req, res);
       break;
     case "POST":
-      await createDoctor(req, res);
+      await createArticle(req, res);
       break;
     default:
       break;
   }
 };
 
-const getDoctors = async (req, res) => {
+const getArticles = async (req, res) => {
   try {
     const connection = mysql.createConnection({
       host: process.env.DB_HOST,
@@ -26,33 +26,30 @@ const getDoctors = async (req, res) => {
     });
 
     connection.connect();
-     
-    const selectDoctorsQuery = `SELECT * FROM doctors`;
-   connection.query(selectDoctorsQuery, (error, results) => {
-     if (error) {
-       throw error;
-     }
-     const doctors = results;
-     res.json({
-       status: "success",
-       result: doctors.length,
-       doctors,
-     });
-   });
 
-   connection.end();
+    const selectArticlesQuery = `SELECT * FROM articles`;
+    connection.query(selectArticlesQuery, (error, results) => {
+      if (error) {
+        throw error;
+      }
+      const articles = results;
+      res.json({ articles });
+    });
+
+    connection.end();
   } catch (err) {
-return res.status(500).json({err: err.message});
+    return res.status(500).json({ err: err.message });
   }
 };
 
-const createDoctor = async (req, res) => {
+
+const createArticle = async (req, res) => {
   try {
     const admin = await auth(req, res);
     if (!admin || admin.role !== "admin") {
       return res.status(500).json({ err: "Authentication is not valid" });
     }
-    const { sirname, fullname, proff, avatar, description } = req.body;
+    const { header, content, image } = req.body;
     const connection = await mysql.createConnection({
       host: process.env.DB_HOST,
       port: process.env.DB_PORT,
@@ -61,21 +58,17 @@ const createDoctor = async (req, res) => {
       database: process.env.DB_NAME,
     });
 
-    const createDoctorQuery = `INSERT INTO doctors (sirname, fullname, proff, avatar, description) VALUES (?, ?, ?, ?, ?)`;
-    const results = await connection.execute(createDoctorQuery, [
-      sirname,
-      fullname,
-      proff,
-      JSON.stringify(avatar),
-      description,
+    const createArticleQuery = `INSERT INTO articles (header, content, image) VALUES (?, ?, ?)`;
+    const results = await connection.execute(createArticleQuery, [
+      header,
+      content,
+      image
     ]);
-
-    const doctors = results;
+    const articles = results;
     res.json({
       status: "success",
-      result: doctors ? doctors.length : 0,
-      doctors,
-      msg: "Врач успешно добавлен",
+      articles,
+      msg: "Статья успешно добавлена",
     });
 
     connection.end();

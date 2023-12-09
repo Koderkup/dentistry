@@ -2,10 +2,10 @@ import { useState, useContext } from "react";
 import { getData } from "../../utils/fetchData";
 import { DataContext } from "../../store/GlobalState";
 import Image from "next/image";
-import s from '../../styles/DetatilDoctor.module.scss'
+import s from "../../styles/DetatilService.module.scss";
 
-const DetailDoctor = (props) => {
-  const [doctor] = useState(props.doctor[0]);
+const DetailService = (props) => {
+  const [service] = useState(props.service[0]);
   const [tab, setTab] = useState(0);
   const { state, dispatch } = useContext(DataContext);
 
@@ -15,12 +15,12 @@ const DetailDoctor = (props) => {
   };
   return (
     <div className="container">
-      <h1 className={s.main_title}>Сведения о враче</h1>
-      <div className={s.detail_doctor}>
+      <h1 className={s.main_title}>Сведения об услуге</h1>
+      <div className={s.detail_service}>
         <div className={s.images_container}>
           <Image
-            src={doctor.avatar[0].url}
-            alt={doctor.avatar[0].url}
+            src={service.image[0].url}
+            alt={service.image[0].url}
             width={500}
             height={500}
             className={s.main_image}
@@ -29,7 +29,7 @@ const DetailDoctor = (props) => {
             className="row mx-0"
             style={{ cursor: "pointer", marginTop: "4px" }}
           >
-            {doctor.avatar.map((img, index) => (
+            {service.image.map((img, index) => (
               <Image
                 key={index}
                 src={img.url}
@@ -48,10 +48,9 @@ const DetailDoctor = (props) => {
           </div>
         </div>
         <div className={s.text_wrapper}>
-          <h2 className={`${s.name} text-uppercase`}>{doctor.sirname}</h2>
-          <h3 className={`${s.name} text-uppercase`}>{doctor.fullname}</h3>
+          <h2 className={`${s.name} text-uppercase`}>{service.title}</h2>
           <p className={s.description} style={{ textAlign: "justify" }}>
-            {doctor.description}
+            {service.description}
           </p>
         </div>
       </div>
@@ -59,13 +58,13 @@ const DetailDoctor = (props) => {
   );
 };
 
-export default DetailDoctor;
+export default DetailService;
 
 export async function getServerSideProps({ params: { id } }) {
-  const res = await getData(`doctors/${id}`);
+  const res = await getData(`services/${id}`);
   return {
     props: {
-      doctor: res.doctor,
+      service: res.service,
     },
   };
 }

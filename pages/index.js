@@ -7,7 +7,7 @@ import { DoctorPersonDefault } from "@/components/doctor/DoctorPerson";
 import s from "../styles/Home.module.scss";
 import { DataContext } from "../store/GlobalState";
 import Welcom from "@/components/Welcom";
-import ActionAd from "@/components/ActionAd";
+import ActionAd from "@/components/action/ActionAd";
 const inter = Inter({ subsets: ["latin"] });
 
 function Home({ doctorProps }) {

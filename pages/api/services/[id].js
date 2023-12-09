@@ -7,17 +7,17 @@ connectDB();
 export default async (req, res) => {
   switch (req.method) {
     case "GET":
-      await getDoctor(req, res);
+      await getService(req, res);
       break;
     case "PUT":
-      await updateDoctor(req, res);
+      await updateService(req, res);
       break;
     default:
       break;
   }
 };
 
-const getDoctor = async (req, res) => {
+const getService = async (req, res) => {
   try {
     const { id } = req.query;
 
@@ -30,14 +30,14 @@ const getDoctor = async (req, res) => {
     });
     connection.connect();
 
-    const selectDoctorQuery = `SELECT * FROM doctors WHERE id = ?`;
-    connection.query(selectDoctorQuery, [id], (error, result) => {
+    const selectServiceQuery = `SELECT * FROM services WHERE id = ?`;
+    connection.query(selectServiceQuery, [id], (error, result) => {
       if (error) {
         throw error;
       }
-      const doctor = result;
-      if (!doctor) return res.status(400).json({ err: "Такого врача нет" });
-      res.json({ doctor });
+      const service = result;
+      if (!service) return res.status(400).json({ err: "Такой услуги нет" });
+      res.json({ service });
     });
 
     connection.end();
@@ -46,15 +46,15 @@ const getDoctor = async (req, res) => {
   }
 };
 
-const updateDoctor = async (req, res) => {
+const updateService = async (req, res) => {
   try {
     const results = await auth(req, res);
     if (!results || results.role !== "admin") {
       return res.status(500).json({ err: "Authtication is not valid" });
     }
     const { id } = req.query;
-    const { sirname, fullname, proff, avatar, description } = req.body;
-    if (!sirname || !fullname || !proff || avatar.length === 0 || !description)
+    const { title, intro, image, description } = req.body;
+    if (!title || !intro || image.length === 0 || !description)
       return res.status(500).json({ err: "Incomplete data" });
     const connection = mysql.createConnection({
       host: process.env.DB_HOST,
@@ -68,12 +68,15 @@ const updateDoctor = async (req, res) => {
         return res.status(500).json({ err: err.message });
       }
     });
-    const updateDoctorQuery =
-      "UPDATE doctors SET sirname=?, fullname=?, proff=?, avatar=?, description=? WHERE id=?";
-    await connection.execute(
-      updateDoctorQuery,
-      [sirname, fullname, proff, avatar, description, id]
-    );
+    const updateServiceQuery =
+      "UPDATE services SET title=?, intro=?, image=?, description=? WHERE id=?";
+    await connection.execute(updateServiceQuery, [
+      title,
+      intro,
+      image,
+      description,
+      id,
+    ]);
     res.json({ msg: "Данные успешно обновлены" });
     connection.end();
   } catch (err) {

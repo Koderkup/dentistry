@@ -31,7 +31,7 @@ const reducers = (state, action) => {
         ...state,
         services: action.payload,
       };
-    case ACTIONS.ADD_ARTICLE:
+    case ACTIONS.ADD_ARTICLES:
       return {
         ...state,
         articles: action.payload,
