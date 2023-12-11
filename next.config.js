@@ -34,6 +34,8 @@ const nextConfig = {
     DB_PORT: "3306",
     DEFAULT_USER_IMAGE:
       "https://res.cloudinary.com/dlr2olc8r/image/upload/v1699090090/test/user_default_x6y6up.png	",
+    REACT_APP_RECAPTCHA_SITE_KEY: "6Le3Zy0pAAAAAEdYTQRFesRv0kJe6bIEd_MPF7RY",
+    REACT_APP_RECAPTCHA_SERVER_KEY: "6Le3Zy0pAAAAACnADRp-C9-kDXPS3hSQ5gdE16Jm",
   },
 };
 

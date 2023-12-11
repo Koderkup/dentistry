@@ -11,7 +11,7 @@ import {
 } from "../../utils/fetchData";
 import { deleteItem, deleteItems } from "../../store/Actions";
 import usePagination from "@/hooks/usePagination";
-
+import ReCAPTCHA from "react-google-recaptcha";
 function Reviews({ reviewsProps }) {
   const initialState = { name: "", comment: "", rating: 5, avatar: "woman" };
   const [userComment, setUserComment] = useState(initialState);
@@ -22,6 +22,8 @@ function Reviews({ reviewsProps }) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [checked, setChecked] = useState(false);
+  const [delivary, setDelivary] = useState(true);
+  const [formData, setFormData] = useState({ recaptchaResponse: "" });
 
   const {
     firstContentIndex,
@@ -71,22 +73,22 @@ function Reviews({ reviewsProps }) {
     );
   }, []);
 
-useEffect(() => {
-  const filteredReviews = reviewsProps
-    .filter((review) => {
-      const reviewDate = new Date(review.timestamp);
-      const startDateObj = new Date(startDate);
-      const endDateObj = new Date(endDate);
-      endDateObj.setHours(23, 59, 59); // Добавляем время к endDate
-      return reviewDate >= startDateObj && reviewDate <= endDateObj;
-    })
-    .sort((a, b) => {
-      const dateA = new Date(a.timestamp);
-      const dateB = new Date(b.timestamp);
-      return dateB - dateA;
-    });
-  setReviews(filteredReviews);
-}, [startDate, endDate]);
+  useEffect(() => {
+    const filteredReviews = reviewsProps
+      .filter((review) => {
+        const reviewDate = new Date(review.timestamp);
+        const startDateObj = new Date(startDate);
+        const endDateObj = new Date(endDate);
+        endDateObj.setHours(23, 59, 59); // Добавляем время к endDate
+        return reviewDate >= startDateObj && reviewDate <= endDateObj;
+      })
+      .sort((a, b) => {
+        const dateA = new Date(a.timestamp);
+        const dateB = new Date(b.timestamp);
+        return dateB - dateA;
+      });
+    setReviews(filteredReviews);
+  }, [startDate, endDate]);
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
@@ -95,13 +97,25 @@ useEffect(() => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch({ type: "NOTIFY", payload: { loading: true } });
-    const res = await postData("/reviews", userComment);
-    if (res.status == "success") {
-      return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
-    }
-    if (res.err) {
-      return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+    try {
+      const response = await postData("/recaptcha", formData);
+      if (response.success) {
+        dispatch({ type: "NOTIFY", payload: { loading: true } });
+        const res = await postData("/reviews", userComment);
+        if (res.status == "success") {
+          setDelivary(true);
+          return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
+        }
+        if (res.err) {
+          return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+        }
+      } else {
+        // Ответ reCAPTCHA недействительный
+        console.error("Недействительный ответ reCAPTCHA");
+      }
+    } catch (error) {
+      // Произошла ошибка при проверке reCAPTCHA
+      console.error("Ошибка при проверке reCAPTCHA:", error);
     }
   };
 
@@ -133,6 +147,11 @@ useEffect(() => {
       }
     } else return;
   };
+  const handleRecaptchaChange = (response) => {
+    setFormData({ ...formData, recaptchaResponse: response });
+    setDelivary(false);
+  };
+
   return (
     <div className="container">
       <h1>Поделитесь своими впечатлениями</h1>
@@ -216,9 +235,20 @@ useEffect(() => {
             Мужской
           </label>
         </div>
-        <button type="submit" className="btn btn-primary">
-          Опубликовать
-        </button>
+        <div className={s.ReCAPTCHA}>
+          <button
+            type="submit"
+            className="btn btn-primary"
+            style={{ maxHeight: "50px" }}
+            disabled={delivary}
+          >
+            Опубликовать
+          </button>
+          <ReCAPTCHA
+            sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+            onChange={handleRecaptchaChange}
+          />
+        </div>
       </form>
       {auth.user && auth.user.role === "admin" && (
         <>

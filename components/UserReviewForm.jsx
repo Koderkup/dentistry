@@ -23,6 +23,7 @@ useEffect(()=>{
     setChecked(true);
   }
 },[]);
+
   return (
     <form className={s.user_review_form} onSubmit={handleDelete}>
       <fieldset disabled>

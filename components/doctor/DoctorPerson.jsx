@@ -18,9 +18,13 @@ export const DoctorPersonDefault = () => {
         style={{ border: "1.5px solid gray" }}
       />
       <div className="card-body d-flex flex-column justify-content-center align-items-center">
+        <h5 className="card-title text-center" style={{ height: "50px" }}></h5>
+        <h6 className="card-title text-center" style={{ height: "30px" }}></h6>
+        <p className="card-text text-center" style={{ height: "30px" }}></p>
         <Link
           href={`doctors/create`}
           className="btn btn-success"
+          style={{ width: "156px" }}
         >
           Добавить
         </Link>

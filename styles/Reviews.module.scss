@@ -10,3 +10,20 @@
         border: 1px solid #0078D7;
     }
 }
+
+.ReCAPTCHA {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+@media screen and (max-width: 568px) {
+    .ReCAPTCHA {
+        flex-direction: column;
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
