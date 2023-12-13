@@ -120,7 +120,7 @@ const createTables = async () => {
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   comment TEXT NOT NULL,
-  avatar JSON,
+  avatar VARCHAR(255),
   rating INT NOT NULL,
   checked BOOLEAN DEFAULT false,
   timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP

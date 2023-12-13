@@ -15,7 +15,7 @@ const nextConfig = {
   },
   env: {
     BASE_URL: "http://localhost:3000",
-    MYSQLDB_URL: "http://localhost:3306",
+    MYSQLDB_URL: "db4free.net",
     ACCESS_TOKEN_SECRET: "aGZY^&S@)z37;w8m%#Lj[45,6=.`(gb>Mud+]_rkscCQ?U/N~",
     REFRESH_TOKEN_SECRET: "pS~a,kU6.`$Bf:'LRCh[Y+)Kz!Fe%mH;8rqGx?@_#}d^9J->D2",
     CLOUD_API: "https://api.cloudinary.com/v1_1/dlr2olc8r/image/upload",
@@ -27,10 +27,10 @@ const nextConfig = {
     EMAIL_RECIEPIENT: "mirastom2023@gmail.com",
     EMAIL_PASSWORD: "2dJujpjXUDyA0YXd9fwi",
     PORT: " 5000",
-    DB_NAME: "mirastomDB",
-    DB_USER: "root",
-    DB_PASSWORD: "password",
-    DB_HOST: "localhost",
+    DB_NAME: "mirastom",
+    DB_USER: "mirastom_admin",
+    DB_PASSWORD: "166d6c4e",
+    DB_HOST: "db4free.net",
     DB_PORT: "3306",
     DEFAULT_USER_IMAGE:
       "https://res.cloudinary.com/dlr2olc8r/image/upload/v1699090090/test/user_default_x6y6up.png	",
