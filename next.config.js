@@ -29,7 +29,7 @@ const nextConfig = {
     PORT: " 5000",
     DB_NAME: "mirastom",
     DB_USER: "mirastom_admin",
-    DB_PASSWORD: "166d6c4e",
+    DB_PASSWORD: "c9525f28",
     DB_HOST: "db4free.net",
     DB_PORT: "3306",
     DEFAULT_USER_IMAGE:
