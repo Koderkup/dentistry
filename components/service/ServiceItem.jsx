@@ -38,7 +38,7 @@ const ServiceItem = ({ service }) => {
           className="btn btn-info"
           style={{ width: "160px"}}
         >
-          Редактактировать
+          Править
         </Link>
         <button
           className="btn btn-danger"

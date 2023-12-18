@@ -16,7 +16,7 @@ function Home({ doctorProps }) {
   const { auth } = state;
   return (
     <>
-      <div style={{ backgroundColor: "#DBF0FC", padding: "1%" }}>
+      <div style={{ padding: "1%" }}>
         <ActionAd />
       </div>
       <Welcom />

@@ -6,9 +6,9 @@ html {
 }
 body {
     height: 100%;
-    background-color: #87CEFA;
+    /* background-color: #87CEFA; */
         /* Светлоголубой цвет фона */
-        background-image: linear-gradient(to bottom right, #E3F3FD, #87CEFA, #D3D3D3, #E3F3FD);
+        /* background-image: linear-gradient(to bottom right, #E3F3FD, #87CEFA, #D3D3D3, #E3F3FD); */
         /* Градиент с указанными цветами */
         -webkit-user-select: none;
             /* Safari */

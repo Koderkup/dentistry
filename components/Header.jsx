@@ -6,6 +6,7 @@ import s from "../styles/Header.module.scss";
 import { FaUserAlt } from "react-icons/fa";
 import { DataContext } from "../store/GlobalState";
 import Cookie from "js-cookie";
+
 const Header = () => {
   const router = useRouter();
   const { state, dispatch } = useContext(DataContext);
@@ -123,7 +124,10 @@ const Header = () => {
     );
   };
   return (
-    <nav className="navbar navbar-expand-xl bg-primary">
+    <nav
+      className="navbar navbar-expand-xl"
+      style={{ backgroundColor: "#51DED1" }}
+    >
       <header className="container-fluid">
         <Link className="navbar-brand" href="/">
           <Image
@@ -213,6 +217,19 @@ const Header = () => {
                 О нас
               </Link>
             </li>
+            <li
+              className={`nav-item ${
+                router.pathname === "/price" ? s.active : ""
+              }`}
+            >
+              <Link
+                className={`nav-link fs-4 `}
+                href="/price"
+                style={{ whiteSpace: "nowrap" }}
+              >
+                Цены
+              </Link>
+            </li>
             <li className={`nav-item dropdown`}>
               <Link
                 className={`nav-link dropdown-toggle fs-4 ${s.useful}`}
@@ -224,11 +241,15 @@ const Header = () => {
               >
                 Полезное
               </Link>
-              <ul className="dropdown-menu" style={{ maxWidth: '500px'}}>
+              <ul className="dropdown-menu" style={{ maxWidth: "500px" }}>
                 {articles.map((article) => (
                   <li key={article.id}>
                     <Link
-                    style={{ maxWidth: '100%', overflow: 'hidden', whiteSpace: 'wrap'}}
+                      style={{
+                        maxWidth: "100%",
+                        overflow: "hidden",
+                        whiteSpace: "wrap",
+                      }}
                       className="dropdown-item fs-4"
                       href={`/articles/${article.id}`}
                     >

@@ -5,7 +5,7 @@ const ActionAd = () => {
    const blurDataURL = "data:image/svg+xml;base64,...";
   return (
     <div className="container">
-      <div className="card bg-dark">
+      <div className="card" style={{backgroundColor: 'white'}}>
         <Image
           src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1701685505/test/action_to0h7a.jpg"
           className="card-img"

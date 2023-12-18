@@ -64,7 +64,8 @@ useEffect(()=>{
                 type="checkbox"
                 id="disabledFieldsetCheck"
                 checked={checked}
-                disabled
+                // disabled
+                onChange={()=> setChecked(true)}
               />
               <label
                 className="form-check-label"

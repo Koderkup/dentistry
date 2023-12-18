@@ -1,0 +1,19 @@
+.headers {
+    color: #2192ED;
+}
+
+.delete_btn {
+    margin: 0.5%;
+    border: 1px solid red;
+    padding: 1%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+@media screen and (max-width: 320px) {
+    .delete_btn {
+        gap: 20%;
+    }
+}

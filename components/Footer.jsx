@@ -1,11 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
+import { useContext } from "react";
 import { MdLocationOn, MdEmail } from "react-icons/md";
 import { FaViber, FaTelegram, FaInstagram } from "react-icons/fa";
-import s from '../styles/Footer.module.scss'
+import s from "../styles/Footer.module.scss";
+import { DataContext } from "../store/GlobalState";
 const Footer = () => {
+  const {state} = useContext(DataContext);
+ const { articles } = state;
   return (
-    <footer className="text-center text-lg-start bg-gray text-muted">
+    <footer className={`text-center text-lg-start bg-gray text-muted ${s.footer}`}>
       <section className="d-flex justify-content-center p-4 border-bottom">
         <div className="me-5 d-none d-lg-block">
           <i className="fab fa-linkedin">
@@ -112,21 +116,13 @@ const Footer = () => {
               <h6 className={`text-uppercase fw-bold mb-4 ${s.paragraph}`}>
                 Полезные статьи
               </h6>
-              <p>
-                <Link href="/articles" className="text-reset">
-                  Перед посещением
-                </Link>
-              </p>
-              <p>
-                <Link href="/articles" className="text-reset">
-                  Анастезия плюсы и минусы
-                </Link>
-              </p>
-              <p>
-                <Link href="/articles" className="text-reset">
-                  Профилактика кариеса
-                </Link>
-              </p>
+              {articles.slice(0, 3).map((article) => (
+                <p key={article.id}>
+                  <Link href={`/articles/${article.id}`} className="text-reset">
+                   {article.header}
+                  </Link>
+                </p>
+              ))}
               <p>
                 <Link href="/articles" className="text-reset">
                   Все статьи
