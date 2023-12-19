@@ -15,15 +15,11 @@
 
 .order_ring {
     position: fixed;
-    top: 50%;
-    left: 80px;
-    transform: translate(-50%, -50%);
+    bottom: 20px;
+    right: 20px;
     z-index: 999;
     cursor: pointer;
     background-color: #51DED1;
-    border-radius: 5px;
+    border-radius: 50%;
     border: none;
-    height: 40px;
-    font-size: 20px;
-    vertical-align: middle;
 }

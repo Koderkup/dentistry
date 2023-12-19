@@ -6,6 +6,7 @@ import { ServiceItemDefault } from "@/components/service/ServiceItem";
 import s from "../../styles/Services.module.scss";
 import { DataContext } from "../../store/GlobalState";
 import OrderRingForm from "@/components/OrderRingForm";
+import { FaPhone } from "react-icons/fa";
 const Services = ({ serviceProps }) => {
   const [services, setServices] = useState(serviceProps);
   const { state, dispatch } = useContext(DataContext);
@@ -34,10 +35,51 @@ const Services = ({ serviceProps }) => {
             предоставляем:
           </h5>
           <div className={s.services_list}>
-            {services.map((service, i) => (
-              <ServiceItem key={service.id} service={service} />
-            ))}
-            {auth.user && auth.user.role === "admin" && <ServiceItemDefault />}
+            <div
+              id="carouselExampleFade"
+              class="carousel slide carousel-fade"
+              data-bs-ride="carousel"
+            >
+              <div class="carousel-inner">
+                {services.map((service, index) => (
+                  <div
+                    className={`carousel-item ${index === 0 ? "active" : ""}`}
+                    key={service.id}
+                  >
+                    <ServiceItem service={service} />
+                  </div>
+                ))}
+                {auth.user && auth.user.role === "admin" && (
+                  <ServiceItemDefault />
+                )}
+              </div>
+              <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselExampleFade"
+                data-bs-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                  style={{ backgroundColor: "#51DED1", borderRadius: "20%", opacity: 0.5 }}
+                ></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#carouselExampleFade"
+                data-bs-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                  style={{ backgroundColor: "#51DED1", borderRadius: "20%", opacity: 0.5 }}
+                ></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
           </div>
         </div>
         <h5 style={{ textAlign: "justify", color: "#948FA5" }}>
@@ -50,8 +92,9 @@ const Services = ({ serviceProps }) => {
               className={`btn btn-primary ${s.order_ring}`}
               data-bs-toggle="modal"
               data-bs-target="#orderRingModal"
+              style={{ textAlign: "center", verticalAlign: "middle" }}
             >
-              Заказать звонок
+              <FaPhone />
             </button>
           </span>
         </h5>

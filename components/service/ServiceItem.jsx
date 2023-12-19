@@ -74,7 +74,7 @@ const ServiceItem = ({ service }) => {
   return (
     <div
       className={`card mb-3 ${s.service_item}`}
-      style={{ maxWidth: "540px" }}
+      style={{ height: "100%", minWidth: "100%" }}
     >
       <div className="row g-0">
         <div className="col-md-4" style={{ padding: "1%" }}>
@@ -111,7 +111,7 @@ export const ServiceItemDefault = () => {
   return (
     <div
       className={`card mb-3 ${s.service_item} ${s.service_default_item}`}
-      style={{ maxWidth: "540px" }}
+      style={{ height: "100%" }}
     >
       <div className="row g-0">
         <div className="col-md-4" style={{ padding: "1%" }}>
