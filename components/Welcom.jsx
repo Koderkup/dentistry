@@ -9,7 +9,7 @@ const Welcom = () => {
         padding: "20px",
       }}
     >
-      <h1 style={{ marginTop: "20px", marginBottom: "40px" }}>
+      <h1 style={{ marginTop: "20px", marginBottom: "40px", color: "#51DED1" }}>
         Добро пожаловать в стоматологическую клинику Мирастом
       </h1>
       <div className={s.content}>

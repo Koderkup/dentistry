@@ -12,3 +12,30 @@
         margin-top: 12px;
     }
 }
+
+.order_ring {
+    position: fixed;
+    top: 50%;
+    left: 5%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    cursor: pointer;
+    background-color: #51DED1;
+    border-radius: 5px;
+    border: none;
+    height: 40px;
+    font-size: 20px;
+    vertical-align: middle;
+}
+
+@media screen and (max-width: 768px) {
+    .order_ring {
+        left: 15%;
+    }
+}
+
+@media screen and (max-width: 368px) {
+    .order_ring {
+        left: 26%;
+    }
+}

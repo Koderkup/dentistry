@@ -17,8 +17,14 @@ const Services = ({ serviceProps }) => {
       </>
       <div className="container">
         <div className={s.service_wrapper}>
-          <h1>Как мы можем Вам помочь</h1>
-          <h5 style={{ textAlign: "justify", textIndent: "40px" }}>
+          <h1 style={{ color: "#51DED1" }}>Как мы можем Вам помочь</h1>
+          <h5
+            style={{
+              textAlign: "justify",
+              textIndent: "40px",
+              color: "#948FA5",
+            }}
+          >
             Наши опытные стоматологи будут тесно сотрудничать с вами, чтобы
             определить, какие варианты лечения лучше всего подходят для
             достижения вашей идеальной улыбки. Хотите ли вы исправить дефект
@@ -34,15 +40,14 @@ const Services = ({ serviceProps }) => {
             {auth.user && auth.user.role === "admin" && <ServiceItemDefault />}
           </div>
         </div>
-        <h5 style={{ textAlign: "justify" }}>
+        <h5 style={{ textAlign: "justify", color: "#948FA5" }}>
           Если вы хотите узнать больше о том, как наша стоматология может
           улучшить вашу улыбку с помощью стоматолагических процедур, свяжитесь с
           нами сегодня любым удобным способом, чтобы записаться на консультацию!
-          <i>{"-->"}</i>
           <span>
             <button
               type="button"
-              className="btn btn-primary"
+              className={`btn btn-primary ${s.order_ring}`}
               data-bs-toggle="modal"
               data-bs-target="#orderRingModal"
             >

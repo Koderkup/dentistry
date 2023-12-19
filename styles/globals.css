@@ -6,10 +6,6 @@ html {
 }
 body {
     height: 100%;
-    /* background-color: #87CEFA; */
-        /* Светлоголубой цвет фона */
-        /* background-image: linear-gradient(to bottom right, #E3F3FD, #87CEFA, #D3D3D3, #E3F3FD); */
-        /* Градиент с указанными цветами */
         -webkit-user-select: none;
             /* Safari */
             -moz-user-select: none;
@@ -22,7 +18,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     text-align: center;
-    color: gray;
+    color: #51DED1;
 }
 
 .rc-anchor-pt {

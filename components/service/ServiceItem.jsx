@@ -24,7 +24,11 @@ const ServiceItem = ({ service }) => {
   const serviceLink = () => {
     return (
       <>
-        <Link href={`services/${service.id}`} className="btn btn-info">
+        <Link
+          href={`services/${service.id}`}
+          className="btn"
+          style={{ backgroundColor: "#51DED1", color: 'white' }}
+        >
           Узнать больше
         </Link>
       </>

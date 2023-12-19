@@ -41,7 +41,12 @@ const DoctorPerson = ({ doctor }) => {
         <Link
           href={`doctors/${doctor.id}`}
           className="btn btn-info flex-fill"
-          style={{ marginRight: "5px", flex: 1 }}
+          style={{
+            marginRight: "5px",
+            flex: 1,
+            color: "white",
+            backgroundColor: "#51DED1",
+          }}
         >
           Узнать больше
         </Link>
