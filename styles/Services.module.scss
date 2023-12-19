@@ -16,7 +16,7 @@
 .order_ring {
     position: fixed;
     top: 50%;
-    left: 5%;
+    left: 80px;
     transform: translate(-50%, -50%);
     z-index: 999;
     cursor: pointer;
@@ -26,16 +26,4 @@
     height: 40px;
     font-size: 20px;
     vertical-align: middle;
-}
-
-@media screen and (max-width: 768px) {
-    .order_ring {
-        left: 40%;
-    }
-}
-
-@media screen and (max-width: 368px) {
-    .order_ring {
-        left: 24%;
-    }
 }
