@@ -62,7 +62,7 @@ const Services = ({ serviceProps }) => {
                 <span
                   class="carousel-control-prev-icon"
                   aria-hidden="true"
-                  style={{ backgroundColor: "#51DED1", borderRadius: "20%", opacity: 0.5 }}
+                  style={{ backgroundColor: "#51DED1", borderRadius: "20%" }}
                 ></span>
                 <span class="visually-hidden">Previous</span>
               </button>
@@ -75,7 +75,7 @@ const Services = ({ serviceProps }) => {
                 <span
                   class="carousel-control-next-icon"
                   aria-hidden="true"
-                  style={{ backgroundColor: "#51DED1", borderRadius: "20%", opacity: 0.5 }}
+                  style={{ backgroundColor: "#51DED1", borderRadius: "20%" }}
                 ></span>
                 <span class="visually-hidden">Next</span>
               </button>
