@@ -4,10 +4,10 @@ import Link from 'next/link'
 const ActionAd = () => {
    const blurDataURL = "data:image/svg+xml;base64,...";
   return (
-    <div className="container">
-      <div className="card" style={{backgroundColor: 'white'}}>
+    <div className="" style={{ width: "100%" }}>
+      <div className="card" style={{ backgroundColor: "white" }}>
         <Image
-          src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1701685505/test/action_to0h7a.jpg"
+          src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1702964598/test/action_2_ovrczl.png"
           className="card-img"
           alt="action-ad"
           width={800}
@@ -17,14 +17,14 @@ const ActionAd = () => {
           blurDataURL={blurDataURL}
           placeholder="blur"
         />
-        <div className="card-img-overlay" style={{ color: "#5F5F5F" }}>
-          <h2 className="card-title" style={{ color: "#5F5F5F" }}>
+        <div className="card-img-overlay" style={{ color: "#00DEB5" }}>
+          <h2 className="card-title" style={{ color: "#00DEB5" }}>
             Ловите сезонные скидки на услуги!
           </h2>
-          <h3 className="card-text" style={{ color: "#5F5F5F" }}>
+          <h3 className="card-text" style={{ color: "#00DEB5" }}>
             Вся информация о акциях в клинике Мирастом
           </h3>
-          <h4 className="card-text" style={{ color: "#5F5F5F" }}>
+          <h4 className="card-text" style={{ color: "#00DEB5" }}>
             Скидки на лечение, протезирование, имплантацию, удаление, гигиену и
             отбеливание зубов
           </h4>
@@ -32,7 +32,7 @@ const ActionAd = () => {
             <Link
               href="/actions"
               style={{
-                color: "#5F5F5F",
+                color: "#00DEB5",
                 fontSize: "24px",
                 width: "150px",
                 textDecoration: "none",

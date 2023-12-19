@@ -1,5 +1,6 @@
 .active {
     text-decoration: underline;
+    color: white;
 }
 .login_button {
     display: flex;
@@ -16,4 +17,7 @@
 
 .admin_menu {
     color: darkgray;
+}
+.navbar {
+   color: white;
 }

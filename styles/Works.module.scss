@@ -9,6 +9,7 @@
     &__title {
         text-align: center;
         width: 100%;
+        color: #51DED1;
     }
 
     &__paragraph_container {
@@ -27,12 +28,13 @@
 
         &__paragraph_title {
             text-align: center;
+            color: #51DED1;
         }
 
         &__paragraph_text {
             text-align: justify;
             font-size: 1.5em;
-            font-weight: 600;
+            color: #948FA5;
         }
     }
 }
@@ -43,6 +45,8 @@
     right: 20px;
     z-index: 999;
     cursor: pointer;
+    background-color: #51DED1;
+    border-radius: 50%;
 }
 
 @media screen and (max-width: 1400px) {
