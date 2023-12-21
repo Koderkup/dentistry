@@ -162,7 +162,6 @@ const Header = () => {
                 className="nav-link fs-4 active"
                 aria-current="page"
                 href="/"
-                style={{ color: "white" }}
               >
                 Главная
               </Link>
@@ -172,11 +171,7 @@ const Header = () => {
                 router.pathname === "/services" ? s.active : ""
               }`}
             >
-              <Link
-                className={`nav-link fs-4`}
-                href="/services"
-                style={{ color: "white" }}
-              >
+              <Link className={`nav-link fs-4`} href="/services">
                 Услуги
               </Link>
             </li>
@@ -188,7 +183,7 @@ const Header = () => {
               <Link
                 className={`nav-link fs-4 `}
                 href="/works"
-                style={{ whiteSpace: "nowrap", color: "white" }}
+                style={{ whiteSpace: "nowrap" }}
               >
                 Наши работы
               </Link>
@@ -198,11 +193,7 @@ const Header = () => {
                 router.pathname === "/contacts" ? s.active : ""
               }`}
             >
-              <Link
-                className={`nav-link fs-4`}
-                href="/contacts"
-                style={{ color: "white" }}
-              >
+              <Link className={`nav-link fs-4`} href="/contacts">
                 Контакты
               </Link>
             </li>
@@ -211,11 +202,7 @@ const Header = () => {
                 router.pathname === "/reviews" ? s.active : ""
               }`}
             >
-              <Link
-                className={`nav-link fs-4`}
-                href="/reviews"
-                style={{ color: "white" }}
-              >
+              <Link className={`nav-link fs-4`} href="/reviews">
                 Отзывы
               </Link>
             </li>
@@ -227,7 +214,7 @@ const Header = () => {
               <Link
                 className={`nav-link fs-4 `}
                 href="/about"
-                style={{ whiteSpace: "nowrap", color: "white" }}
+                style={{ whiteSpace: "nowrap" }}
               >
                 О нас
               </Link>
@@ -240,7 +227,7 @@ const Header = () => {
               <Link
                 className={`nav-link fs-4 `}
                 href="/price"
-                style={{ whiteSpace: "nowrap", color: "white" }}
+                style={{ whiteSpace: "nowrap" }}
               >
                 Цены
               </Link>

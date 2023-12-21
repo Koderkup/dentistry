@@ -4,12 +4,21 @@
 
     .services_list {
         display: flex;
-        flex-flow: row wrap;
+        // flex-flow: row wrap;
         justify-content: center;
-        align-items: space-between;
-        width: 100%;
-        gap: 40px;
-        margin-top: 12px;
+        // align-items: space-between;
+        // width: 100%;
+        // gap: 40px;
+        // margin-top: 12px;
+
+        .service_text {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+        }
+
+
     }
 }
 
@@ -22,4 +31,101 @@
     background-color: #51DED1;
     border-radius: 50%;
     border: none;
+}
+
+.img {
+    z-index: 100;
+}
+
+.center {
+    width: 50px;
+    height: 50px;
+    margin: auto;
+    border-radius: 50%;
+
+}
+
+.circle_1 {
+    position: absolute;
+    margin: auto;
+    border-radius: 50%;
+    border: 0.05px solid rgba(127, 214, 246, 0.4);
+    width: 270px;
+    height: 270px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: rotation 30s infinite linear;
+}
+
+.circle_2 {
+    position: relative;
+    margin: auto;
+    border-radius: 50%;
+    border: 0.05px solid rgba(127, 214, 246, 0.4);
+    border-radius: 50%;
+    position: relative;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-origin: center center;
+
+
+    .circle_2>.icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .icon:nth-child(1) {
+        transform: rotate(0deg) translate(0px) rotate(0deg);
+    }
+
+    .icon:nth-child(2) {
+        transform: rotate(30deg) translate(270px) rotate(-30deg);
+    }
+
+    .icon:nth-child(3) {
+        transform: rotate(-275deg) translate(100px) rotate(-80deg);
+    }
+
+    .icon:nth-child(4) {
+        transform: rotate(180deg) translate(110px) rotate(-180deg);
+    }
+
+    .icon:nth-child(5) {
+        transform: rotate(230deg) translate(160px) rotate(-230deg);
+    }
+
+    .icon:nth-child(6) {
+        transform: rotate(-100deg) translate(110px) rotate(-260deg);
+    }
+
+    .icon:nth-child(7) {
+        transform: rotate(-190deg) translate(50px) rotate(-170deg);
+    }
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.circle_wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.accordion {
+    width: 500px;
+    flex-direction: row;
+    flex-wrap: nowrap;
 }
