@@ -126,7 +126,7 @@ const Header = () => {
   return (
     <nav
       className="navbar navbar-expand-xl"
-      style={{ backgroundColor: "#51DED1" }}
+      style={{ backgroundColor: 'rgba(108,193,198,0.2)' }}
     >
       <header className="container-fluid">
         <Link className="navbar-brand" href="/">

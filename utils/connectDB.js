@@ -144,6 +144,22 @@ const createTables = async () => {
       throw error;
     }
   });
+
+  const checkSubservicesTableQuery = `CREATE TABLE IF NOT EXISTS subservices (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  article TEXT NOT NULL,
+  image JSON NOT NULL,
+  serviceId INT(11) NOT NULL,
+  timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (serviceId) REFERENCES services(id) ON DELETE CASCADE
+)`;
+  connection.query(checkPriceTableQuery, (error, results) => {
+    if (error) {
+      throw error;
+    }
+  });
+
   connection.end();
 };
 export default connectDB;

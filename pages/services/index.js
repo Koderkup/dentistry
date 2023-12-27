@@ -9,10 +9,12 @@ import s from "../../styles/Services.module.scss";
 import { DataContext } from "../../store/GlobalState";
 import OrderRingForm from "@/components/OrderRingForm";
 import { FaPhone } from "react-icons/fa";
-const Services = ({ serviceProps }) => {
+const Services = ({ serviceProps, subServicesProps }) => {
   const [services, setServices] = useState(serviceProps);
+  const [subservices, setSubservices] = useState(subServicesProps);
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
+  console.log(subServicesProps);
   return (
     <>
       <>
@@ -20,12 +22,12 @@ const Services = ({ serviceProps }) => {
       </>
       <div className="container">
         <div className={s.service_wrapper}>
-          <h1 style={{ textAlign: "center" }}>Как мы можем Вам помочь</h1>
-          <h5
+          <h1 style={{ textAlign: "center" }}>Услуги стоматологии</h1>
+          <p
             style={{
               textAlign: "justify",
               textIndent: "40px",
-              color: "#948FA5",
+              fontSize: "1.2em",
             }}
           >
             Наши опытные стоматологи будут тесно сотрудничать с вами, чтобы
@@ -35,543 +37,143 @@ const Services = ({ serviceProps }) => {
             зубов, у нас есть технологии и опыт для улучшения эстетического вида
             и функциональности ваших зубов. Вот некоторые из услуг, которые мы
             предоставляем:
-          </h5>
+          </p>
           <div className={s.services_list}>
-            <div className="container">
-              <div className={`row  ${s.circle_wrapper}`}>
-                <div
-                  className={`col-lg-5 col-md-5 col-sm-12 mx-3 py-2 ${s.service_text}`}
-                >
-                  <div
-                    class={`accordion accordion-flush ${s.accordion}`}
-                    id="accordionFlushExample"
-                  >
-                    <div
-                      class="accordion-item"
-                    >
-                      <h2 class="accordion-header" id="flush-headingOne">
-                        <button
-                          class="accordion-button collapsed"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#flush-collapseOne"
-                          aria-expanded="false"
-                          aria-controls="flush-collapseOne"
-                        >
-                          <Image
-                            src="./assets/therapy.svg"
-                            width={50}
-                            height={50}
-                            className={`${s.img}`}
-                          />
-                          <span style={{ fontSize: "20px" }}>Терапия</span>
-                        </button>
-                      </h2>
-                      <div
-                        id="flush-collapseOne"
-                        class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingOne"
-                        data-bs-parent="#accordionFlushExample"
-                      >
-                        <div class="accordion-body">Снятие острой боли</div>
-                      </div>
-                      <div
-                        id="flush-collapseOne"
-                        class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingOne"
-                        data-bs-parent="#accordionFlushExample"
-                      >
-                        <div class="accordion-body">Лечение канала</div>
-                      </div>
-                      <div
-                        id="flush-collapseOne"
-                        class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingOne"
-                        data-bs-parent="#accordionFlushExample"
-                      >
-                        <div class="accordion-body">Пломбирование зуба</div>
-                      </div>
-                      <div
-                        id="flush-collapseOne"
-                        class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingOne"
-                        data-bs-parent="#accordionFlushExample"
-                      >
-                        <div class="accordion-body">Лечение десны</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className={`col-lg-5 col-md-5 col-sm-12 mx-3 py-2 ${s.service_text}`}
-                >
-                  <div
-                    class={`accordion accordion-flush ${s.accordion}`}
-                    id="accordionFlushExample1"
-                  >
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="flush-headingOne1">
-                        <button
-                          class="accordion-button collapsed"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#flush-collapseOne1"
-                          aria-expanded="false"
-                          aria-controls="flush-collapseOne1"
-                        >
-                          <Image
-                            src="./assets/implant.svg"
-                            width={50}
-                            height={50}
-                            className={`${s.img}`}
-                          />
-                          <span style={{ fontSize: "20px" }}>
-                            Импланталогия
-                          </span>
-                        </button>
-                      </h2>
-                      <div
-                        id="flush-collapseOne1"
-                        class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingOne1"
-                        data-bs-parent="#accordionFlushExample1"
-                      >
-                        <div class="accordion-body">
-                          Установка импланта тип1
-                        </div>
-                      </div>
-                      <div
-                        id="flush-collapseOne1"
-                        class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingOne1"
-                        data-bs-parent="#accordionFlushExample1"
-                      >
-                        <div class="accordion-body">
-                          Установка импланта тип2
-                        </div>
-                      </div>
-                      <div
-                        id="flush-collapseOne1"
-                        class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingOne1"
-                        data-bs-parent="#accordionFlushExample1"
-                      >
-                        <div class="accordion-body">
-                          Установка импланта тип3
-                        </div>
-                      </div>
-                      <div
-                        id="flush-collapseOne1"
-                        class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingOne1"
-                        data-bs-parent="#accordionFlushExample1"
-                      >
-                        <div class="accordion-body">
-                          Установка импланта тип4
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className={`col-lg-5 col-md-5 col-sm-12 mx-3 py-2 ${s.service_text}`}
-                >
-                  <div
-                    class={`accordion accordion-flush ${s.accordion}`}
-                    id="accordionFlushExample2"
-                  >
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="flush-headingOne2">
-                        <button
-                          class="accordion-button collapsed"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#flush-collapseOne2"
-                          aria-expanded="false"
-                          aria-controls="flush-collapseOne2"
-                        >
-                          <Image
-                            src="./assets/kid`s.svg"
-                            width={50}
-                            height={50}
-                            className={`${s.img}`}
-                          />
-                          <span style={{ fontSize: "20px" }}>
-                            Детская стоматология
-                          </span>
-                        </button>
-                      </h2>
-                      <div
-                        id="flush-collapseOne2"
-                        class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingOne2"
-                        data-bs-parent="#accordionFlushExample2"
-                      >
-                        <div class="accordion-body">
-                          Установка импланта тип1
-                        </div>
-                      </div>
-                      <div
-                        id="flush-collapseOne2"
-                        class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingOne2"
-                        data-bs-parent="#accordionFlushExample2"
-                      >
-                        <div class="accordion-body">
-                          Установка импланта тип2
-                        </div>
-                      </div>
-                      <div
-                        id="flush-collapseOne2"
-                        class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingOne2"
-                        data-bs-parent="#accordionFlushExample2"
-                      >
-                        <div class="accordion-body">
-                          Установка импланта тип3
-                        </div>
-                      </div>
-                      <div
-                        id="flush-collapseOne2"
-                        class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingOne2"
-                        data-bs-parent="#accordionFlushExample2"
-                      >
-                        <div class="accordion-body">
-                          Установка импланта тип4
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className={`col-lg-5 col-md-5 col-sm-12 mx-3 py-2 ${s.service_text}`}
-                >
-                  <div
-                    class={`accordion accordion-flush ${s.accordion}`}
-                    id="accordionFlushExample3"
-                  >
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="flush-headingOne3">
-                        <button
-                          class="accordion-button collapsed"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#flush-collapseOne3"
-                          aria-expanded="false"
-                          aria-controls="flush-collapseOne3"
-                        >
-                          <Image
-                            src="./assets/ortoped.svg"
-                            width={50}
-                            height={50}
-                            className={`${s.img}`}
-                          />
-                          <span style={{ fontSize: "20px" }}>Ортопедия</span>
-                        </button>
-                      </h2>
-                      <div
-                        id="flush-collapseOne3"
-                        class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingOne3"
-                        data-bs-parent="#accordionFlushExample3"
-                      >
-                        <div class="accordion-body">
-                          Установка импланта тип1
-                        </div>
-                      </div>
-                      <div
-                        id="flush-collapseOne3"
-                        class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingOne3"
-                        data-bs-parent="#accordionFlushExample3"
-                      >
-                        <div class="accordion-body">
-                          Установка импланта тип2
-                        </div>
-                      </div>
-                      <div
-                        id="flush-collapseOne3"
-                        class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingOne3"
-                        data-bs-parent="#accordionFlushExample3"
-                      >
-                        <div class="accordion-body">
-                          Установка импланта тип3
-                        </div>
-                      </div>
-                      <div
-                        id="flush-collapseOne3"
-                        class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingOne3"
-                        data-bs-parent="#accordionFlushExample3"
-                      >
-                        <div class="accordion-body">
-                          Установка импланта тип4
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className={`col-lg-5 col-md-5 col-sm-12 mx-3 py-2 ${s.service_text}`}
-                >
-                  <div
-                    class={`accordion accordion-flush ${s.accordion}`}
-                    id="accordionFlushExample4"
-                  >
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="flush-headingOne4">
-                        <button
-                          class="accordion-button collapsed"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#flush-collapseOne4"
-                          aria-expanded="false"
-                          aria-controls="flush-collapseOne4"
-                        >
-                          <Image
-                            src="./assets/surgeian.svg"
-                            width={50}
-                            height={50}
-                            className={`${s.img}`}
-                          />
-                          <span style={{ fontSize: "20px" }}>
-                            Лечение по страховке
-                          </span>
-                        </button>
-                      </h2>
-                      <div
-                        id="flush-collapseOne4"
-                        class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingOne4"
-                        data-bs-parent="#accordionFlushExample4"
-                      >
-                        <div class="accordion-body">
-                          Установка импланта тип1
-                        </div>
-                      </div>
-                      <div
-                        id="flush-collapseOne4"
-                        class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingOne4"
-                        data-bs-parent="#accordionFlushExample4"
-                      >
-                        <div class="accordion-body">
-                          Установка импланта тип2
-                        </div>
-                      </div>
-                      <div
-                        id="flush-collapseOne4"
-                        class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingOne4"
-                        data-bs-parent="#accordionFlushExample4"
-                      >
-                        <div class="accordion-body">
-                          Установка импланта тип3
-                        </div>
-                      </div>
-                      <div
-                        id="flush-collapseOne4"
-                        class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingOne4"
-                        data-bs-parent="#accordionFlushExample4"
-                      >
-                        <div class="accordion-body">
-                          Установка импланта тип4
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>{" "}
-                <div
-                  className={`col-lg-5 col-md-5 col-sm-12 mx-3 py-2 ${s.service_text}`}
-                >
-                  <div
-                    class={`accordion accordion-flush ${s.accordion}`}
-                    id="accordionFlushExample5"
-                  >
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="flush-headingOne5">
-                        <button
-                          class="accordion-button collapsed"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#flush-collapseOne5"
-                          aria-expanded="false"
-                          aria-controls="flush-collapseOne5"
-                        >
-                          <Image
-                            src="./assets/surgeian2.svg"
-                            width={50}
-                            height={50}
-                            className={`${s.img}`}
-                          />
-                          <span style={{ fontSize: "20px" }}>Хирургия</span>
-                        </button>
-                      </h2>
-                      <div
-                        id="flush-collapseOne5"
-                        class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingOne5"
-                        data-bs-parent="#accordionFlushExample5"
-                      >
-                        <div class="accordion-body">
-                          Установка импланта тип1
-                        </div>
-                      </div>
-                      <div
-                        id="flush-collapseOne5"
-                        class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingOne5"
-                        data-bs-parent="#accordionFlushExample5"
-                      >
-                        <div class="accordion-body">
-                          Установка импланта тип2
-                        </div>
-                      </div>
-                      <div
-                        id="flush-collapseOne5"
-                        class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingOne5"
-                        data-bs-parent="#accordionFlushExample5"
-                      >
-                        <div class="accordion-body">
-                          Установка импланта тип3
-                        </div>
-                      </div>
-                      <div
-                        id="flush-collapseOne5"
-                        class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingOne5"
-                        data-bs-parent="#accordionFlushExample5"
-                      >
-                        <div class="accordion-body">
-                          Установка импланта тип4
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* <div
-              id="carouselExampleFade"
-              class="carousel slide carousel-fade"
+            <div
+              id="carouselExampleCaptions"
+              className="carousel slide"
               data-bs-ride="carousel"
             >
-              <div class="carousel-inner">
+              <div className="carousel-indicators">
+                {services.map((service, index) => {
+                  return (
+                    <button
+                      key={index}
+                      type="button"
+                      data-bs-target="#carouselExampleCaptions"
+                      data-bs-slide-to={index}
+                      className={`${
+                        index === 0 ? "active" : ""
+                      } {s.carousel_indicator}`}
+                      aria-current={`${index === 0 ? true : false}`}
+                      aria-label={`Slide ${index + 1}`}
+                    ></button>
+                  );
+                })}
+              </div>
+              <div className="carousel-inner">
                 {services.map((service, index) => (
                   <div
-                    className={`carousel-item ${index === 0 ? "active" : ""}`}
                     key={service.id}
+                    className={`carousel-item ${index === 0 ? "active" : ""}`}
                   >
-                    <ServiceItem service={service} />
+                    <Image
+                      src={service.image[0].url}
+                      className={`w-100 ${s.img}`}
+                      alt="service"
+                      width={800}
+                      height={800}
+                      style={{ width: "100%" }}
+                    />
+                    <div className="carousel-caption d-md-block">
+                      <h3 style={{ color: "#5E5E5E" }}>{service.title}</h3>
+                    </div>
                   </div>
                 ))}
-                {auth.user && auth.user.role === "admin" && (
-                  <ServiceItemDefault />
-                )}
               </div>
               <button
-                class="carousel-control-prev"
+                className="carousel-control-prev"
                 type="button"
-                data-bs-target="#carouselExampleFade"
+                data-bs-target="#carouselExampleCaptions"
                 data-bs-slide="prev"
               >
                 <span
-                  class="carousel-control-prev-icon"
+                  className="carousel-control-prev-icon"
                   aria-hidden="true"
-                  style={{ backgroundColor: "#51DED1", borderRadius: "20%" }}
+                  style={{ backgroundColor: "gray", opacity: "0.6" }}
                 ></span>
-                <span class="visually-hidden">Previous</span>
+                <span className="visually-hidden">Previous</span>
               </button>
               <button
-                class="carousel-control-next"
+                className="carousel-control-next"
                 type="button"
-                data-bs-target="#carouselExampleFade"
+                data-bs-target="#carouselExampleCaptions"
                 data-bs-slide="next"
               >
                 <span
-                  class="carousel-control-next-icon"
+                  className="carousel-control-next-icon"
                   aria-hidden="true"
-                  style={{ backgroundColor: "#51DED1", borderRadius: "20%" }}
+                  style={{ backgroundColor: "gray", opacity: "0.6" }}
                 ></span>
-                <span class="visually-hidden">Next</span>
+                <span className="visually-hidden">Next</span>
               </button>
-            </div> */}
-          </div>
-          <div
-            className={`container`}
-            style={{ marginTop: "20px", marginBottom: "20px" }}
-          >
-            <div className={`row`}>
-              <div className="col-lg-12 col-md-12 col-sm-12">
-                <div className={s.circle_2}>
-                  <div className={s.circle_1}>
-                    <div className={s.center}>
-                      <Image
-                        src={"./assets/logo_mirastom.svg"}
-                        width={50}
-                        height={50}
-                      />
-                    </div>
-                  </div>
-                  <Link href={`services/5`} className={`btn ${s.icon}`}>
-                    <Image
-                      src="./assets/surgeian2.svg"
-                      width={50}
-                      height={50}
-                      className={`${s.img}`}
-                    />
-                  </Link>
-                  <Link href={`services/5`} className={`btn ${s.icon}`}>
-                    <Image
-                      src="./assets/surgeian.svg"
-                      width={50}
-                      height={50}
-                      className={`${s.img}`}
-                    />
-                  </Link>
-                  <Link href={`services/5`} className={`btn ${s.icon}`}>
-                    <Image
-                      src="./assets/ortoped.svg"
-                      width={50}
-                      height={50}
-                      className={`${s.img}`}
-                    />
-                  </Link>
-                  <Link href={`services/5`} className={`btn ${s.icon}`}>
-                    <Image
-                      src="./assets/kid`s.svg"
-                      width={50}
-                      height={50}
-                      className={`${s.img}`}
-                    />
-                  </Link>
-                  <Link href={`services/5`} className={`btn ${s.icon}`}>
-                    <Image
-                      src="./assets/implant.svg"
-                      width={50}
-                      height={50}
-                      className={`${s.img}`}
-                    />
-                  </Link>
-                  <Link href={`services/5`} className={`btn ${s.icon}`}>
-                    <Image
-                      src="./assets/therapy.svg"
-                      width={50}
-                      height={50}
-                      className={`${s.img}`}
-                    />
-                  </Link>
-                </div>
-              </div>
             </div>
           </div>
-        </div>
+          {/* -------------------------------------------------------------------------------------------------------- */}
 
-        <h5 style={{ textAlign: "justify", color: "#948FA5" }}>
+          <section className="container">
+            <h1>Перечень услуг</h1>
+            <div className="row">
+              {services.map((service, index) => (
+                <div className={`col-md-6 col-sm-12`}>
+                  <div
+                    className={`accordion accordion-flush`}
+                    id={`accordion${index}`}
+                  >
+                    <h2 className="accordion-header" id={`heading${index}`}>
+                      <button
+                        className="accordion-button"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target={`#collapse${index}`}
+                        aria-expanded="true"
+                        aria-controls={`collapse${index}`}
+                      >
+                        {service.title}
+                      </button>
+                    </h2>
+                    <div
+                      id={`collapse${index}`}
+                      className="accordion-collapse collapse"
+                      aria-labelledby={`heading${index}`}
+                      data-bs-parent={`#accordion${index}`}
+                    >
+                      {subservices
+                        .filter(
+                          (subservice) => subservice.serviceId === service.id
+                        )
+                        .map((item) => (
+                          <div
+                            key={item.title}
+                            className="accordion-body fst-italic"
+                            style={{ padding: "8px" }}
+                          >
+                            <Link
+                              href="/"
+                              style={{
+                                textDecoration: "none",
+                              }}
+                            >
+                              {item.title}
+                            </Link>
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* ------------------------------------------------------------------------------------------------------------- */}
+        </div>
+        <p
+          style={{
+            textAlign: "justify",
+            textIndent: "40px",
+            fontSize: "1.2em",
+          }}
+        >
           Если вы хотите узнать больше о том, как наша стоматология может
           улучшить вашу улыбку с помощью стоматолагических процедур, свяжитесь с
           нами сегодня любым удобным способом, чтобы записаться на консультацию!
@@ -586,7 +188,7 @@ const Services = ({ serviceProps }) => {
               <FaPhone />
             </button>
           </span>
-        </h5>
+        </p>
         <p></p>
         <hr />
       </div>
@@ -595,11 +197,17 @@ const Services = ({ serviceProps }) => {
 };
 
 export async function getServerSideProps(context) {
-  const res = await getData("services");
+  const res1 = await getData("services");
+  const res2 = await getData("subservices");
+
   return {
     props: {
-      serviceProps: res.services,
-      results: res.result,
+      serviceProps: res1.services,
+      subServicesProps: res2.subServices,
+      results: {
+        services: res1.result,
+        subServices: res2.result,
+      },
     },
   };
 }

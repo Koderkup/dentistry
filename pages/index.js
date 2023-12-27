@@ -21,7 +21,7 @@ function Home({ doctorProps }) {
       </div>
       <Welcom />
       <div className={`${s.doctor_wrapper}`}>
-        <h1 style={{ color: "#51DED1" }}>Наши специалисты</h1>
+        <h1>Наши специалисты</h1>
         <div className={s.doctors_list}>
           {doctors.map((doctor, i) => (
             <DoctorPerson key={doctor.id} doctor={doctor} />
