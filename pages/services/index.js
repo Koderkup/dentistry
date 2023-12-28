@@ -9,12 +9,12 @@ import s from "../../styles/Services.module.scss";
 import { DataContext } from "../../store/GlobalState";
 import OrderRingForm from "@/components/OrderRingForm";
 import { FaPhone } from "react-icons/fa";
+import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 const Services = ({ serviceProps, subServicesProps }) => {
   const [services, setServices] = useState(serviceProps);
   const [subservices, setSubservices] = useState(subServicesProps);
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
-  console.log(subServicesProps);
   return (
     <>
       <>
@@ -69,14 +69,16 @@ const Services = ({ serviceProps, subServicesProps }) => {
                   >
                     <Image
                       src={service.image[0].url}
-                      className={`w-100 ${s.img}`}
+                      className={`${s.img}`}
                       alt="service"
-                      width={800}
-                      height={800}
-                      style={{ width: "100%" }}
+                      width={400}
+                      height={600}
                     />
                     <div className="carousel-caption d-md-block">
-                      <h3 style={{ color: "#5E5E5E" }}>{service.title}</h3>
+                      <div className={s.sliderLabel}>
+                        <p className={s.slider_title}>{service.title}</p>
+                        <p>{service.intro}</p>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -87,11 +89,20 @@ const Services = ({ serviceProps, subServicesProps }) => {
                 data-bs-target="#carouselExampleCaptions"
                 data-bs-slide="prev"
               >
-                <span
+                {/* <span
                   className="carousel-control-prev-icon"
                   aria-hidden="true"
                   style={{ backgroundColor: "gray", opacity: "0.6" }}
-                ></span>
+                ></span> */}
+                <span>
+                  <FiChevronLeft
+                    style={{
+                      color: "#34A0A0",
+                      fontWeight: "bold",
+                      fontSize: "45px",
+                    }}
+                  />
+                </span>
                 <span className="visually-hidden">Previous</span>
               </button>
               <button
@@ -100,11 +111,20 @@ const Services = ({ serviceProps, subServicesProps }) => {
                 data-bs-target="#carouselExampleCaptions"
                 data-bs-slide="next"
               >
-                <span
+                {/* <span
                   className="carousel-control-next-icon"
                   aria-hidden="true"
                   style={{ backgroundColor: "gray", opacity: "0.6" }}
-                ></span>
+                ></span> */}
+                <span>
+                  <FiChevronRight
+                    style={{
+                      color: "#34A0A0",
+                      fontWeight: "bold",
+                      fontSize: "45px",
+                    }}
+                  />
+                </span>
                 <span className="visually-hidden">Next</span>
               </button>
             </div>
@@ -115,20 +135,33 @@ const Services = ({ serviceProps, subServicesProps }) => {
             <h1>Перечень услуг</h1>
             <div className="row">
               {services.map((service, index) => (
-                <div className={`col-md-6 col-sm-12`}>
+                <div
+                  className={`col-md-6 col-sm-12`}
+                  style={{ margin: "0.8% auto" }}
+                >
                   <div
                     className={`accordion accordion-flush`}
                     id={`accordion${index}`}
                   >
                     <h2 className="accordion-header" id={`heading${index}`}>
                       <button
-                        className="accordion-button"
+                        className="accordion-button collapsed"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target={`#collapse${index}`}
                         aria-expanded="true"
                         aria-controls={`collapse${index}`}
+                        style={{
+                          backgroundColor: "white",
+                          fontSize: "22px",
+                        }}
                       >
+                        <Image
+                          src={"./assets/logo_mirastom.svg"}
+                          width={40}
+                          height={40}
+                          style={{ marginRight: "20px" }}
+                        />
                         {service.title}
                       </button>
                     </h2>

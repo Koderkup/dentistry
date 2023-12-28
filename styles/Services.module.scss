@@ -11,8 +11,25 @@
     }
 }
 
-.carousel_indicator {
-    
+.sliderLabel {
+    margin-top: -50%;
+    width: 40%;
+    float: right;
+    color: black;
+
+    p {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .slider_title {
+        font-size: 32px;
+        font-weight: 700;
+    }
+}
+
+.img {
+    width: 60%;
 }
 
 .order_ring {
@@ -28,14 +45,60 @@
 
 @media screen and (max-width: 768px) {
     .img {
-        height: 600px;
+        max-height: 350px;
     }
-    
+
+}
+
+@media screen and (max-width: 968px) {
+    .sliderLabel {
+        margin-top: 30%;
+        width: 40%;
+        float: right;
+
+        p {
+            font-size: 16px;
+            text-align: center;
+            line-height: 0.9;
+        }
+
+        .slider_title {
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 0.9;
+            margin-bottom: 5px;
+        }
+    }
+        .img {
+            width: 50%;
+            max-height: 250px;
+        }
+
 }
 
 @media screen and (max-width: 500px) {
+    .sliderLabel {
+        margin-top: 100%;
+        width: 60%;
+        float: right;
+        padding-left: 28px;
+
+        p {
+            font-size: 14px;
+            text-align: center;
+            line-height: 0.9;
+        }
+
+        .slider_title {
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 0.9;
+        }
+    }
+
     .img {
-        height: 400px;
+        width: 59%;
+        max-height: 280px;
     }
 
 }
