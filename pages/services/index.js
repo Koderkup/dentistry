@@ -3,18 +3,54 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useContext } from "react";
 import { getData } from "../../utils/fetchData";
-import ServiceItem from "@/components/service/ServiceItem";
-import { ServiceItemDefault } from "@/components/service/ServiceItem";
 import s from "../../styles/Services.module.scss";
 import { DataContext } from "../../store/GlobalState";
 import OrderRingForm from "@/components/OrderRingForm";
 import { FaPhone } from "react-icons/fa";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
+import AdButton from "@/components/AdButton";
+import { typography } from "@/utils/typography";
 const Services = ({ serviceProps, subServicesProps }) => {
   const [services, setServices] = useState(serviceProps);
   const [subservices, setSubservices] = useState(subServicesProps);
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
+  const { ADD_SERVICE, SEVICE_LINK, SERVICE_IMAGE, ADD_CONTENT_STYLE, A } =
+    typography;
+  const adminLink = (id, title) => {
+    return (
+      <div className={s.admin_link}>
+        <Link
+          href={`services/create/${id}`}
+          className="btn btn-info"
+          style={{ width: "160px", margin: '5px' }}
+        >
+          Редактировать
+        </Link>
+        <button
+          className="btn btn-danger"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          onClick={() =>
+            dispatch({
+              type: "ADD_MODAL",
+              payload: [
+                {
+                  data: "",
+                  id: id,
+                  title: title,
+                  type: "DELETE_SERVICE",
+                },
+              ],
+            })
+          }
+          style={{ width: "160px", margin: '5px' }}
+        >
+          Удалить
+        </button>
+      </div>
+    );
+  };
   return (
     <>
       <>
@@ -77,8 +113,10 @@ const Services = ({ serviceProps, subServicesProps }) => {
                     <div className="carousel-caption d-md-block">
                       <div className={s.sliderLabel}>
                         <p className={s.slider_title}>{service.title}</p>
-                        <p>{service.intro}</p>
                       </div>
+                      {auth.user || (auth.user && auth.user.role === "admin")
+                        ? adminLink(service.id, service.title)
+                        : null}
                     </div>
                   </div>
                 ))}
@@ -89,11 +127,6 @@ const Services = ({ serviceProps, subServicesProps }) => {
                 data-bs-target="#carouselExampleCaptions"
                 data-bs-slide="prev"
               >
-                {/* <span
-                  className="carousel-control-prev-icon"
-                  aria-hidden="true"
-                  style={{ backgroundColor: "gray", opacity: "0.6" }}
-                ></span> */}
                 <span>
                   <FiChevronLeft
                     style={{
@@ -111,11 +144,6 @@ const Services = ({ serviceProps, subServicesProps }) => {
                 data-bs-target="#carouselExampleCaptions"
                 data-bs-slide="next"
               >
-                {/* <span
-                  className="carousel-control-next-icon"
-                  aria-hidden="true"
-                  style={{ backgroundColor: "gray", opacity: "0.6" }}
-                ></span> */}
                 <span>
                   <FiChevronRight
                     style={{
@@ -129,7 +157,6 @@ const Services = ({ serviceProps, subServicesProps }) => {
               </button>
             </div>
           </div>
-          {/* -------------------------------------------------------------------------------------------------------- */}
 
           <section className="container">
             <h1>Перечень услуг</h1>
@@ -138,6 +165,7 @@ const Services = ({ serviceProps, subServicesProps }) => {
                 <div
                   className={`col-md-6 col-sm-12`}
                   style={{ margin: "0.8% auto" }}
+                  key={index}
                 >
                   <div
                     className={`accordion accordion-flush`}
@@ -161,6 +189,7 @@ const Services = ({ serviceProps, subServicesProps }) => {
                           width={40}
                           height={40}
                           style={{ marginRight: "20px" }}
+                          alt="logo"
                         />
                         {service.title}
                       </button>
@@ -177,17 +206,17 @@ const Services = ({ serviceProps, subServicesProps }) => {
                         )
                         .map((item) => (
                           <div
-                            key={item.title}
+                            key={item.subtitle}
                             className="accordion-body fst-italic"
                             style={{ padding: "8px" }}
                           >
                             <Link
-                              href="/"
+                              href={`/services/subservices/${item.id}`}
                               style={{
                                 textDecoration: "none",
                               }}
                             >
-                              {item.title}
+                              {item.subtitle}
                             </Link>
                           </div>
                         ))}
@@ -224,6 +253,14 @@ const Services = ({ serviceProps, subServicesProps }) => {
         </p>
         <p></p>
         <hr />
+        {auth.user && auth.user.role === "admin" && (
+          <AdButton
+            title={ADD_SERVICE}
+            link={SEVICE_LINK}
+            image={SERVICE_IMAGE}
+            style={ADD_CONTENT_STYLE}
+          />
+        )}
       </div>
     </>
   );

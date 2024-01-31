@@ -4,34 +4,6 @@ import { useContext } from "react";
 import { DataContext } from "../../store/GlobalState";
 import s from "../../styles/DoctorPerson.module.scss";
 
-export const DoctorPersonDefault = () => {
-  return (
-    <div className={`card ${s.doctor_person}`} style={{ width: "19rem" }}>
-      <Image
-        src={
-          "https://res.cloudinary.com/dlr2olc8r/image/upload/v1699090090/test/user_default_x6y6up.png"
-        }
-        className="card-img-top"
-        alt="doctor`s photo"
-        width={300}
-        height={300}
-        style={{ border: "1.5px solid gray" }}
-      />
-      <div className="card-body d-flex flex-column justify-content-center align-items-center">
-        <h5 className="card-title text-center" style={{ height: "50px" }}></h5>
-        <h6 className="card-title text-center" style={{ height: "30px" }}></h6>
-        <p className="card-text text-center" style={{ height: "30px" }}></p>
-        <Link
-          href={`doctors/create`}
-          className="btn btn-success"
-          style={{ width: "156px" }}
-        >
-          Добавить
-        </Link>
-      </div>
-    </div>
-  );
-};
 const DoctorPerson = ({ doctor }) => {
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;

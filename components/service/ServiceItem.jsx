@@ -42,7 +42,7 @@ const ServiceItem = ({ service }) => {
           className="btn btn-info"
           style={{ width: "160px"}}
         >
-          Править
+          Редактировать
         </Link>
         <button
           className="btn btn-danger"
@@ -80,7 +80,7 @@ const ServiceItem = ({ service }) => {
         <div className="col-md-4" style={{ padding: "1%" }}>
           <Image
             src={service.image[0].url}
-            className="card-img-top"
+            className="card-img-top img-fluid"
             alt="service`s photo"
             width={400}
             height={objectFitValue}
@@ -90,9 +90,9 @@ const ServiceItem = ({ service }) => {
         <div className="col-md-8">
           <div className="card-body">
             <h5 className="card-title">{service.title}</h5>
-            <p className="card-text" style={{ minHeight: "120px" }}>
+             <p className="card-text" style={{ minHeight: "120px" }}>
               {service.intro}
-            </p>
+            </p> 
             <div className="card-text">
               {!auth.user || (auth.user && auth.user.role !== "admin")
                 ? serviceLink()
@@ -110,8 +110,8 @@ export default ServiceItem;
 export const ServiceItemDefault = () => {
   return (
     <div
-      className={`card mb-3 ${s.service_item} ${s.service_default_item}`}
-      style={{ height: "100%" }}
+      className={`${s.service_item} ${s.service_default_item}`}
+      style={{border: "1px solid gray", maxWidth: '45%', padding: '10px 5px', marginTop: '20px'}}
     >
       <div className="row g-0">
         <div className="col-md-4" style={{ padding: "1%" }}>
@@ -132,7 +132,7 @@ export const ServiceItemDefault = () => {
             <p className="card-text" style={{ minHeight: "120px" }}></p>
             <p className="card-text" style={{ textAlign: "center" }}>
                 <Link href={`services/create`} className="btn btn-success" style={{minWidth: '160px'}}>
-                  Добавить
+                  Добавить услугу
                 </Link>
             </p>
           </div>

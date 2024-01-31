@@ -11,23 +11,24 @@ const ActionAd = () => {
       >
         <Image
           src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1703673131/test/action_2_qzl7qh.png"
-          className="card-img"
+          className="img-fluid"
           alt="action-ad"
-          width={700}
+          width={900}
           height={700}
           rel="preload"
           as="image"
           blurDataURL={blurDataURL}
           placeholder="blur"
+          style={{margin: 'auto'}}
         />
-        <div className="card-img-overlay" style={{ color: "#948FA5" }}>
-          <h2 className="card-title" style={{ color: "#948FA5" }}>
+        <div className="card-img-overlay">
+          <h2 className="card-title">
             Ловите сезонные скидки на услуги!
           </h2>
-          <h3 className="card-text" style={{ color: "#948FA5" }}>
+          <h3 className="card-text">
             Вся информация о акциях в клинике Мирастом
           </h3>
-          <h4 className="card-text" style={{ color: "#948FA5" }}>
+          <h4 className="card-text">
             Скидки на лечение, протезирование, имплантацию, удаление, гигиену и
             отбеливание зубов
           </h4>
@@ -35,7 +36,6 @@ const ActionAd = () => {
             <Link
               href="/actions"
               style={{
-                color: "#948FA5",
                 fontSize: "24px",
                 width: "150px",
                 textDecoration: "none",

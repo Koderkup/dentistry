@@ -36,7 +36,7 @@ const login = async (req, res) => {
     const access_token = createAccessToken({ id: user.id });
     const refresh_token = createRefreshToken({ id: user.id });
 
-    connection.end();
+    // connection.end();
 
     res.json({
       msg: "Login Success!",

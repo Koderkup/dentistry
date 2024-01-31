@@ -3,17 +3,19 @@ import { Inter } from "next/font/google";
 import { useState } from "react";
 import { getData } from "../utils/fetchData";
 import DoctorPerson from "@/components/doctor/DoctorPerson";
-import { DoctorPersonDefault } from "@/components/doctor/DoctorPerson";
 import s from "../styles/Home.module.scss";
 import { DataContext } from "../store/GlobalState";
 import Welcom from "@/components/Welcom";
 import ActionAd from "@/components/action/ActionAd";
+import AdButton from "@/components/AdButton";
+import { typography } from "@/utils/typography";
 const inter = Inter({ subsets: ["latin"] });
 
 function Home({ doctorProps }) {
   const [doctors, setDoctors] = useState(doctorProps);
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
+const {ADD_DOCTOR, DOCTOR_IMAGE, DOCTOR_LINK, ADD_CONTENT_STYLE} = typography;
   return (
     <>
       <div style={{ padding: "1%" }}>
@@ -26,9 +28,16 @@ function Home({ doctorProps }) {
           {doctors.map((doctor, i) => (
             <DoctorPerson key={doctor.id} doctor={doctor} />
           ))}
-          {auth.user && auth.user.role === "admin" && <DoctorPersonDefault />}
         </div>
       </div>
+      {auth.user && auth.user.role === "admin" && (
+        <AdButton
+          title={ADD_DOCTOR}
+          link={DOCTOR_LINK}
+          image={DOCTOR_IMAGE}
+          style={ADD_CONTENT_STYLE}
+        />
+      )}
     </>
   );
 }

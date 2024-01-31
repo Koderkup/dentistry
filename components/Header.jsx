@@ -43,7 +43,7 @@ const Header = () => {
               aria-labelledby="navbarDropdownMenuLink"
               data-bs-auto-close="outside"
             >
-              <Link href="/create" className="dropdown-item fs-4">
+              <Link href="/create-content" className="dropdown-item fs-4">
                 Создать контент
               </Link>
             </div>
@@ -124,10 +124,7 @@ const Header = () => {
     );
   };
   return (
-    <nav
-      className="navbar navbar-expand-xl"
-      style={{ backgroundColor: 'rgba(108,193,198,0.2)' }}
-    >
+    <nav className={`navbar navbar-expand-xl ${s.header}`}>
       <header className="container-fluid">
         <Link className="navbar-brand" href="/">
           <Image
@@ -282,7 +279,7 @@ const Header = () => {
                 style={{ whiteSpace: "nowrap" }}
               >
                 <FaUserAlt />
-                Sign In
+                {!auth.user && "Войти"}
               </Link>
             ) : (
               loggedRouter()
