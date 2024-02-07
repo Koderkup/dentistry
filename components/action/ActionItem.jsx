@@ -1,61 +1,100 @@
-import {useContext} from "react";
+import { useContext, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Loading from "../Loading";
-import s from '../../styles/ActionItem.module.scss'
+import s from "../../styles/ActionItem.module.scss";
 import { DataContext } from "@/store/GlobalState";
-function ActionItem({action}) {
-
+function ActionItem({ action }) {
   const { state } = useContext(DataContext);
   const { articles, auth } = state;
+  const [lasting, setLasting] = useState("");
+  const [buttonVision, setButtunVision] = useState(false);
+  useEffect(() => {
+    let date = new Date(action.timestamp);
+    date.setMonth(date.getMonth() + 1);
+    setLasting(date.toLocaleDateString());
+  }, []);
+  const adminLink = (id, title) => {
+    return (
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Link
+          href={`/actions/create/${action.id}`}
+          className="btn btn-info"
+          style={{ width: "160px", margin: "5px" }}
+        >
+          Редактировать
+        </Link>
+        <button
+          className="btn btn-danger"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          onClick={() =>
+            dispatch({
+              type: "ADD_MODAL",
+              payload: [
+                {
+                  data: "",
+                  id: id,
+                  title: title,
+                  type: "DELETE_SERVICE",
+                },
+              ],
+            })
+          }
+          style={{ width: "160px", margin: "5px" }}
+        >
+          Удалить
+        </button>
+      </div>
+    );
+  };
 
+  const handleClick = () => {
+    setButtunVision(!buttonVision);
+  };
 
   if (!action || !action.image || !action.title || !action.info)
     return <Loading />;
   return (
-    <div style={{ margin: "10px auto", maxWidth: "1000px", border: '2px solid white' }}>
-      <div className="card">
-        <div className="card-body">
-          <h3 className="card-title">{action.title}</h3>
-          <h5 className="card-text">{action.info}</h5>
-          <p className="card-text">
-            <small className="text-muted">Mirastom</small>
-          </p>
-        </div>
-        <Image
-          src={action.image[0].url}
-          className={`card-img-bottom ${s.action_image}`}
-          alt="action_banner"
-          width={600}
-          height={700}
-        />
+    <div className={`card ${s.action_card}`} style={{ width: "18rem" }}>
+      <Image
+        src={action.image[0].url}
+        className="img-fluid rounded-start rounded-end"
+        alt="action_image"
+        width={250}
+        height={250}
+        style={{ width: "100%" }}
+      />
+      <div className="card-body">
+        <h5 className="card-title" style={{ maxHeight: "96px" }}>
+          {action.title}
+        </h5>
+        <p className={`card-text ${s.action_text}`}>{action.info}</p>
+        <ul className="list-group list-group-flush">
+          <li
+            className="list-group-item"
+            style={{ borderRadius: "40px", color: "red" }}
+          >
+            Акция закончится {lasting}
+          </li>
+        </ul>
       </div>
-      {auth.user && auth.user.role === "admin" && (
-        <div
-          className="d-flex justify-content-around"
-          style={{ padding: "4%" }}
-        >
-          <button
-            type="button"
-            className="btn btn-info"
-            style={{ maxWidth: "200px" }}
-          >
-            <Link
-              href={`/actions/create/${action.id}`}
-              style={{ color: "white", textDecoration: "none" }}
-            >
-              Обновить
-            </Link>
-          </button>
-          <button
-            type="button"
-            className="btn btn-danger"
-            style={{ maxWidth: "150px" }}
-          >
-            Удалить
-          </button>
-        </div>
-      )}
+      <div className="card-body" style={{ maxHeight: "96px" }}>
+        {auth.user && auth.user.role === "admin" && (
+          <Image
+            src={"./assets/setting.svg"}
+            width={30}
+            height={30}
+            alt="wheel"
+            onClick={handleClick}
+            style={{ marginTop: "20px" }}
+          />
+        )}
+        {auth.user &&
+          auth.user.role === "admin" &&
+          buttonVision &&
+          adminLink(action.id, action.title)}
+      </div>
     </div>
   );
 }

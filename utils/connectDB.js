@@ -154,7 +154,22 @@ const createTables = async () => {
   timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (serviceId) REFERENCES services(id) ON DELETE CASCADE
 )`;
-  connection.query(checkPriceTableQuery, (error, results) => {
+  connection.query(checkSubservicesTableQuery, (error, results) => {
+    if (error) {
+      throw error;
+    }
+  });
+
+  const checkSubservicesDiractionTableQuery = `CREATE TABLE IF NOT EXISTS subservices_diraction (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  dirtitle VARCHAR(255) NOT NULL,
+  dirarticle TEXT NOT NULL,
+  dirimage JSON NOT NULL,
+  subserviceId INT(11) NOT NULL,
+  timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (subserviceId) REFERENCES subservices(id) ON DELETE CASCADE
+)`;
+  connection.query(checkSubservicesDiractionTableQuery, (error, results) => {
     if (error) {
       throw error;
     }

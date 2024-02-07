@@ -211,7 +211,7 @@ const Services = ({ serviceProps, subServicesProps }) => {
                             style={{ padding: "8px" }}
                           >
                             <Link
-                              href={`/services/subservices/${item.id}`}
+                              href={`/subservices/${item.id}`}
                               style={{
                                 textDecoration: "none",
                               }}

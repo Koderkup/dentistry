@@ -2,9 +2,15 @@ export const typography = {
   ADD_SERVICE: "Добавить услугу",
   ADD_DOCTOR: "Добавить врача",
   SEVICE_LINK: "services/create",
+  SUBSEVICE_LINK: "/subservices/create",
   DOCTOR_LINK: "doctors/create",
   SERVICE_IMAGE: "./assets/dental_care.svg",
+  SUBSERVICE_IMAGE: "../assets/subservice.svg",
   DOCTOR_IMAGE: "./assets/dentist.svg",
+  ADD_SUBSERVICE: "Добавить подуслугу",
+  ADD_ACTION: 'Объявить акцию',
+  ACTION_LINK: '/actions/create',
+  ACTION_IMAGE: '/assets/action.svg',
 
   ADD_CONTENT_STYLE: {
     position: "fixed",
