@@ -14,7 +14,7 @@ const nextConfig = {
     ],
   },
   env: {
-    BASE_URL: "https://dentistry-nine.vercel.app/",
+    BASE_URL: "https://dentistry-alpha.vercel.app/",
     MYSQLDB_URL: "db4free.net",
     ACCESS_TOKEN_SECRET: "aGZY^&S@)z37;w8m%#Lj[45,6=.`(gb>Mud+]_rkscCQ?U/N~",
     REFRESH_TOKEN_SECRET: "pS~a,kU6.`$Bf:'LRCh[Y+)Kz!Fe%mH;8rqGx?@_#}d^9J->D2",
