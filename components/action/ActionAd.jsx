@@ -61,7 +61,7 @@ const ActionAd = () => {
                 src="./assets/dental_insurance.svg"
                 width={100}
                 height={100}
-                class="img-fluid rounded-start"
+                className="img-fluid rounded-start"
                 alt="dettistry-icon"
               />
             </div>
@@ -96,7 +96,7 @@ const ActionAd = () => {
                 src="./assets/warranty.svg"
                 width={100}
                 height={100}
-                class="img-fluid rounded-start"
+                className="img-fluid rounded-start"
                 alt="dettistry-icon"
               />
             </div>

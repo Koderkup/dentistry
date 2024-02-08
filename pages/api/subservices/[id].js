@@ -20,7 +20,6 @@ export default async (req, res) => {
 const getSubService = async (req, res) => {
   try {
     const { id } = req.query;
-    console.log(id);
 
     const connection = mysql.createConnection({
       host: process.env.DB_HOST,
@@ -42,7 +41,6 @@ const getSubService = async (req, res) => {
         throw error;
       }
       const subservice = result;
-      console.log(result)
       if (!subservice) return res.status(400).json({ err: "Такой услуги нет" });
       res.json({ subservice });
     });

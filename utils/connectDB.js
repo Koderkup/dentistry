@@ -160,7 +160,7 @@ const createTables = async () => {
     }
   });
 
-  const checkSubservicesDiractionTableQuery = `CREATE TABLE IF NOT EXISTS subservices_diraction (
+  const checkSubservicesDiractionTableQuery = `CREATE TABLE IF NOT EXISTS subservice_direction (
   id INT AUTO_INCREMENT PRIMARY KEY,
   dirtitle VARCHAR(255) NOT NULL,
   dirarticle TEXT NOT NULL,
