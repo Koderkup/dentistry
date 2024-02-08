@@ -17,6 +17,8 @@ const Services = ({ serviceProps, subServicesProps }) => {
   const { auth } = state;
   const { ADD_SERVICE, SEVICE_LINK, SERVICE_IMAGE, ADD_CONTENT_STYLE, A } =
     typography;
+    console.log(subServicesProps);
+    console.log(serviceProps);
   const adminLink = (id, title) => {
     return (
       <div className={s.admin_link}>
