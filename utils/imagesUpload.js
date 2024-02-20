@@ -18,3 +18,4 @@ export const imageUpload = async (images) => {
 
   return imgArr;
 };
+

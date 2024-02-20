@@ -27,7 +27,8 @@ const Welcom = () => {
         </div>
         <div className={s.image_container}>
           <Image
-            src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1703682862/test/welcom_c7ttcm.png"
+            // src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1703682862/test/welcom_c7ttcm.png"
+            src="https://i.postimg.cc/zB0q3cs1/welcom-c7ttcm.png"
             alt="mirastom_team"
             width={680}
             height={550}

@@ -175,6 +175,18 @@ const createTables = async () => {
     }
   });
 
+  const checkWidgetsQuery = `CREATE TABLE IF NOT EXISTS widgets (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  type VARCHAR(255) NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  widgetURL VARCHAR(255) NOT NULL
+   )`;
+  connection.query(checkWidgetsQuery, (error, results) => {
+    if (error) {
+      throw error;
+    }
+  });
+
   connection.end();
 };
 export default connectDB;

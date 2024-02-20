@@ -11,15 +11,17 @@ import AdButton from "@/components/AdButton";
 import { typography } from "@/utils/typography";
 const inter = Inter({ subsets: ["latin"] });
 
-function Home({ doctorProps }) {
+function Home({ doctorProps, widgetsProps }) {
   const [doctors, setDoctors] = useState(doctorProps);
   const { state, dispatch } = useContext(DataContext);
+  const [widgets, setWidgets] = useState(widgetsProps);
   const { auth } = state;
-const {ADD_DOCTOR, DOCTOR_IMAGE, DOCTOR_LINK, ADD_CONTENT_STYLE} = typography;
+  const { ADD_DOCTOR, DOCTOR_IMAGE, DOCTOR_LINK, ADD_CONTENT_STYLE } =
+    typography;
   return (
     <>
       <div style={{ padding: "1%" }}>
-        <ActionAd />
+        <ActionAd widgets={widgets}/>
       </div>
       <Welcom />
       <div className={`${s.doctor_wrapper}`}>
@@ -44,9 +46,11 @@ const {ADD_DOCTOR, DOCTOR_IMAGE, DOCTOR_LINK, ADD_CONTENT_STYLE} = typography;
 
 export async function getServerSideProps(context) {
   const res = await getData("doctors");
+  const query = await getData('widgets');
   return {
     props: {
       doctorProps: res.doctors,
+      widgetsProps: query.widgets,
       results: res.result,
     },
   };

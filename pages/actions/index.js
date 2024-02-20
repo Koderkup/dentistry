@@ -22,7 +22,8 @@ const {ADD_ACTION, ACTION_IMAGE, ACTION_LINK, ADD_CONTENT_STYLE} = typography;
       </div>
       <div className={`${s.gift}`}>
         <Image
-          src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1702112215/test/xnp3y2ahpwl3ey5dhbc6.png"
+          // src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1702112215/test/xnp3y2ahpwl3ey5dhbc6.png"
+          src="https://i.postimg.cc/bYZXLBC2/sertificat.png"
           width={450}
           height={450}
           alt="certificat"
@@ -52,7 +53,7 @@ const {ADD_ACTION, ACTION_IMAGE, ACTION_LINK, ADD_CONTENT_STYLE} = typography;
         </ul>
       </div>
       <div className="row">
-        <h3 style={{ marginTop: "30px" }}>Акции</h3>
+        <h1 style={{ marginTop: "30px"}}>Акции</h1>
       </div>
       {auth.user && auth.user.role === "admin" && (
         <>
@@ -64,6 +65,7 @@ const {ADD_ACTION, ACTION_IMAGE, ACTION_LINK, ADD_CONTENT_STYLE} = typography;
           />
         </>
       )}
+      <div className={s.action_image}></div>
       <div className={s.action_card_container}>
         {actions.map((action, i) => (
           <ActionItem key={action.id} action={action} />

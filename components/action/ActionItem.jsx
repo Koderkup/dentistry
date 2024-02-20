@@ -58,12 +58,13 @@ function ActionItem({ action }) {
   return (
     <div className={`card ${s.action_card}`} style={{ width: "18rem" }}>
       <Image
-        src={action.image[0].url}
+        // src={action.image[0].url}
+        src={'./assets/logo_mirastom.svg'}
         className="img-fluid rounded-start rounded-end"
         alt="action_image"
-        width={250}
-        height={250}
-        style={{ width: "100%" }}
+        width={120}
+        height={120}
+        style={{ margin: 'auto' }}
       />
       <div className="card-body">
         <h5 className="card-title" style={{ maxHeight: "96px" }}>

@@ -32,7 +32,8 @@ const Works = () => {
         <div className={s.works__paragraph_container}>
           <Image
             className={s.works__paragraph_container__paragraph_image}
-            src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1698229332/test/ckcwsacbyfrpncjmfitt.png"
+            // src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1698229332/test/ckcwsacbyfrpncjmfitt.png"
+            src="https://i.postimg.cc/mrm90L4y/ckcwsacbyfrpncjmfitt.png"
             alt="smile"
             width={800}
             height={480}
@@ -49,7 +50,8 @@ const Works = () => {
         <div className={s.works__paragraph_container}>
           <Image
             className={s.works__paragraph_container__paragraph_image}
-            src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1698229578/test/kqwjarazx3m1pbfbqrzd.png"
+            // src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1698229578/test/kqwjarazx3m1pbfbqrzd.png"
+            src="https://i.postimg.cc/X76RzF83/kqwjarazx3m1pbfbqrzd.png"
             alt="bonding"
             width={800}
             height={480}
@@ -70,7 +72,8 @@ const Works = () => {
         <div className={s.works__paragraph_container}>
           <Image
             className={s.works__paragraph_container__paragraph_image}
-            src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1698229741/test/ywgnhi4wo9omj311fzkr.png"
+            // src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1698229741/test/ywgnhi4wo9omj311fzkr.png"
+            src="https://i.postimg.cc/Kj20J7yH/ywgnhi4wo9omj311fzkr.png"
             alt="veners"
             width={800}
             height={480}
@@ -91,7 +94,8 @@ const Works = () => {
         <div className={s.works__paragraph_container}>
           <Image
             className={s.works__paragraph_container__paragraph_image}
-            src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1698229842/test/hxgvbi8kynyzhdmbtx2f.png"
+            // src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1698229842/test/hxgvbi8kynyzhdmbtx2f.png"
+            src="https://i.postimg.cc/SsDnvk0b/hxgvbi8kynyzhdmbtx2f.png"
             alt="crowns"
             width={800}
             height={480}
@@ -113,7 +117,8 @@ const Works = () => {
         <div className={s.works__paragraph_container}>
           <Image
             className={s.works__paragraph_container__paragraph_image}
-            src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1698229991/test/ctnzbbbdykl0zezaiu7c.png"
+            // src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1698229991/test/ctnzbbbdykl0zezaiu7c.png"
+            src="https://i.postimg.cc/SRpL7ypL/ctnzbbbdykl0zezaiu7c.png"
             alt="smile"
             width={800}
             height={480}
@@ -134,7 +139,8 @@ const Works = () => {
         <div className={s.works__paragraph_container}>
           <Image
             className={s.works__paragraph_container__paragraph_image}
-            src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1698230102/test/k7avqninoyvpery03fww.png"
+            // src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1698230102/test/k7avqninoyvpery03fww.png"
+            src="https://i.postimg.cc/bYH1ffhM/k7avqninoyvpery03fww.png"
             alt="smile"
             width={800}
             height={480}
@@ -156,7 +162,8 @@ const Works = () => {
         <div className={s.works__paragraph_container}>
           <Image
             className={s.works__paragraph_container__paragraph_image}
-            src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1698230222/test/k5miskwlti4m5bxery9e.png"
+            // src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1698230222/test/k5miskwlti4m5bxery9e.png"
+            src="https://i.postimg.cc/vByD0Dcm/k5miskwlti4m5bxery9e.png"
             alt="smile"
             width={800}
             height={480}
@@ -178,7 +185,8 @@ const Works = () => {
         <div className={s.works__paragraph_container}>
           <Image
             className={s.works__paragraph_container__paragraph_image}
-            src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1698230342/test/w76nejn914uypknjgkmp.png"
+            // src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1698230342/test/w76nejn914uypknjgkmp.png"
+            src="https://i.postimg.cc/hjCgVGm6/w76nejn914uypknjgkmp.png"
             alt="smile"
             width={800}
             height={480}
@@ -199,7 +207,8 @@ const Works = () => {
         <div className={s.works__paragraph_container}>
           <Image
             className={s.works__paragraph_container__paragraph_image}
-            src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1698230424/test/infpab7bwj4ildordrbf.png"
+            // src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1698230424/test/infpab7bwj4ildordrbf.png"
+            src="https://i.postimg.cc/XvQtzzvy/infpab7bwj4ildordrbf.png"
             alt="smile"
             width={800}
             height={480}
@@ -219,7 +228,8 @@ const Works = () => {
         <div className={s.works__paragraph_container}>
           <Image
             className={s.works__paragraph_container__paragraph_image}
-            src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1698230521/test/twu6ot1pyo0fbbjj25w1.png"
+            // src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1698230521/test/twu6ot1pyo0fbbjj25w1.png"
+            src="https://i.postimg.cc/cHKZMScJ/twu6ot1pyo0fbbjj25w1.png"
             alt="dentures"
             width={800}
             height={480}
@@ -235,13 +245,14 @@ const Works = () => {
           </p>
         </div>
         <div className={s.works__paragraph_container}>
-            <Image
-              className={s.works__paragraph_container__paragraph_image}
-              src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1698230631/test/pu0hgcepu5xuwbmnubim.png"
-              alt="bridges"
-              width={800}
-              height={480}
-            />
+          <Image
+            className={s.works__paragraph_container__paragraph_image}
+            // src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1698230631/test/pu0hgcepu5xuwbmnubim.png"
+            src="https://i.postimg.cc/y8VHp9Tt/pu0hgcepu5xuwbmnubim.png"
+            alt="bridges"
+            width={800}
+            height={480}
+          />
           <h1 className={s.works__paragraph_container__paragraph_title}>
             Мосты (несъемные частичные протезы)
           </h1>
@@ -257,7 +268,8 @@ const Works = () => {
         <div className={s.works__paragraph_container}>
           <Image
             className={s.works__paragraph_container__paragraph_image}
-            src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1698230748/test/uda9fkck3gt8lvjfrepw.png"
+            // src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1698230748/test/uda9fkck3gt8lvjfrepw.png"
+            src="https://i.postimg.cc/SxZwZPRY/uda9fkck3gt8lvjfrepw.png"
             alt="gums"
             width={800}
             height={480}

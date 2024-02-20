@@ -25,6 +25,26 @@ export const postData = async (url, post, token) => {
   return data;
 };
 
+export const postImageData = async (url, post, token) => {
+  try {
+    const formData = new FormData();
+    formData.append("image", post[0]);
+    const res = await fetch(`${baseUrl}/api/${url}`, {
+      method: "POST",
+      headers: {
+        Authorization: token,
+      },
+      body: formData,
+    });
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw new Error("Image upload failed");
+  }
+};
+
 export const putData = async (url, post, token) => {
   const res = await fetch(`${baseUrl}/api/${url}`, {
     method: "PUT",
@@ -64,17 +84,15 @@ export const deleteData = async (url, token) => {
   return data;
 };
 
-
-  export const deleteDataArray = async (url, post, token) => {
-    const res = await fetch(`${baseUrl}/api/${url}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-      body: JSON.stringify({ ids: post }),
-    });
-    const data = await res.json();
-    return data;
-  };
-
+export const deleteDataArray = async (url, post, token) => {
+  const res = await fetch(`${baseUrl}/api/${url}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token,
+    },
+    body: JSON.stringify({ ids: post }),
+  });
+  const data = await res.json();
+  return data;
+};
