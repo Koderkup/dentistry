@@ -13,17 +13,15 @@ const ActionAd = ({ widgets }) => {
     TITLE_INFORM_CARD,
   } = typography;
   const [title, setTitle] = useState("");
-  const [contents, setContents] = useState([]);
+  const [contents, setContents] = useState(
+    Array.from(new Set(widgets.map((widget) => widget.type)))
+  );
   const [context, setContext] = useState({});
   const [list, setList] = useState([]);
   useEffect(() => {
-    const widgetKeys = Array.from(
-      new Set(widgets.map((widget) => widget.type))
-    );
-    setContents(widgetKeys);
-    widgetKeys.forEach((widgetKey) => {
-      context[widgetKey] = widgets.filter(
-        (widget) => widget.type === widgetKey
+    contents.forEach((content) => {
+      context[content] = widgets.filter(
+        (widget) => widget.type === content
       );
     });
   }, []);
@@ -88,7 +86,6 @@ const ActionAd = ({ widgets }) => {
         style={{ backgroundColor: "white", border: "none" }}
       >
         <Image
-          // src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1707064370/test/action-add_iicf3y.png"
           src="https://i.postimg.cc/fLYqhqzK/action-add-iicf3y.png"
           className="img-fluid"
           alt="action-ad"
@@ -98,6 +95,7 @@ const ActionAd = ({ widgets }) => {
           as="image"
           blurDataURL={blurDataURL}
           placeholder="blur"
+          priority
           style={{ margin: "auto", width: "100%" }}
         />
         <div className={`card-img-overlay ${s.overlay}`}>

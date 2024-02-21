@@ -20,7 +20,7 @@ function Home({ doctorProps, widgetsProps }) {
     typography;
   return (
     <>
-      <div style={{ padding: "1%" }}>
+      <div className="container">
         <ActionAd widgets={widgets}/>
       </div>
       <Welcom />
