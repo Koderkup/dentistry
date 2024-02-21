@@ -1,15 +1,20 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { Inter } from "next/font/google";
-import { useState } from "react";
 import { getData } from "../utils/fetchData";
-import DoctorPerson from "@/components/doctor/DoctorPerson";
+// import DoctorPerson from "@/components/doctor/DoctorPerson";
 import s from "../styles/Home.module.scss";
 import { DataContext } from "../store/GlobalState";
-import Welcom from "@/components/Welcom";
-import ActionAd from "@/components/action/ActionAd";
-import AdButton from "@/components/AdButton";
+// import Welcom from "@/components/Welcom";
+// import ActionAd from "@/components/action/ActionAd";
+// import AdButton from "@/components/AdButton";
 import { typography } from "@/utils/typography";
 const inter = Inter({ subsets: ["latin"] });
+
+const DoctorPerson = dynamic(() => import("@/components/doctor/DoctorPerson"));
+const Welcom = dynamic(() => import("@/components/Welcom"));
+const ActionAd = dynamic(() => import("@/components/action/ActionAd"));
+const AdButton = dynamic(() => import("@/components/AdButton"));
 
 function Home({ doctorProps, widgetsProps }) {
   const [doctors, setDoctors] = useState(doctorProps);
@@ -18,6 +23,14 @@ function Home({ doctorProps, widgetsProps }) {
   const { auth } = state;
   const { ADD_DOCTOR, DOCTOR_IMAGE, DOCTOR_LINK, ADD_CONTENT_STYLE } =
     typography;
+    useEffect(() => {
+      if ("loading" in HTMLImageElement.prototype) {
+        const images = document.querySelectorAll('img[loading="lazy"]');
+        images.forEach((img) => {
+          img.src = img.dataset.src;
+        });
+      }
+    }, []);
   return (
     <>
       <div className="container">

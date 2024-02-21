@@ -27,7 +27,7 @@ const Welcom = () => {
         </div>
         <div className={s.image_container}>
           <Image
-            src="https://i.postimg.cc/9f0r9RsY/all.png"
+            src="https://i.postimg.cc/13FMPJPk/all-Photoroom-png-Photoroom.png"
             alt="mirastom_team"
             width={680}
             height={550}

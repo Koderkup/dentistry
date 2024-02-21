@@ -41,8 +41,7 @@ const nextConfig = {
     DB_USER: "mirastom_admin",
     DB_PASSWORD: "c9525f28",
     DB_HOST: "db4free.net",
-    DEFAULT_USER_IMAGE:
-      "https://res.cloudinary.com/dlr2olc8r/image/upload/v1699090090/test/user_default_x6y6up.png	",
+    DEFAULT_USER_IMAGE: "https://i.postimg.cc/j2W8zTBC/user-default-x6y6up.png",
     REACT_APP_RECAPTCHA_SITE_KEY: "6Le3Zy0pAAAAAEdYTQRFesRv0kJe6bIEd_MPF7RY",
     REACT_APP_RECAPTCHA_SERVER_KEY: "6Le3Zy0pAAAAACnADRp-C9-kDXPS3hSQ5gdE16Jm",
     API_IMGBB_URL:
