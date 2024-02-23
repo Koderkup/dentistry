@@ -76,27 +76,26 @@ console.log(directions)
           </p>
         </div>
         <div className={`${s.directions} row`}>
-            {directions.map((direction) => (
-              <div
-                key={direction.id}
-                className="card text-dark bg-light mb-3 mt-3"
-                style={{ maxWidth: "18rem" }}
-              >
-                <div className="card-header mx-auto">
-                  <Image
-                    src={direction.dirimage[0].url}
-                    alt="icon-of-service"
-                    width={50}
-                    height={50}
-                  />
-                </div>
-                <div className="card-body">
-                  <h5 className="card-title">{direction.dirtitle}</h5>
-                  <p className="card-text">
-                  </p>
-                </div>
+          {directions.map((direction) => (
+            <div
+              key={direction.id}
+              className="card text-dark bg-light mb-3 mt-3"
+              style={{ maxWidth: "18rem" }}
+            >
+              <div className="card-header mx-auto" style={{border: 'none', backgroundColor: 'rgba(255,255,255,0)'}}>
+                <Image
+                  src={"../assets/logo_mirastom.svg"}
+                  alt="icon-of-service"
+                  width={50}
+                  height={50}
+                />
               </div>
-            ))}
+              <div className="card-body">
+                <h5 className="card-title">{direction.dirtitle}</h5>
+                <p className="card-text"></p>
+              </div>
+            </div>
+          ))}
         </div>
 
         <button

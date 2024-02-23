@@ -22,7 +22,7 @@ const {ADD_ACTION, ACTION_IMAGE, ACTION_LINK, ADD_CONTENT_STYLE} = typography;
       </div>
       <div className={`${s.gift}`}>
         <Image
-          src="https://i.postimg.cc/bYZXLBC2/sertificat.png"
+          src="https://i.postimg.cc/T3sMWJd8/Screenshot-9.png"
           width={450}
           height={450}
           alt="certificat"
@@ -52,7 +52,7 @@ const {ADD_ACTION, ACTION_IMAGE, ACTION_LINK, ADD_CONTENT_STYLE} = typography;
         </ul>
       </div>
       <div className="row">
-        <h1 style={{ marginTop: "30px"}}>Акции</h1>
+        <h1 style={{ marginTop: "30px" }}>Акции</h1>
       </div>
       {auth.user && auth.user.role === "admin" && (
         <>

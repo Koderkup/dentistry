@@ -23,14 +23,7 @@ function Home({ doctorProps, widgetsProps }) {
   const { auth } = state;
   const { ADD_DOCTOR, DOCTOR_IMAGE, DOCTOR_LINK, ADD_CONTENT_STYLE } =
     typography;
-    useEffect(() => {
-      if ("loading" in HTMLImageElement.prototype) {
-        const images = document.querySelectorAll('img[loading="lazy"]');
-        images.forEach((img) => {
-          img.src = img.dataset.src;
-        });
-      }
-    }, []);
+    
   return (
     <>
       <div className="container">
