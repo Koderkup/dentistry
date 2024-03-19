@@ -52,6 +52,10 @@ const createWidget = async (req, res) => {
       return res.status(500).json({ err: "Authentication is not valid" });
     }
     const { type, title, widgetURL } = req.body;
+    if (!widgetURL.includes("https://postimg.cc")) {
+      return res.status(500).json({ err: "Неправильный url адрес" });
+    }
+  
     const connection = await mysql.createConnection({
       host: process.env.DB_HOST,
       port: process.env.DB_PORT,

@@ -1,22 +1,28 @@
 import Head from "next/head";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { DataContext } from "../../store/GlobalState";
-import { postData } from "../../utils/fetchData";
-import s from "../../styles/CreateContent.module.scss";
-
+import { postData, getData } from "../../utils/fetchData";
+import s from "../../styles/CreateWidget.module.scss";
 
 const CreateContentManager = () => {
   const initialState = {
-    type: '',
-    title: '',
-    widgetURL: '',
+    type: "",
+    title: "",
+    widgetURL: "",
   };
   const [widget, setWidget] = useState(initialState);
   const { type, title, widgetURL } = widget;
-
+  useEffect(() => {
+    getData("widgets").then((res) => {
+      if (res.err) {
+        dispatch({ type: "NOTIFY", payload: { error: res.err } });
+      } else {
+        dispatch({ type: "ADD_WIDGET", payload: res.widgets });
+      }
+    });
+  }, []);
   const { state, dispatch } = useContext(DataContext);
-  const { auth } = state;
-
+  const { auth, widgets } = state;
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
     setWidget({ ...widget, [name]: value });
@@ -31,48 +37,45 @@ const CreateContentManager = () => {
         payload: { error: "Authentication is not valid." },
       });
 
-    if (!type || !title || !widgetURL )
+    if (!type || !title || !widgetURL)
       return dispatch({
         type: "NOTIFY",
         payload: { error: "Please add all the fields." },
       });
 
     let res;
-          res = await postData(
-        "services",
-        { ...widget },
-        auth.token
-      );
-      if (res.err)
-        return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+    res = await postData("widgets", { ...widget }, auth.token);
+    if (res.err)
+      return dispatch({ type: "NOTIFY", payload: { error: res.err } });
 
     return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
   };
   return (
     <div className={`container`}>
       <Head>
-        <title>Content Manager</title>
+        <title>Widget Manager</title>
       </Head>
       <form className="row" onSubmit={handleSubmit}>
-        <div className="col-md-6">
+        <div className="col-md-8">
           <div className="row">
-            <div className="col-sm-6">
+            <div className="col-sm-12">
               <label htmlFor="title">Тип</label>
               <div className="mb-3">
                 <select
                   className="form-select"
                   aria-label="Default select example"
-                  value={''}
-                  onChange={()=>{}}
-                  name="serviceId"
+                  value={widget.type}
+                  onChange={handleChangeInput}
+                  name="type"
                 >
                   <option value={""}>выберите категорию</option>
-                  {
-                   [1,2,3].map((service) => (
-                      <option key={service} value={service}>
-                        {service}
+                  {Array.from(new Set(widgets.map((item) => item.type))).map(
+                    (widget, index) => (
+                      <option key={index} value={widget}>
+                        {widget}
                       </option>
-                    ))}
+                    )
+                  )}
                 </select>
               </div>
               <label htmlFor="title">Название</label>
@@ -82,6 +85,16 @@ const CreateContentManager = () => {
                 id="title"
                 value={title}
                 placeholder="Название"
+                className="d-block w-100 p-2"
+                onChange={handleChangeInput}
+              />
+              <label htmlFor="widgetURL">URL адрес</label>
+              <input
+                type="text"
+                name="widgetURL"
+                id="widgetURL"
+                value={widgetURL}
+                placeholder="ссылка на облако https://postimg.cc/"
                 className="d-block w-100 p-2"
                 onChange={handleChangeInput}
               />

@@ -216,18 +216,18 @@ const DoctorsManager = () => {
           </div>
 
           <div className="row img-up mx-0">
-             {avatar.map((ava, index) => (
+            {avatar.map((ava, index) => (
               <div key={index} className="file_img my-1">
+                <p onClick={() => deleteImage(index)} style={{float: 'right'}}>
+                  <MdClose style={{ fontSize: "32px", color: "red" }} />
+                </p>
                 <img
                   src={ava.url ? ava.url : URL.createObjectURL(ava)}
                   alt=""
                   className="img-thumbnail rounded"
                 />
-                <p onClick={() => deleteImage(index)}>
-                  <MdClose style={{fontSize: '32px', color: 'red'}} />
-                </p>
               </div>
-            ))} 
+            ))}
           </div>
         </div>
       </form>

@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Modal, Row, Col } from "react-bootstrap";
 import Image from "next/image";
 import Link from "next/link";
-const OffsetContent = ({list}) => {
+import { MdClose } from "react-icons/md";
+import { DataContext } from "@/store/GlobalState";
+const OffsetContent = ({ list }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedContent, setSelectedContent] = useState(null);
+  const { state, dispatch } = useContext(DataContext);
+  const { auth } = state;
   const openModal = (content) => {
     setSelectedContent(content);
     setShowModal(true);
@@ -19,6 +23,37 @@ const OffsetContent = ({list}) => {
       <Row>
         {list.map((content) => (
           <Col key={content.id} xs={8} md={8} lg={8} className="mx-auto mb-5">
+            {auth.user || (auth.user && auth.user.role === "admin") ? (
+              <>
+                <button
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                  style={{
+                    float: "right",
+                    backgroundColor: "transparent",
+                    border: "none",
+                  }}
+                >
+                  <MdClose
+                    style={{ fontSize: "32px", color: "red" }}
+                    onClick={() => {
+                      dispatch({
+                        type: "ADD_MODAL",
+                        payload: [
+                          {
+                            data: "",
+                            id: content.id,
+                            title: content.title,
+                            type: "DELETE_WIDGET",
+                          },
+                        ],
+                      });
+                    }}
+                  />
+                </button>
+              </>
+            ) : null}
+
             <Image
               width={100}
               height={120}
@@ -32,7 +67,7 @@ const OffsetContent = ({list}) => {
       </Row>
       <hr />
       <Row>
-        <Link href={"/create-content"} style={{ textAlign: "center" }}>
+        <Link href={"/create-widget"} style={{ textAlign: "center" }}>
           <Image
             width={70}
             height={70}

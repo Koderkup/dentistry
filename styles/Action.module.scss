@@ -106,11 +106,12 @@
         height: auto;
 
     }
-        .action_image {
-            background-size: contain center;
-            margin-left: 1%;
-            width: 98%;
-        }
+
+    .action_image {
+        background-size: contain center;
+        margin-left: 1%;
+        width: 98%;
+    }
 
 }
 
@@ -158,9 +159,10 @@
     .action_image {
         background-size: contain;
         background-position: center;
-        margin-top: -20px;
-        margin-left: -10%;
-        width: 120%;
+        width: 100%;
+        background-image: url('https://i.postimg.cc/2y0znrJQ/action-board-small.png');
+        width: 100%;
+        height: calc(0.4*100vw);
     }
 
     .colored_marker_list li {

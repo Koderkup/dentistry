@@ -44,8 +44,6 @@ const nextConfig = {
     DEFAULT_USER_IMAGE: "https://i.postimg.cc/j2W8zTBC/user-default-x6y6up.png",
     REACT_APP_RECAPTCHA_SITE_KEY: "6Le3Zy0pAAAAAEdYTQRFesRv0kJe6bIEd_MPF7RY",
     REACT_APP_RECAPTCHA_SERVER_KEY: "6Le3Zy0pAAAAACnADRp-C9-kDXPS3hSQ5gdE16Jm",
-    API_IMGBB_URL:
-      "https://api.imgbb.com/1/upload?expiration=600&key=10ca40cde29b94318d8c9a9192d06f9e",
   },
 };
 

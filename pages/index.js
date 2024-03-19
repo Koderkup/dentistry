@@ -2,12 +2,8 @@ import { useContext, useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { Inter } from "next/font/google";
 import { getData } from "../utils/fetchData";
-// import DoctorPerson from "@/components/doctor/DoctorPerson";
 import s from "../styles/Home.module.scss";
 import { DataContext } from "../store/GlobalState";
-// import Welcom from "@/components/Welcom";
-// import ActionAd from "@/components/action/ActionAd";
-// import AdButton from "@/components/AdButton";
 import { typography } from "@/utils/typography";
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +19,6 @@ function Home({ doctorProps, widgetsProps }) {
   const { auth } = state;
   const { ADD_DOCTOR, DOCTOR_IMAGE, DOCTOR_LINK, ADD_CONTENT_STYLE } =
     typography;
-    
   return (
     <>
       <div className="container">

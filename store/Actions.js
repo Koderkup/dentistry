@@ -10,6 +10,8 @@ export const ACTIONS = {
   ADD_REVIEW: "ADD_REVIEW",
   ADD_REVIEW: "DELETE_REVIEW",
   ADD_ACTION: "ADD_ACTION",
+  ADD_WIDGET: "ADD_WIDGET",
+  DELETE_WIDGET: "DELETE_WIDGET",
 };
 export const deleteItem = (data, id, type) => {
   const newData = data.filter((item) => item.id !== id);

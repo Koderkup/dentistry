@@ -13,6 +13,7 @@ const DataProvider = ({ children }) => {
     articles: [],
     actions: [],
     reviews: [],
+    widgets: [],
   };
 
   const [state, dispatch] = useReducer(reducers, initialState);

@@ -46,6 +46,11 @@ const reducers = (state, action) => {
         ...state,
         reviews: action.payload,
       };
+    case ACTIONS.ADD_WIDGET:
+      return {
+        ...state,
+        widgets: action.payload,
+      };
     default:
       return state;
   }

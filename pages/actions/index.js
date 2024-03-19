@@ -22,7 +22,7 @@ const {ADD_ACTION, ACTION_IMAGE, ACTION_LINK, ADD_CONTENT_STYLE} = typography;
       </div>
       <div className={`${s.gift}`}>
         <Image
-          src="https://i.postimg.cc/T3sMWJd8/Screenshot-9.png"
+          src="https://i.postimg.cc/fyg6Z6pL/Screenshot-10.png"
           width={450}
           height={450}
           alt="certificat"
