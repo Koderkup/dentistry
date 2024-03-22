@@ -6,7 +6,6 @@ import { DataContext } from "../../store/GlobalState";
 import AdButton from "@/components/AdButton";
 import { typography } from "@/utils/typography";
 const SubservicePage = ({ subservice, directions }) => {
-console.log(directions)
   const {
     ADD_SUBSERVICE,
     SUBSEVICE_LINK,
@@ -56,7 +55,7 @@ console.log(directions)
         </div>
         <div className="row">
           <div className="col-lg-12 col-md-12">
-            <p>{subservice[0].description}</p>
+            <p style={{textAlign: 'justify'}}>{subservice[0].description}</p>
           </div>
         </div>
         <div className="row">
@@ -68,10 +67,10 @@ console.log(directions)
             alt="subservice title"
             width={200}
             height={300}
-            className={`float-right col-lg-3 col-md-6 col-sm-12`}
-            style={{ margin: "auto", borderRadius: "50%" }}
+            className={`float-right col-lg-3 col-md-6 col-sm-12 ${s.image_subservice}`}
+            style={{ margin: "auto", borderRadius: "50%"}}
           />
-          <p className={`col-lg-9 col-md-12 col-sm-12`}>
+          <p className={`col-lg-9 col-md-12 col-sm-12`} style={{textAlign: 'justify'}}>
             {subservice[0].article}
           </p>
         </div>

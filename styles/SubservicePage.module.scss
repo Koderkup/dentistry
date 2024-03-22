@@ -4,3 +4,15 @@
     justify-content: space-around;
     margin: auto;
 }
+
+@media screen and (max-width: 768px) {
+    .image_subservice {
+        height: 400px;
+    }
+}
+
+@media screen and (max-width: 460px) {
+    .image_subservice {
+        height: 330px;
+    }
+}

@@ -52,7 +52,8 @@ const createWidget = async (req, res) => {
       return res.status(500).json({ err: "Authentication is not valid" });
     }
     const { type, title, widgetURL } = req.body;
-    if (!widgetURL.includes("https://postimg.cc")) {
+    console.log(widgetURL);
+    if (!widgetURL.includes("https://i.postimg.cc")) {
       return res.status(500).json({ err: "Неправильный url адрес" });
     }
   

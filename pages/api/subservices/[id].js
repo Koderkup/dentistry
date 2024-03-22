@@ -58,8 +58,8 @@ const updateSubService = async (req, res) => {
       return res.status(500).json({ err: "Authtication is not valid" });
     }
     const { id } = req.query;
-    const { title, article, image, serviceId } = req.body;
-    if (!title || !article || image.length === 0 || !serviceId)
+    const { subtitle, article, subimage, serviceId } = req.body;
+    if (!subtitle || !article || subimage.length === 0 || !serviceId)
       return res.status(500).json({ err: "Incomplete data" });
     const connection = mysql.createConnection({
       host: process.env.DB_HOST,
@@ -74,12 +74,11 @@ const updateSubService = async (req, res) => {
       }
     });
     const updateSubServiceQuery =
-      "UPDATE subservices SET title=?, article=?, image=?, serviceId=? WHERE id=?";
+      "UPDATE subservices SET subtitle=?, article=?, subimage=?, serviceId=? WHERE id=?";
     await connection.execute(updateSubServiceQuery, [
-      title,
-      fullname,
+      subtitle,
       article,
-      image,
+      subimage,
       serviceId,
       id,
     ]);
