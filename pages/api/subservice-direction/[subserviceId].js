@@ -13,7 +13,7 @@ export default async (req, res) => {
 
 const getSubserviceDirections = async (req, res) => {
   try {
-    const { id } = req.query;
+    const { subserviceId } = req.query;
     const connection = mysql.createConnection({
       host: process.env.DB_HOST,
       port: process.env.DB_PORT,
@@ -27,13 +27,12 @@ const getSubserviceDirections = async (req, res) => {
     const selectSubserviceDirectionsQuery = `SELECT * FROM subservice_direction WHERE subserviceId=?`;
     connection.query(
       selectSubserviceDirectionsQuery,
-      [id],
+      [subserviceId],
       (error, results) => {
         if (error) {
           throw error;
         }
         const subServiceDirections = results;
-        console.log(subServiceDirections);
         res.json({
           status: "success",
           result: subServiceDirections.length,
