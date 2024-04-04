@@ -7,16 +7,16 @@ import { useRouter } from "next/router";
 import s from "../../../styles/DoctorsManager.module.scss";
 import { MdClose } from "react-icons/md";
 
-const SubservicesManager = () => {
+const SubDirectionManager = () => {
   const initialState = {
-    subtitle: "",
-    article: "",
-    serviceId: "",
+    dirtitle: "",
+    dirarticle: "",
+    subserviceId: "",
   };
-  const [subservice, setSubservice] = useState(initialState);
-  const { subtitle, article, serviceId } = subservice;
-  const [subimage, setSubimage] = useState([]);
-  const [serviceTitles, setServiceTitles] = useState([]);
+  const [subDirection, setSubDirection] = useState(initialState);
+  const { dirtitle, dirarticle, subserviceId } = subDirection;
+  const [dirimage, setDirImage] = useState([]);
+  const [subServiceTitles, setSubServiceTitles] = useState([]);
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
   const router = useRouter();
@@ -26,22 +26,22 @@ const SubservicesManager = () => {
   useEffect(() => {
     if (id) {
       setOnEdit(true);
-      getData(`subservices/${id}`, auth.token).then((res) => {
-        setSubservice(res.subservice[0]);
-        setSubimage(res.subservice[0].subimage);
+      getData(`subservice-direction/subdirection/${id}`, auth.token).then((res) => {
+        setSubDirection(res.subServiceDirection[0]);
+        setDirImage(res.subServiceDirection[0].dirimage);
       });
     } else {
       setOnEdit(false);
-      setSubservice(initialState);
-      setSubimage([]);
+      setSubDirection(initialState);
+      setDirImage([]);
     }
-    getData(`services`, auth.token).then((res) => {
-      setServiceTitles(res.services);
+    getData(`subservices`, auth.token).then((res) => {
+      setSubServiceTitles(res.subServices);
     });
   }, [id]);
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
-    setSubservice({ ...subservice, [name]: value });
+    setSubDirection({ ...subDirection, [name]: value });
     dispatch({ type: "NOTIFY", payload: {} });
   };
   const handleUploadInput = (e) => {
@@ -71,19 +71,19 @@ const SubservicesManager = () => {
 
     if (err) dispatch({ type: "NOTIFY", payload: { error: err } });
 
-    const imgCount = subimage.length;
+    const imgCount = dirimage.length;
     if (imgCount + newImages.length > 5)
       return dispatch({
         type: "NOTIFY",
         payload: { error: "Select up to 5 images." },
       });
-    setSubimage([...subimage, ...newImages]);
+    setDirImage([...dirimage, ...newImages]);
   };
 
   const deleteImage = (index) => {
-    const newArr = [...subimage];
+    const newArr = [...dirimage];
     newArr.splice(index, 1);
-    setSubimage(newArr);
+    setDirImage(newArr);
   };
 
   const handleSubmit = async (e) => {
@@ -94,7 +94,7 @@ const SubservicesManager = () => {
         payload: { error: "Authentication is not valid." },
       });
 
-    if (!subtitle || !article || !serviceId || subimage.length === 0)
+    if (!dirtitle || !dirarticle || !subserviceId || dirimage.length === 0)
       return dispatch({
         type: "NOTIFY",
         payload: { error: "Please add all the fields." },
@@ -102,24 +102,24 @@ const SubservicesManager = () => {
 
     dispatch({ type: "NOTIFY", payload: { loading: true } });
     let media = [];
-    const imgNewURL = subimage.filter((img) => !img.url);
-    const imgOldURL = subimage.filter((img) => img.url);
+    const imgNewURL = dirimage.filter((img) => !img.url);
+    const imgOldURL = dirimage.filter((img) => img.url);
 
     if (imgNewURL.length > 0) media = await imageUpload(imgNewURL);
 
     let res;
     if (onEdit) {
       res = await putData(
-        `subservices/${id}`,
-        { ...subservice, subimage: [...imgOldURL, ...media] },
+        `subservice-direction/subdirection/${id}`,
+        { ...subDirection, dirimage: [...imgOldURL, ...media] },
         auth.token
       );
       if (res.err)
         return dispatch({ type: "NOTIFY", payload: { error: res.err } });
     } else {
       res = await postData(
-        "subservices",
-        { ...subservice, subimage: [...imgOldURL, ...media] },
+        "subservice-direction/subdirection",
+        { ...subDirection, dirimage: [...imgOldURL, ...media] },
         auth.token
       );
       if (res.err)
@@ -132,36 +132,36 @@ const SubservicesManager = () => {
   return (
     <div className={`container`}>
       <Head>
-        <title>Subservices Manager</title>
+        <title>Subservices Direction Manager</title>
       </Head>
       <form className="row" onSubmit={handleSubmit}>
         <div className="col-md-6">
           <div className="row">
             <div className="col-sm-6">
-              <label htmlFor="subservice">Название</label>
+              <label htmlFor="subDiraction">Название подуслуги</label>
               <select
-                id="subservice"
+                id="subDiraction"
                 className="form-select"
                 aria-label="Default select example"
-                value={subservice.serviceId}
+                value={subDirection.subserviceId}
                 onChange={handleChangeInput}
-                name="serviceId"
+                name="subserviceId"
               >
                 <option value={""}>выберите подуслугу</option>
-                {serviceTitles.map((serviceTitle) => (
-                  <option key={serviceTitle.id} value={serviceTitle.id}>
-                    {serviceTitle.title}
+                {subServiceTitles.map((subServiceTitle) => (
+                  <option key={subServiceTitle.id} value={subServiceTitle.id}>
+                    {subServiceTitle.subtitle}
                   </option>
                 ))}
               </select>
             </div>
             <div className="col-sm-6">
-              <label htmlFor="subtitle">Название</label>
+              <label htmlFor="dirtitle">Название</label>
               <input
                 type="text"
-                name="subtitle"
-                id="subtitle"
-                value={subtitle}
+                name="dirtitle"
+                id="dirtitle"
+                value={dirtitle}
                 placeholder="Название"
                 className="d-block w-100 p-2"
                 onChange={handleChangeInput}
@@ -170,14 +170,14 @@ const SubservicesManager = () => {
           </div>
           <label htmlFor="article">Статья</label>
           <textarea
-            name="article"
-            id="article"
+            name="dirarticle"
+            id="dirarticle"
             cols="50"
             rows="6"
             placeholder="Статья"
             onChange={handleChangeInput}
             className="d-block my-4 w-100 p-2"
-            value={article}
+            value={dirarticle}
           />
           <button type="submit" className="btn btn-info my-2 px-4">
             {onEdit ? "Обновить" : "Создать"}
@@ -199,7 +199,7 @@ const SubservicesManager = () => {
           </div>
 
           <div className="row img-up mx-0">
-            {subimage.map((img, index) => (
+            {dirimage.map((img, index) => (
               <div key={index} className="file_img my-1">
                 <img
                   src={img.url ? img.url : URL.createObjectURL(img)}
@@ -218,4 +218,4 @@ const SubservicesManager = () => {
   );
 };
 
-export default SubservicesManager;
+export default SubDirectionManager;

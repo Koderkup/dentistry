@@ -9,7 +9,9 @@ const Footer = () => {
   const {state} = useContext(DataContext);
  const { articles } = state;
   return (
-    <footer className={`text-center text-lg-start bg-gray text-muted ${s.footer}`}>
+    <footer
+      className={`text-center text-lg-start bg-gray text-muted ${s.footer}`}
+    >
       <section className="d-flex justify-content-center p-4 border-bottom">
         <div className="me-5 d-none d-lg-block">
           <i className="fab fa-linkedin">
@@ -62,9 +64,9 @@ const Footer = () => {
             <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
               <h6 className={`text-uppercase fw-bold mb-4 ${s.paragraph}`}>
                 <Image
-                  src="./assets/logo_mirastom.svg"
-                  width={30}
-                  height={30}
+                  src="https://i.postimg.cc/KcBtY2Zr/logo-4-Photo-Room-png-Photo-Room.png"
+                  width={40}
+                  height={40}
                   alt="logo"
                 />
                 <i className="fas fa-gem me-3 text-secondary"></i>
@@ -119,7 +121,7 @@ const Footer = () => {
               {articles.slice(0, 3).map((article) => (
                 <p key={article.id}>
                   <Link href={`/articles/${article.id}`} className="text-reset">
-                   {article.header}
+                    {article.header}
                   </Link>
                 </p>
               ))}

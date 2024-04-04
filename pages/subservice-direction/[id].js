@@ -5,18 +5,18 @@ import { getData } from "@/utils/fetchData";
 import { DataContext } from "../../store/GlobalState";
 import AdButton from "@/components/AdButton";
 import { typography } from "@/utils/typography";
-const SubservicePage = ({ subservice, directions }) => {
+const SubserviceDirectionPage = ({ subdirection }) => {
   const {
-    ADD_SUBSERVICE,
-    SUBSEVICE_LINK,
-    SUBSERVICE_IMAGE,
+    ADD_SUBDIRSERVICE,
+    SUBDIRSEVICE_LINK,
+    SUBDIRSERVICE_IMAGE,
     ADD_CONTENT_STYLE,
   } = typography;
   const adminLink = (id, title) => {
     return (
       <div className={s.admin_link}>
         <Link
-          href={`/subservices/create/${id}`}
+          href={`/subservice-direction/create/${id}`}
           className="btn btn-info"
           style={{ width: "160px", margin: "5px" }}
         >
@@ -46,26 +46,27 @@ const SubservicePage = ({ subservice, directions }) => {
       </div>
     );
   };
-
   return (
     <>
       <div className="container">
         <div className="row">
-          <h1>{subservice[0].title}</h1>
+          <h1>{subdirection[0].dirtitle}</h1>
         </div>
         <div className="row">
           <div className="col-lg-12 col-md-12">
-            <p style={{ textAlign: "justify" }}>{subservice[0].description}</p>
+            <p style={{ textAlign: "justify" }}>
+              {subdirection[0].description}
+            </p>
           </div>
         </div>
         <div className="row">
-          <h2>{subservice[0].subtitle}</h2>
+          <h2>{subdirection[0].subtitle}</h2>
         </div>
         <div className="row">
           <Image
-            src={subservice[0].subimage[0].url}
-            alt="subservice title"
-            width={300}
+            src={subdirection[0].dirimage[0].url}
+            alt="subdirection title"
+            width={200}
             height={300}
             className={`float-right col-lg-3 col-md-4 col-sm-12 ${s.image_subservice}`}
             style={{ margin: "auto", borderRadius: "50%" }}
@@ -74,45 +75,8 @@ const SubservicePage = ({ subservice, directions }) => {
             className={`col-lg-8 col-md-12 col-sm-12`}
             style={{ textAlign: "justify" }}
           >
-            {subservice[0].article}
+            {subdirection[0].dirarticle}
           </p>
-        </div>
-        <div className={`${s.directions} row`}>
-          {directions.map((direction) => (
-            <div
-              key={direction.id}
-              className={`card mb-3 mt-3 ${s.direction_card}`}
-              style={{ maxWidth: "18rem" }}
-            >
-              <div
-                className="card-header mx-auto"
-                style={{
-                  border: "none",
-                  backgroundColor: "rgba(255,255,255,0)",
-                }}
-              >
-                <Image
-                  src={"../assets/logo_mirastom.svg"}
-                  alt="icon-of-service"
-                  width={50}
-                  height={50}
-                />
-              </div>
-              <Link
-                href={`/subservice-direction/${direction.id}`}
-                style={{
-                  textDecoration: "none",
-                  color: "black",
-                  display: "inline",
-                }}
-              >
-                <div className="card-body">
-                  <h5 className="card-title">{direction.dirtitle}</h5>
-                  <p className="card-text"></p>
-                </div>
-              </Link>
-            </div>
-          ))}
         </div>
 
         <button
@@ -122,7 +86,7 @@ const SubservicePage = ({ subservice, directions }) => {
           data-bs-target="#offcanvasRight"
           aria-controls="offcanvasRight"
         >
-          Изменить подуслугу
+          Изменить напр/подуслуги
         </button>
 
         <div
@@ -133,7 +97,7 @@ const SubservicePage = ({ subservice, directions }) => {
         >
           <div className="offcanvas-header">
             <h5 className="offcanvas-title" id="offcanvasRightLabel">
-              {subservice[0].subtitle}
+              {subdirection[0].dirtitle}
             </h5>
             <button
               type="button"
@@ -143,30 +107,27 @@ const SubservicePage = ({ subservice, directions }) => {
             ></button>
           </div>
           <div className="offcanvas-body">
-            {adminLink(subservice[0].id, subservice.title)}
+            {adminLink(subdirection[0].id, subdirection.dirtitle)}
           </div>
         </div>
       </div>
       <AdButton
-        title={ADD_SUBSERVICE}
-        link={SUBSEVICE_LINK}
-        image={SUBSERVICE_IMAGE}
+        title={ADD_SUBDIRSERVICE}
+        link={SUBDIRSEVICE_LINK}
+        image={SUBDIRSERVICE_IMAGE}
         style={ADD_CONTENT_STYLE}
       />
     </>
   );
 };
 
-export default SubservicePage;
+export default SubserviceDirectionPage;
 
 export async function getServerSideProps({ params: { id } }) {
-  const res = await getData(`subservices/${id}`);
-  const subserviceId = id;
-  const dir = await getData(`subservice-direction/${subserviceId}`);
+  const res = await getData(`subservice-direction/subdirection/${id}`);
   return {
     props: {
-      subservice: res.subservice,
-      directions: dir.subServiceDirections,
+      subdirection: res.subServiceDirection,
     },
   };
 }

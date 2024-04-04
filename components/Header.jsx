@@ -128,9 +128,9 @@ const Header = () => {
       <header className="container-fluid">
         <Link className="navbar-brand" href="/">
           <Image
-            src="./assets/logo_mirastom.svg"
-            width={60}
-            height={60}
+            src="https://i.postimg.cc/KcBtY2Zr/logo-4-Photo-Room-png-Photo-Room.png"
+            width={70}
+            height={70}
             alt="logo"
           />
         </Link>

@@ -15,6 +15,7 @@ body {
             user-select: none;
             /* Standard */
             background-color: rgba(248,247,242,0.1);
+                    overflow: auto !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
