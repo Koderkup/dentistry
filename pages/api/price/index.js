@@ -101,13 +101,13 @@ const deletePrices = async (req, res) => {
     });
     connection.connect();
 
-    const deletePricesQuery = `DELETE FROM prices WHERE id IN (?)`; // Используем оператор IN для удаления нескольких записей по массиву идентификаторов
+    const deletePricesQuery = `DELETE FROM prices WHERE id IN (?)`; 
 
     connection.query(deletePricesQuery, [ids], (error, results) => {
       if (error) {
         throw error;
       }
-      res.json({ msg: "Deleted Success!", status: "success" });
+      res.json({ msg: "Удаление успешно!", status: "success" });
       connection.end();
     });
   } catch (err) {

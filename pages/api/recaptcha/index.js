@@ -11,9 +11,7 @@ export default async (req, res) => {
 const recaptchaVerify = async (req, res) => {
   if (req.method === "POST") {
     const { recaptchaResponse } = req.body;
-
     const secretKey = process.env.REACT_APP_RECAPTCHA_SERVER_KEY;
-
     const url = "https://www.google.com/recaptcha/api/siteverify";
     const data = {
       secret: secretKey,
@@ -31,11 +29,9 @@ const recaptchaVerify = async (req, res) => {
       if (response.status === 200) {
         res.status(200).json({ success: true });
       } else {
-        // Ответ reCAPTCHA недействительный
         res.status(400).json({ error: "Недействительный ответ reCAPTCHA" });
       }
     } catch (error) {
-      // Произошла ошибка при проверке reCAPTCHA
       console.error("Ошибка при проверке reCAPTCHA:", error);
       res.status(500).json({ error: "Ошибка при проверке reCAPTCHA" });
     }

@@ -2,17 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState, useContext } from "react";
 import { DataContext } from "@/store/GlobalState";
-
-const ArticleCard = ({ id }) => {
-  const { state } = useContext(DataContext);
-  const { articles, auth } = state;
-  const [content, setContent] = useState({});
-  useEffect(() => {
-    const filling = articles.filter((article) => article.id === Number(id));
-    setContent(filling[0]);
-  }, [id]);
+import Loading from "@/components/Loading";
+const ArticleCard = ({ content }) => {
+  const { state, dispatch } = useContext(DataContext);
+  const { auth } = state;
   if (!content || !content.image) {
-    return null;
+    return (
+      <div>
+        <Loading/>
+      </div>
+    );
   }
   return (
     <div className="card" style={{ marginTop: "12px" }}>
@@ -47,15 +46,28 @@ const ArticleCard = ({ id }) => {
           >
             <Link
               href={`/articles/create/${content.id}`}
-              style={{ color: "white", textDecoration: 'none' }}
+              style={{ color: "white", textDecoration: "none" }}
             >
               Обновить
             </Link>
           </button>
           <button
-            type="button"
             className="btn btn-danger"
-            style={{ maxWidth: "150px" }}
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            onClick={() =>
+              dispatch({
+                type: "ADD_MODAL",
+                payload: [
+                  {
+                    data: [content],
+                    id: content.id,
+                    title: content.header,
+                    type: "ADD_ARTICLE",
+                  },
+                ],
+              })
+            }
           >
             Удалить
           </button>

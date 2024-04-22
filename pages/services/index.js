@@ -17,7 +17,7 @@ const Services = ({ serviceProps, subServicesProps }) => {
   const { auth } = state;
   const { ADD_SERVICE, SEVICE_LINK, SERVICE_IMAGE, ADD_CONTENT_STYLE, A } =
     typography;
-  const adminLink = (id, title) => {
+  const adminLink = (id, title, item=[]) => {
     return (
       <div className={s.admin_link}>
         <Link
@@ -36,10 +36,10 @@ const Services = ({ serviceProps, subServicesProps }) => {
               type: "ADD_MODAL",
               payload: [
                 {
-                  data: "",
+                  data: [item],
                   id: id,
                   title: title,
-                  type: "DELETE_SERVICE",
+                  type: "ADD_SERVICE",
                 },
               ],
             })
@@ -115,7 +115,7 @@ const Services = ({ serviceProps, subServicesProps }) => {
                         <p className={s.slider_title}>{service.title}</p>
                       </div>
                       {auth.user || (auth.user && auth.user.role === "admin")
-                        ? adminLink(service.id, service.title)
+                        ? adminLink(service.id, service.title, service)
                         : null}
                     </div>
                   </div>

@@ -75,7 +75,7 @@ const deleteReviews = async (req, res) => {
     if (result.role !== "admin" || !result.root) {
       return res.status(400).json({ err: "Authentication is not valid" });
     }
-    const { ids } = req.body; // Получаем массив идентификаторов отзывов из запроса
+    const { ids } = req.body; 
     const connection = mysql.createConnection({
       host: process.env.DB_HOST,
       port: process.env.DB_PORT,
@@ -85,13 +85,13 @@ const deleteReviews = async (req, res) => {
     });
     connection.connect();
 
-    const deleteReviewQuery = `DELETE FROM reviews WHERE id IN (?)`; // Используем оператор IN для удаления нескольких записей по массиву идентификаторов
+    const deleteReviewQuery = `DELETE FROM reviews WHERE id IN (?)`; 
 
     connection.query(deleteReviewQuery, [ids], (error, results) => {
       if (error) {
         throw error;
       }
-      res.json({ msg: "Deleted Success!", status: "success" });
+      res.json({ msg: "Удаление успешно!", status: "success" });
       connection.end();
     });
   } catch (err) {

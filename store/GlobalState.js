@@ -8,12 +8,15 @@ const DataProvider = ({ children }) => {
     auth: {},
     modal: {},
     services: [],
+    subservices: [],
+    subservice_directions: [],
     users: [],
     doctors: [],
     articles: [],
     actions: [],
     reviews: [],
     widgets: [],
+    prices: [],
   };
 
   const [state, dispatch] = useReducer(reducers, initialState);
@@ -54,14 +57,11 @@ const DataProvider = ({ children }) => {
   }, [auth.token, auth.user]);
 
   useEffect(() => {
-    // Получение данных статей из базы данных
     getData("articles").then((res) => {
       if (res.err) {
-        // Обработка ошибки, если не удалось получить данные
         dispatch({ type: "NOTIFY", payload: { error: res.err } });
       } else {
-        // Обновление состояния с полученными данными статей
-        dispatch({ type: "ADD_ARTICLES", payload: res.articles });
+        dispatch({ type: "ADD_ARTICLE", payload: res.articles });
       }
     });
   }, []);
