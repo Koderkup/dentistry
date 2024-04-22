@@ -1,4 +1,4 @@
-import {ACTIONS} from'./Actions';
+import { ACTIONS } from "./Actions";
 const reducers = (state, action) => {
   switch (action.type) {
     case ACTIONS.NOTIFY:
@@ -31,7 +31,17 @@ const reducers = (state, action) => {
         ...state,
         services: action.payload,
       };
-    case ACTIONS.ADD_ARTICLES:
+    case ACTIONS.ADD_SUBSERVICE_DIRECTION:
+      return {
+        ...state,
+        subservice_directions: action.payload,
+      };
+    case ACTIONS.ADD_SUBSERVICE:
+      return {
+        ...state,
+        subservices: action.payload,
+      };
+    case ACTIONS.ADD_ARTICLE:
       return {
         ...state,
         articles: action.payload,
@@ -41,7 +51,7 @@ const reducers = (state, action) => {
         ...state,
         reviews: action.payload,
       };
-    case ACTIONS.DELETE_REVIEW:
+    case ACTIONS.ADD_REVIEWS:
       return {
         ...state,
         reviews: action.payload,
@@ -50,6 +60,16 @@ const reducers = (state, action) => {
       return {
         ...state,
         widgets: action.payload,
+      };
+    case ACTIONS.ADD_PRICE:
+      return {
+        ...state,
+        prices: action.payload,
+      };
+    case ACTIONS.ADD_ACTION:
+      return {
+        ...state,
+        prices: action.payload,
       };
     default:
       return state;

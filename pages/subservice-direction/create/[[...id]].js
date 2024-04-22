@@ -148,11 +148,12 @@ const SubDirectionManager = () => {
                 name="subserviceId"
               >
                 <option value={""}>выберите подуслугу</option>
-                {subServiceTitles.map((subServiceTitle) => (
-                  <option key={subServiceTitle.id} value={subServiceTitle.id}>
-                    {subServiceTitle.subtitle}
-                  </option>
-                ))}
+                {subServiceTitles &&
+                  subServiceTitles.map((subServiceTitle) => (
+                    <option key={subServiceTitle.id} value={subServiceTitle.id}>
+                      {subServiceTitle.subtitle}
+                    </option>
+                  ))}
               </select>
             </div>
             <div className="col-sm-6">
@@ -199,18 +200,19 @@ const SubDirectionManager = () => {
           </div>
 
           <div className="row img-up mx-0">
-            {dirimage.map((img, index) => (
-              <div key={index} className="file_img my-1">
-                <img
-                  src={img.url ? img.url : URL.createObjectURL(img)}
-                  alt=""
-                  className="img-thumbnail rounded"
-                />
-                <p onClick={() => deleteImage(index)}>
-                  <MdClose style={{ fontSize: "32px", color: "red" }} />
-                </p>
-              </div>
-            ))}
+            {dirimage &&
+              dirimage.map((img, index) => (
+                <div key={index} className="file_img my-1">
+                  <img
+                    src={img.url ? img.url : URL.createObjectURL(img)}
+                    alt=""
+                    className="img-thumbnail rounded"
+                  />
+                  <p onClick={() => deleteImage(index)}>
+                    <MdClose style={{ fontSize: "32px", color: "red" }} />
+                  </p>
+                </div>
+              ))}
           </div>
         </div>
       </form>

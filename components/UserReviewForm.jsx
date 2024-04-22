@@ -1,11 +1,10 @@
 import { useContext, useEffect } from "react";
 import s from "../styles/UserReviewForm.module.scss";
 import { MdStar, MdDateRange } from "react-icons/md";
-import { AiOutlineCheckCircle } from "react-icons/ai";
 import Image from "next/image";
 import { DataContext } from "../store/GlobalState";
 
-const UserReviewForm = ({ review, handleDelete, checked, setChecked }) => {
+const UserReviewForm = ({ review, checked, handleSelectedReview }) => {
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
   const date = new Date(review.timestamp);
@@ -18,14 +17,14 @@ const UserReviewForm = ({ review, handleDelete, checked, setChecked }) => {
     }
     return stars;
   };
-useEffect(()=>{
-  if(checked){
-    setChecked(true);
-  }
-},[]);
 
   return (
-    <form className={s.user_review_form} onSubmit={handleDelete}>
+    <form
+      className={s.user_review_form}
+      onSubmit={(e) => {
+        e.preventDefault();
+      }}
+    >
       <fieldset disabled>
         <legend>
           <p>
@@ -60,22 +59,39 @@ useEffect(()=>{
           <div className="mb-3">
             <div className="form-check">
               <input
-                className="form-check-input"
+                className="form-check-input mx-1"
                 type="checkbox"
                 id="disabledFieldsetCheck"
                 checked={checked}
-                // disabled
-                onChange={()=> setChecked(true)}
+                onChange={() => {
+                  handleSelectedReview(review.id);
+                }}
+                style={{ width: "25px", height: "25px" }}
               />
               <label
                 className="form-check-label"
                 htmlFor="disabledFieldsetCheck"
-              >
-                <AiOutlineCheckCircle />
-              </label>
+              ></label>
             </div>
           </div>
-          <button type="submit" className="btn btn-danger">
+          <button
+            className="btn btn-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            onClick={() =>
+              dispatch({
+                type: "ADD_MODAL",
+                payload: [
+                  {
+                    data: [review],
+                    id: review.id,
+                    title: `Это отзыв оставил - ${review.name} ?`,
+                    type: "ADD_REVIEW",
+                  },
+                ],
+              })
+            }
+          >
             Удалить
           </button>
         </>

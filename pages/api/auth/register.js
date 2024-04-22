@@ -21,6 +21,7 @@ const DEFAULT_IMG_URL = {
 const register = async (req, res) => {
   try {
     const { name, email, password, cf_password } = req.body;
+    console.log(name, email, password, cf_password);
   const connection = DatabaseConnection.getInstance().getConnection();
     const errMsg = valid(name, email, password, cf_password);
     if (errMsg) return res.status(400).json({ err: errMsg });

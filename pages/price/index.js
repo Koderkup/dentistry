@@ -87,7 +87,24 @@ const Price = ({ priceProps }) => {
         selectedItems.length !== 0 && (
           <div className={s.delete_btn}>
             <h3>Удалить выбранное</h3>
-            <button type="button" className="btn btn-danger">
+            <button
+              className="btn btn-danger"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              onClick={() =>
+                dispatch({
+                  type: "ADD_MODAL",
+                  payload: [
+                    {
+                      data: selectedItems,
+                      id: selectedItems.length,
+                      title: ` Выбрано ${selectedItems.length} позиций для удаления`,
+                      type: "ADD_PRICE",
+                    },
+                  ],
+                })
+              }
+            >
               Удалить
             </button>
           </div>
@@ -158,7 +175,10 @@ const Price = ({ priceProps }) => {
                           color: chunk.isChecked ? "red" : "black",
                         }}
                       >
-                        <span style={{color: 'blue', fontSize: '16px'}}>от</span> {chunk.price}
+                        <span style={{ color: "blue", fontSize: "16px" }}>
+                          от
+                        </span>{" "}
+                        {chunk.price}
                       </td>
                     </tr>
                   ))}

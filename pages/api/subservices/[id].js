@@ -12,6 +12,9 @@ export default async (req, res) => {
     case "PUT":
       await updateSubService(req, res);
       break;
+    case "DELETE":
+      await deleteSubService(req, res);
+      break;
     default:
       break;
   }
@@ -84,6 +87,34 @@ const updateSubService = async (req, res) => {
     ]);
     res.json({ msg: "Данные успешно обновлены" });
     connection.end();
+  } catch (err) {
+    return res.status(500).json({ err: err.message });
+  }
+};
+const deleteSubService = async (req, res) => {
+  try {
+    const results = await auth(req, res);
+    if (!results || results.role !== "admin") {
+      return res.status(500).json({ err: "Authtication is not valid" });
+    }
+    const { id } = req.query;
+    const connection = mysql.createConnection({
+      host: process.env.DB_HOST,
+      port: process.env.DB_PORT,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+    });
+    connection.connect((err) => {
+      if (err) {
+        return res.status(500).json({ err: err.message });
+      }
+    });
+    const deleteSubServiceQuery = `DELETE FROM subservices WHERE id=?`;
+    connection.execute(deleteSubServiceQuery, [id]);
+    res.json({ msg: "Данные успешно удалены" });
+    connection.end();
+
   } catch (err) {
     return res.status(500).json({ err: err.message });
   }

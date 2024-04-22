@@ -12,6 +12,9 @@ export default async (req, res) => {
     case "PUT":
       await updateDoctor(req, res);
       break;
+    case "DELETE":
+      await deleteDoctor(req, res);
+      break;
     default:
       break;
   }
@@ -70,11 +73,43 @@ const updateDoctor = async (req, res) => {
     });
     const updateDoctorQuery =
       "UPDATE doctors SET sirname=?, fullname=?, proff=?, avatar=?, description=? WHERE id=?";
-    await connection.execute(
-      updateDoctorQuery,
-      [sirname, fullname, proff, avatar, description, id]
-    );
+    await connection.execute(updateDoctorQuery, [
+      sirname,
+      fullname,
+      proff,
+      avatar,
+      description,
+      id,
+    ]);
     res.json({ msg: "Данные успешно обновлены" });
+    connection.end();
+  } catch (err) {
+    return res.status(500).json({ err: err.message });
+  }
+};
+
+const deleteDoctor = async (req, res) => {
+  try {
+    const results = await auth(req, res);
+    if (!results || results.role !== "admin") {
+      return res.status(500).json({ err: "Authtication is not valid" });
+    }
+    const { id } = req.query;
+    const connection = mysql.createConnection({
+      host: process.env.DB_HOST,
+      port: process.env.DB_PORT,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+    });
+    connection.connect((err) => {
+      if (err) {
+        return res.status(500).json({ err: err.message });
+      }
+    });
+    const deleteDoctorQuery = "DELETE FROM doctors WHERE id=?";
+    await connection.execute(deleteDoctorQuery, [id]);
+    res.json({ msg: "Данные успешно удалены" });
     connection.end();
   } catch (err) {
     return res.status(500).json({ err: err.message });

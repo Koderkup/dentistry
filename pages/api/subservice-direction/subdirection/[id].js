@@ -9,6 +9,9 @@ export default async (req, res) => {
       break;
       case "PUT":
       await updateSubserviceDirection(req, res);
+      case "DELETE":
+        deleteSubServiceDirection(req, res);
+      break;
     default:
       break;
   }
@@ -86,5 +89,35 @@ const updateSubserviceDirection = async (req, res) => {
     connection.end();
   } catch (err) {
     return res.status(500).json({ err: err.message });
+  }
+};
+
+const deleteSubServiceDirection = async (req, res) => {
+  try{
+    const results = await auth(req, res);
+    if (!results || results.role !== "admin") {
+      return res.status(500).json({ err: "Authtication is not valid" });
+    }
+    const { id } = req.query;
+    const connection = mysql.createConnection({
+      host: process.env.DB_HOST,
+      port: process.env.DB_PORT,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+    });
+    connection.connect((err) => {
+      if (err) {
+        return res.status(500).json({ err: err.message });
+      }
+    });
+    const deleteSubServiceDirectionQuery =
+      "DELETE FROM subservice_direction WHERE id=?";
+    await connection.execute(deleteSubServiceDirectionQuery, [id]);
+    res.json({ msg: "Данные успешно удалены" });
+    connection.end();
+
+  } catch (err) {
+     return res.status(500).json({ err: err.message });
   }
 };

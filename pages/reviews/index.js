@@ -3,13 +3,7 @@ import s from "../../styles/Reviews.module.scss";
 import UserReviewForm from "@/components/UserReviewForm";
 import Pagination from "@/components/Pagination";
 import { DataContext } from "../../store/GlobalState";
-import {
-  getData,
-  postData,
-  deleteData,
-  deleteDataArray,
-} from "../../utils/fetchData";
-import { deleteItem, deleteItems } from "../../store/Actions";
+import { getData, postData } from "../../utils/fetchData";
 import usePagination from "@/hooks/usePagination";
 import ReCAPTCHA from "react-google-recaptcha";
 function Reviews({ reviewsProps }) {
@@ -24,7 +18,7 @@ function Reviews({ reviewsProps }) {
   const [checked, setChecked] = useState(false);
   const [delivary, setDelivary] = useState(true);
   const [formData, setFormData] = useState({ recaptchaResponse: "" });
-
+  const [selectedReviewsForRemove, setSelectedReviewsForRemove] = useState([]);
   const {
     firstContentIndex,
     lastContentIndex,
@@ -45,23 +39,28 @@ function Reviews({ reviewsProps }) {
     setEndDate(e.target.value);
   };
 
-  const updateCheckedStatus = (checkedValue) => {
+  const updateCheckedStatusAll = (checkedValue) => {
     const updatedReviews = reviews.map((review, index) => {
       if (index >= firstContentIndex && index <= lastContentIndex - 1) {
         return {
           ...review,
-          checked: checkedValue, // Используем переданное значение checked
+          checked: checkedValue,
         };
       }
       return review;
     });
     setReviews(updatedReviews);
   };
-
-  const handleSelectionChange = (e) => {
+  const handleSelectionAll = (e) => {
     setChecked((prevChecked) => !prevChecked);
-    updateCheckedStatus(!checked);
+    updateCheckedStatusAll(!checked);
   };
+  useEffect(() => {
+    const removeIds = reviews
+      .filter((review) => review.checked)
+      .map((review) => review.id);
+    setSelectedReviewsForRemove(removeIds);
+  }, [reviews]);
   useEffect(() => {
     const start = new Date(reviews[0].timestamp);
     const end = new Date(reviews[reviews.length - 1].timestamp);
@@ -79,7 +78,7 @@ function Reviews({ reviewsProps }) {
         const reviewDate = new Date(review.timestamp);
         const startDateObj = new Date(startDate);
         const endDateObj = new Date(endDate);
-        endDateObj.setHours(23, 59, 59); // Добавляем время к endDate
+        endDateObj.setHours(23, 59, 59);
         return reviewDate >= startDateObj && reviewDate <= endDateObj;
       })
       .sort((a, b) => {
@@ -89,6 +88,13 @@ function Reviews({ reviewsProps }) {
       });
     setReviews(filteredReviews);
   }, [startDate, endDate]);
+
+  useEffect(() => {
+    const allChecked = reviews
+      .slice(firstContentIndex, lastContentIndex)
+      .every((element) => element.checked);
+    setChecked(allChecked);
+  }, [firstContentIndex, lastContentIndex, reviews]);
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
@@ -110,48 +116,30 @@ function Reviews({ reviewsProps }) {
           return dispatch({ type: "NOTIFY", payload: { error: res.err } });
         }
       } else {
-        // Ответ reCAPTCHA недействительный
         console.error("Недействительный ответ reCAPTCHA");
       }
     } catch (error) {
-      // Произошла ошибка при проверке reCAPTCHA
       console.error("Ошибка при проверке reCAPTCHA:", error);
     }
   };
 
-  const handleDelete = async (id) => {
-    dispatch({ type: "NOTIFY", payload: { loading: true } });
-    const res = await deleteData(`/reviews/${id}`, auth.token);
-    if (res.status === "success") {
-      dispatch(deleteItem(reviews, id, "DELETE_REVIEW"));
-      return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
-    }
-    if (res.err) {
-      return dispatch({ type: "NOTIFY", payload: { error: res.err } });
-    }
-  };
-
-  const handleDeleteAll = async () => {
-    const removeIds = reviews
-      .filter((review) => review.checked) // Фильтруем только отмеченные элементы
-      .map((review) => review.id);
-    if (checked) {
-      dispatch({ type: "NOTIFY", payload: { loading: true } });
-      const res = await deleteDataArray("/reviews", removeIds, auth.token);
-      if (res.status === "success") {
-        dispatch(deleteItems(reviews, removeIds, "DELETE_REVIEW"));
-        return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
-      }
-      if (res.err) {
-        return dispatch({ type: "NOTIFY", payload: { error: res.err } });
-      }
-    } else return;
-  };
   const handleRecaptchaChange = (response) => {
     setFormData({ ...formData, recaptchaResponse: response });
     setDelivary(false);
   };
-
+  const handleSelectedReview = (id) => {
+    const updatedReviews = reviews.map((review) => {
+      if (review.id === id) {
+        const checkedValue = !review.checked;
+        return {
+          ...review,
+          checked: checkedValue,
+        };
+      }
+      return review;
+    });
+    setReviews(updatedReviews);
+  };
   return (
     <div className="container">
       <h1>Поделитесь своими впечатлениями</h1>
@@ -204,11 +192,8 @@ function Reviews({ reviewsProps }) {
             max="5"
           />
         </div>
+        <label htmlFor="flexRadioDefault1">Выберите пол:</label>
         <div className="form-check">
-          <span className="form-text" style={{ marginLeft: "-24px" }}>
-            Выберите пол:
-          </span>
-          <br />
           <input
             className="form-check-input"
             type="radio"
@@ -257,22 +242,36 @@ function Reviews({ reviewsProps }) {
             className="mb-3 d-flex justify-content-between"
             style={{ margin: "auto", maxWidth: "540px" }}
           >
-            <div className="mb-3 form-check">
+            <div className="form-check">
               <input
                 type="checkbox"
-                className="form-check-input"
+                className="form-check-input mx-1"
                 id="exampleCheck1"
-                onChange={handleSelectionChange}
+                onChange={handleSelectionAll}
                 checked={checked}
+                style={{ width: "25px", height: "25px" }}
               />
               <label className="form-check-label" htmlFor="exampleCheck1">
                 Выбрать все
               </label>
             </div>
             <button
-              type="button"
-              className="btn btn-primary"
-              onClick={handleDeleteAll}
+              className="btn btn-danger"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              onClick={() =>
+                dispatch({
+                  type: "ADD_MODAL",
+                  payload: [
+                    {
+                      data: selectedReviewsForRemove,
+                      id: selectedReviewsForRemove.length,
+                      title: `Выбрано для удаления ${selectedReviewsForRemove.length} отзывов`,
+                      type: "ADD_REVIEWS",
+                    },
+                  ],
+                })
+              }
             >
               Удалить выбранное
             </button>
@@ -302,9 +301,8 @@ function Reviews({ reviewsProps }) {
           <UserReviewForm
             key={review.id}
             review={review}
-            handleDelete={() => handleDelete(review.id)}
             checked={review.checked}
-            setChecked={setChecked}
+            handleSelectedReview={handleSelectedReview}
           />
         );
       })}

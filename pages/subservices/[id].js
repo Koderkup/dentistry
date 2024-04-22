@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import s from "../../styles/SubservicePage.module.scss";
@@ -5,14 +6,18 @@ import { getData } from "@/utils/fetchData";
 import { DataContext } from "../../store/GlobalState";
 import AdButton from "@/components/AdButton";
 import { typography } from "@/utils/typography";
+
 const SubservicePage = ({ subservice, directions }) => {
+  const { state, dispatch } = useContext(DataContext);
+  const { auth } = state;
   const {
     ADD_SUBSERVICE,
     SUBSEVICE_LINK,
     SUBSERVICE_IMAGE,
     ADD_CONTENT_STYLE,
   } = typography;
-  const adminLink = (id, title) => {
+
+  const adminLink = (id, title, item) => {
     return (
       <div className={s.admin_link}>
         <Link
@@ -31,10 +36,10 @@ const SubservicePage = ({ subservice, directions }) => {
               type: "ADD_MODAL",
               payload: [
                 {
-                  data: "",
+                  data: item,
                   id: id,
                   title: title,
-                  type: "DELETE_SERVICE",
+                  type: "ADD_SUBSERVICE",
                 },
               ],
             })
@@ -51,7 +56,7 @@ const SubservicePage = ({ subservice, directions }) => {
     <>
       <div className="container">
         <div className="row">
-          <h1>{subservice[0].title}</h1>
+          <h1>{subservice[0].subtitle}</h1>
         </div>
         <div className="row">
           <div className="col-lg-12 col-md-12">
@@ -114,17 +119,17 @@ const SubservicePage = ({ subservice, directions }) => {
             </div>
           ))}
         </div>
-
-        <button
-          className="btn btn-info mt-2"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasRight"
-          aria-controls="offcanvasRight"
-        >
-          Изменить подуслугу
-        </button>
-
+        {auth.user && auth.user.role === "admin" && (
+          <button
+            className="btn btn-info mt-2"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasRight"
+            aria-controls="offcanvasRight"
+          >
+            Изменить подуслугу
+          </button>
+        )}
         <div
           className="offcanvas offcanvas-end"
           tabIndex="-1"
@@ -143,16 +148,18 @@ const SubservicePage = ({ subservice, directions }) => {
             ></button>
           </div>
           <div className="offcanvas-body">
-            {adminLink(subservice[0].id, subservice.title)}
+            {adminLink(subservice[0].id, subservice[0].subtitle, subservice)}
           </div>
         </div>
       </div>
-      <AdButton
-        title={ADD_SUBSERVICE}
-        link={SUBSEVICE_LINK}
-        image={SUBSERVICE_IMAGE}
-        style={ADD_CONTENT_STYLE}
-      />
+      {auth.user && auth.user.role === "admin" && (
+        <AdButton
+          title={ADD_SUBSERVICE}
+          link={SUBSEVICE_LINK}
+          image={SUBSERVICE_IMAGE}
+          style={ADD_CONTENT_STYLE}
+        />
+      )}
     </>
   );
 };

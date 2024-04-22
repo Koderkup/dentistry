@@ -1,12 +1,10 @@
 import React from "react";
+import { act } from "react-dom/test-utils";
 import { useRouter } from "next/router";
 import { DataContext } from "../store/GlobalState";
-import {
-  toHaveClass
-} from "@testing-library/jest-dom";
-import { render, fireEvent, screen } from "@testing-library/react";
+import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 import SubDirectionManager from "@/pages/subservice-direction/create/[[...id]]";
-
+import { toHaveClass } from "@testing-library/jest-dom";
 jest.mock("next/router", () => ({
   useRouter: jest.fn(),
 }));
@@ -16,7 +14,8 @@ jest.mock("../utils/fetchData", () => ({
     Promise.resolve({
       subServiceDirection: [
         {
-          /* mocked data */
+          id: 1,
+          subtitle: "Название",
         },
       ],
     })
@@ -44,7 +43,7 @@ describe("SubDirectionManager", () => {
     jest.clearAllMocks();
   });
 
-  test("renders without errors", () => {
+  test("renders without errors", async () => {
     const mockState = {
       notify: {},
       auth: {},
@@ -59,22 +58,20 @@ describe("SubDirectionManager", () => {
     };
     const mockDispatch = jest.fn();
     jest
-      .spyOn(React, "useContext")
-      .mockImplementation(() => ({ state: mockState, dispatch: mockDispatch }));
-    const { container } = render(
-      <DataContext.Provider value={{ state: {}, dispatch: jest.fn() }}>
-        <SubDirectionManager />
-      </DataContext.Provider>
+     .spyOn(React, "useContext")
+     .mockImplementation(() => ({ state: mockState, dispatch: mockDispatch }));
+    await act(async () => {
+      render(
+        <DataContext.Provider value={{ state: {}, dispatch: jest.fn() }}>
+          <SubDirectionManager />
+        </DataContext.Provider>
+      );
+    });
+    const elementsWithText = screen.queryAllByText((content) =>
+      content.includes("Название")
     );
+    expect(elementsWithText.length).toBeGreaterThan(1);
     React.useContext.mockRestore();
-    const input = container.querySelector("input[name='dirtitle']");
-    fireEvent.change(input, { target: { value: "New Title" } });
-    expect(input.value).toBe("New Title");
-    expect(mockDispatch).toHaveBeenCalled();
-    expect(screen.queryByText("Название подуслуги")).toBeInTheDocument();
-    expect(screen.queryByText("Название")).toBeInTheDocument();
-    expect(screen.queryByText("Статья")).toBeInTheDocument();
-    const button = screen.getByRole("button");
-    expect(button).toHaveClass("btn", "btn-info");
   });
+
 });

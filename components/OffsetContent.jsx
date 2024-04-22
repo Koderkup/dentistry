@@ -41,10 +41,10 @@ const OffsetContent = ({ list }) => {
                         type: "ADD_MODAL",
                         payload: [
                           {
-                            data: "",
+                            data: [content],
                             id: content.id,
                             title: content.title,
-                            type: "DELETE_WIDGET",
+                            type: "ADD_WIDGET",
                           },
                         ],
                       });

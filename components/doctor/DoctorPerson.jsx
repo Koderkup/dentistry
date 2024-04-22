@@ -28,7 +28,10 @@ const DoctorPerson = ({ doctor }) => {
   const adminLink = () => {
     return (
       <>
-        <Link href={`doctors/create/${doctor.id}`} className="btn btn-info flex-fill">
+        <Link
+          href={`doctors/create/${doctor.id}`}
+          className="btn btn-info flex-fill"
+        >
           Редактактировать
         </Link>
         <button
@@ -40,10 +43,10 @@ const DoctorPerson = ({ doctor }) => {
               type: "ADD_MODAL",
               payload: [
                 {
-                  data: "",
+                  data: [doctor],
                   id: doctor.id,
                   title: doctor.sirname,
-                  type: "DELETE_DOCTOR",
+                  type: "ADD_DOCTOR",
                 },
               ],
             })

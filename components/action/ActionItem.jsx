@@ -5,7 +5,7 @@ import Loading from "../Loading";
 import s from "../../styles/ActionItem.module.scss";
 import { DataContext } from "@/store/GlobalState";
 function ActionItem({ action }) {
-  const { state } = useContext(DataContext);
+  const { state, dispatch } = useContext(DataContext);
   const { articles, auth } = state;
   const [lasting, setLasting] = useState("");
   const [buttonVision, setButtunVision] = useState(false);
@@ -14,7 +14,7 @@ function ActionItem({ action }) {
     date.setMonth(date.getMonth() + 1);
     setLasting(date.toLocaleDateString());
   }, []);
-  const adminLink = (id, title) => {
+  const adminLink = (id, title, item) => {
     return (
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Link
@@ -33,10 +33,10 @@ function ActionItem({ action }) {
               type: "ADD_MODAL",
               payload: [
                 {
-                  data: "",
+                  data: [item],
                   id: id,
                   title: title,
-                  type: "DELETE_SERVICE",
+                  type: "ADD_ACTION",
                 },
               ],
             })
@@ -94,7 +94,7 @@ function ActionItem({ action }) {
         {auth.user &&
           auth.user.role === "admin" &&
           buttonVision &&
-          adminLink(action.id, action.title)}
+          adminLink(action.id, action.title, action)}
       </div>
     </div>
   );

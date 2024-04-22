@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import s from "../../styles/SubservicePage.module.scss";
@@ -12,7 +13,9 @@ const SubserviceDirectionPage = ({ subdirection }) => {
     SUBDIRSERVICE_IMAGE,
     ADD_CONTENT_STYLE,
   } = typography;
-  const adminLink = (id, title) => {
+  const { state, dispatch } = useContext(DataContext);
+  const { auth } = state;
+  const adminLink = (id, title, item) => {
     return (
       <div className={s.admin_link}>
         <Link
@@ -31,10 +34,10 @@ const SubserviceDirectionPage = ({ subdirection }) => {
               type: "ADD_MODAL",
               payload: [
                 {
-                  data: "",
+                  data: item,
                   id: id,
                   title: title,
-                  type: "DELETE_SERVICE",
+                  type: "ADD_SUBSERVICE_DIRECTION",
                 },
               ],
             })
@@ -78,17 +81,17 @@ const SubserviceDirectionPage = ({ subdirection }) => {
             {subdirection[0].dirarticle}
           </p>
         </div>
-
-        <button
-          className="btn btn-info mt-2"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasRight"
-          aria-controls="offcanvasRight"
-        >
-          Изменить напр/подуслуги
-        </button>
-
+        {auth.user && auth.user.role === "admin" && (
+          <button
+            className="btn btn-info mt-2"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasRight"
+            aria-controls="offcanvasRight"
+          >
+            Изменить напр/подуслуги
+          </button>
+        )}
         <div
           className="offcanvas offcanvas-end"
           tabIndex="-1"
@@ -107,16 +110,18 @@ const SubserviceDirectionPage = ({ subdirection }) => {
             ></button>
           </div>
           <div className="offcanvas-body">
-            {adminLink(subdirection[0].id, subdirection.dirtitle)}
+            {adminLink(subdirection[0].id, subdirection[0].dirtitle, subdirection)}
           </div>
         </div>
       </div>
-      <AdButton
-        title={ADD_SUBDIRSERVICE}
-        link={SUBDIRSEVICE_LINK}
-        image={SUBDIRSERVICE_IMAGE}
-        style={ADD_CONTENT_STYLE}
-      />
+      {auth.user && auth.user.role === "admin" && (
+        <AdButton
+          title={ADD_SUBDIRSERVICE}
+          link={SUBDIRSEVICE_LINK}
+          image={SUBDIRSERVICE_IMAGE}
+          style={ADD_CONTENT_STYLE}
+        />
+      )}
     </>
   );
 };
