@@ -123,6 +123,7 @@ const createTables = async () => {
   avatar VARCHAR(255),
   rating INT NOT NULL,
   checked BOOLEAN DEFAULT false,
+  public BOOLEAN DEFAULT false,
   timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )`;
   connection.query(checkReviewsTableQuery, (error, results) => {
