@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { DataContext } from "../store/GlobalState";
-import { deleteItem, deleteItems } from "../store/Actions";
-import { deleteData, deleteDataArray } from "../utils/fetchData";
+import { deleteItem, deleteItems, updateItem } from "../store/Actions";
+import { deleteData, deleteDataArray, patchData } from "../utils/fetchData";
 import { useRouter } from "next/router";
 
 const Modal = () => {
@@ -113,6 +113,17 @@ const Modal = () => {
     });
   };
 
+  const publicReview = (item) => {
+    dispatch(updateItem([item], item.id, item.data, item.type));
+   patchData(`reviews/${item.id}`, item.data, auth.token).then((res) =>{
+    if(res.err)
+    return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+
+    console.log(res)
+  return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
+   })
+  };
+
   const handleSubmit = () => {
     if (modal.length !== 0) {
       for (const item of modal) {
@@ -125,8 +136,9 @@ const Modal = () => {
         if (item.type === "ADD_ARTICLE") deleteArticle(item);
         if (item.type === "ADD_SUBSERVICE_DIRECTION") deleteSubServiceDirection(item);
         if (item.type === "ADD_WIDGET") deleteWidget(item);
-        if (item.type === "ADD_REVIEW") deleteReview(item);
-        if (item.type === "ADD_REVIEWS") deleteReviews(item);
+        if (item.type === "DELETE_REVIEW") deleteReview(item);
+        if (item.type === "ADD_REVIEW") publicReview(item);
+        if (item.type === "DELETE_REVIEWS") deleteReviews(item);
       }
       dispatch({ type: "ADD_MODAL", payload: [] });
     }
