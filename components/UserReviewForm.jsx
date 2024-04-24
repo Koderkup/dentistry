@@ -1,12 +1,12 @@
-import { useContext, useEffect } from "react";
+import { useContext, useState } from "react";
 import s from "../styles/UserReviewForm.module.scss";
-import { MdStar, MdDateRange } from "react-icons/md";
+import { MdStar, MdDateRange, MdFiberNew } from "react-icons/md";
 import Image from "next/image";
 import { DataContext } from "../store/GlobalState";
-
 const UserReviewForm = ({ review, checked, handleSelectedReview }) => {
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
+  const [text, setText] = useState(review.comment);
   const date = new Date(review.timestamp);
   const renderStars = (rating) => {
     const stars = [];
@@ -17,6 +17,9 @@ const UserReviewForm = ({ review, checked, handleSelectedReview }) => {
     }
     return stars;
   };
+  const handleTextChange = (event) => {
+    setText(event.target.value);
+  };
 
   return (
     <form
@@ -25,35 +28,51 @@ const UserReviewForm = ({ review, checked, handleSelectedReview }) => {
         e.preventDefault();
       }}
     >
-      <fieldset disabled>
-        <legend>
-          <p>
-            <MdDateRange />
-            {date.getDate() +
-              "." +
-              (date.getMonth() + 1) +
-              "." +
-              date.getFullYear()}
-          </p>
-          <Image
-            src={`/assets/${review.avatar}.png`}
-            width={30}
-            height={30}
-            alt="user-avatar"
-          />
-          {review.name}
-        </legend>
-        <textarea
-          className={`form-control ${s.autosize}`}
-          id="exampleFormControlTextarea1"
-          rows="3"
-          defaultValue={review.comment}
-        ></textarea>
-        <div>
-          <span>Рейтинг услуги: </span>
-          {renderStars(review.rating)}
-        </div>
-      </fieldset>
+      <legend>
+        <p>
+          <MdDateRange />
+          {date.getDate() +
+            "." +
+            (date.getMonth() + 1) +
+            "." +
+            date.getFullYear()}
+          {auth.user && auth.user.role === "admin" && !review.view && (
+            <MdFiberNew color="red" size={40} />
+          )}
+        </p>
+        <Image
+          src={`/assets/${review.avatar}.png`}
+          width={30}
+          height={30}
+          alt="user-avatar"
+        />
+        {review.name}
+      </legend>
+      {auth.user && auth.user.role === "admin" ? (
+        <fieldset>
+          <textarea
+            className={`form-control ${s.autosize}`}
+            id="exampleFormControlTextarea1"
+            rows="3"
+            value={text}
+            onChange={handleTextChange}
+          ></textarea>
+        </fieldset>
+      ) : (
+        <fieldset disabled>
+          <textarea
+            className={`form-control ${s.autosize}`}
+            id="exampleFormControlTextarea1"
+            rows="3"
+            value={text}
+            onChange={handleTextChange}
+          ></textarea>
+        </fieldset>
+      )}
+      <div>
+        <span>Рейтинг услуги: </span>
+        {renderStars(review.rating)}
+      </div>
       {auth.user && auth.user.role === "admin" && (
         <>
           <div className="mb-3">
@@ -86,13 +105,33 @@ const UserReviewForm = ({ review, checked, handleSelectedReview }) => {
                     data: [review],
                     id: review.id,
                     title: `Это отзыв оставил - ${review.name} ?`,
-                    type: "ADD_REVIEW",
+                    type: "DELETE_REVIEW",
                   },
                 ],
               })
             }
           >
             Удалить
+          </button>
+          <button
+            className="btn btn-info"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            onClick={() =>
+              dispatch({
+                type: "ADD_MODAL",
+                payload: [
+                  {
+                    data: { ...review, comment: text, view: true },
+                    id: review.id,
+                    title: `Вы хотите опубликовать отзыв - ${review.name} ?`,
+                    type: "ADD_REVIEW",
+                  },
+                ],
+              })
+            }
+          >
+            Опубликовать
           </button>
         </>
       )}

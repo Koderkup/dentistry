@@ -7,6 +7,9 @@ export default async (req, res) => {
     case "DELETE":
       await deleteReview(req, res);
       break;
+    case "PATCH":
+      await updateReview(req, res);
+      break;
     default:
       break;
   }
@@ -34,6 +37,30 @@ const deleteReview = async (req, res) => {
       res.json({ msg: "Deleted Success!", status: "success" });
       connection.end();
     });
+  } catch (err) {
+    return res.status(500).json({ err: err.message });
+  }
+};
+
+const updateReview = async (req, res) => {
+  try {
+    const result = await auth(req, res);
+    if (result.role !== "admin" || !result.root)
+      return res.status(400).json({ err: "Authentication is not valid" });
+    const { id } = req.query;
+    const { comment, view } = req.body;
+    const connection = mysql.createConnection({
+      host: process.env.DB_HOST,
+      port: process.env.DB_PORT,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+    });
+    connection.connect();
+    const updateReviewQuery = `UPDATE reviews SET comment=?, view=? WHERE id=?`;
+    connection.execute(updateReviewQuery, [comment, view, id]);
+    res.json({ msg: "Отзыв успешно опубликован!", status: "success" });
+    connection.end();
   } catch (err) {
     return res.status(500).json({ err: err.message });
   }

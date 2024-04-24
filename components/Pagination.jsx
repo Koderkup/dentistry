@@ -6,7 +6,6 @@ const Pagination = ({
   setPage,
   nextPage,
   prevPage,
-  setChecked,
 }) => {
   return (
     <div className={s.pagination_wrapper}>
@@ -15,8 +14,7 @@ const Pagination = ({
           <li
             className="page-item"
             onClick={() => {
-              prevPage;
-              setChecked(false);
+              prevPage()
             }}
           >
             <p className="page-link" href="#" aria-label="Previous">
@@ -29,7 +27,6 @@ const Pagination = ({
               key={el}
               onClick={() => {
                 setPage(el + 1);
-                setChecked(false);
               }}
             >
               <p className="page-link" style={{ cursor: "pointer" }}>
@@ -40,8 +37,7 @@ const Pagination = ({
           <li
             className="page-item"
             onClick={() => {
-              nextPage;
-              setChecked(false);
+              nextPage()
             }}
           >
             <p className="page-link" aria-label="Next">

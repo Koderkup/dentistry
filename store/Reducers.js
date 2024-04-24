@@ -46,12 +46,17 @@ const reducers = (state, action) => {
         ...state,
         articles: action.payload,
       };
-    case ACTIONS.ADD_REVIEW:
+    case ACTIONS.DELETE_REVIEW:
       return {
         ...state,
         reviews: action.payload,
       };
-    case ACTIONS.ADD_REVIEWS:
+    case ACTIONS.DELETE_REVIEWS:
+      return {
+        ...state,
+        reviews: action.payload,
+      };
+    case ACTIONS.ADD_REVIEW:
       return {
         ...state,
         reviews: action.payload,

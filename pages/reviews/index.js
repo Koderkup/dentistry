@@ -267,7 +267,7 @@ function Reviews({ reviewsProps }) {
                       data: selectedReviewsForRemove,
                       id: selectedReviewsForRemove.length,
                       title: `Выбрано для удаления ${selectedReviewsForRemove.length} отзывов`,
-                      type: "ADD_REVIEWS",
+                      type: "DELETE_REVIEWS",
                     },
                   ],
                 })
@@ -296,16 +296,23 @@ function Reviews({ reviewsProps }) {
         </span>
       </div>
       <hr />
-      {reviews.slice(firstContentIndex, lastContentIndex).map((review) => {
-        return (
-          <UserReviewForm
-            key={review.id}
-            review={review}
-            checked={review.checked}
-            handleSelectedReview={handleSelectedReview}
-          />
-        );
-      })}
+      {reviews
+        .slice(firstContentIndex, lastContentIndex)
+        .filter((review) => {
+          return auth.user && auth.user.role === 'admin'
+            ? review
+            : review.view;
+        })
+        .map((review) => {
+          return (
+            <UserReviewForm
+              key={review.id}
+              review={review}
+              checked={review.checked}
+              handleSelectedReview={handleSelectedReview}
+            />
+          );
+        })}
       <span>
         {page}/{totalPages}
       </span>
@@ -315,7 +322,6 @@ function Reviews({ reviewsProps }) {
         setPage={setPage}
         nextPage={nextPage}
         prevPage={prevPage}
-        setChecked={setChecked}
       />
     </div>
   );
