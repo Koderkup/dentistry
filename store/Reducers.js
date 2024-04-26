@@ -46,6 +46,10 @@ const reducers = (state, action) => {
         ...state,
         articles: action.payload,
       };
+      case ACTIONS.ADD_FILTERED_ARTICLE:
+      return {
+        ...state, filtered_articles: action.payload,
+      };
     case ACTIONS.DELETE_REVIEW:
       return {
         ...state,

@@ -39,7 +39,7 @@ function Articles() {
         </div>
       )}
       {articles.map((article, i) => (
-        <ArticleCard key={i} id={article.id} />
+        <ArticleCard key={i} content={article} />
       ))}
     </div>
   );

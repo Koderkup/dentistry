@@ -14,9 +14,8 @@
 
 .paragraph {
     font-size: 30px;
-    font-weight: 500;
-    border: 0.1px solid rgba(200, 200, 200, 0.5);
     padding: 5px;
+    font-weight: 700;
 }
 
 .action_card_container {
@@ -32,7 +31,7 @@
     justify-content: space-around;
     align-items: center;
     border-radius: 5px;
-    background-image: url('https://i.postimg.cc/vHxpDsBM/Screenshot-3.png');
+    background-image: url('https://i.postimg.cc/0jHB23x9/Screenshot-3.png');
     background-position: contain center;
     background-repeat: no-repeat;
     height: 700px;
@@ -68,7 +67,7 @@
 .action_image {
     margin: 0 auto 20px auto;
     width: 100%;
-    height: calc(0.4*100vw);
+    height: calc(0.5*100vw);
     background-repeat: no-repeat;
     background-position: center center;
     background-image: url('https://i.postimg.cc/yx835qd8/action-1.png');
@@ -92,7 +91,6 @@
 
     .paragraph {
         font-size: 22px;
-        font-weight: 400;
     }
 
 
@@ -135,7 +133,7 @@
 
     .paragraph {
         font-size: 20px;
-        font-weight: 300;
+        font-weight: 500;
         line-height: 1;
         border: none;
 
@@ -159,10 +157,9 @@
     .action_image {
         background-size: contain;
         background-position: center;
-        width: 100%;
         background-image: url('https://i.postimg.cc/2y0znrJQ/action-board-small.png');
-        width: 100%;
-        height: calc(0.4*100vw);
+        width: 96%;
+        height: calc(0.5*100vw);
     }
 
     .colored_marker_list li {
