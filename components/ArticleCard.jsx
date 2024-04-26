@@ -9,7 +9,7 @@ const ArticleCard = ({ content }) => {
   if (!content || !content.image) {
     return (
       <div>
-        <Loading/>
+        <Loading />
       </div>
     );
   }
@@ -30,7 +30,9 @@ const ArticleCard = ({ content }) => {
             <h3 className="card-title" style={{ textAlign: "center" }}>
               {content.header}
             </h3>
-            <p className="card-text">{content.content}</p>
+            <p className="card-text" style={{ textAlign: "justify" }}>
+              {content.content}
+            </p>
           </div>
         </div>
       </div>

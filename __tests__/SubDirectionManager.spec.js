@@ -52,6 +52,7 @@ describe("SubDirectionManager", () => {
       users: [],
       doctors: [],
       articles: [],
+      filtered_articles: [],
       actions: [],
       reviews: [],
       widgets: [],

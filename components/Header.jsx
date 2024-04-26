@@ -60,7 +60,7 @@ const Header = () => {
 
     return (
       <>
-        <div className="d-flex align-items-center">
+        <div className="d-flex align-items-center col-lg-12 col-md-12 col-sm-12">
           <div className="nav-item dropdown">
             <div
               className={`nav-link dropdown-toggle fs-4`}

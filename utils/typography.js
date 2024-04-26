@@ -14,6 +14,10 @@ export const typography = {
   ADD_ACTION: "Объявить акцию",
   ACTION_LINK: "/actions/create",
   ACTION_IMAGE: "/assets/action.svg",
+  SPECIALIZATION_1: "Процедура Зубы за день",
+  SPECIALIZATION_2: "Процедура All-on-4",
+  SPECIALIZATION_3: "Зубные импланты",
+  SPECIALIZATION_4: "Преображение улыбки",
 
   ADD_CONTENT_STYLE: {
     position: "fixed",

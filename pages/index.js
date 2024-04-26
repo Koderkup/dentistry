@@ -26,7 +26,7 @@ function Home({ doctorProps, widgetsProps }) {
       </div>
       <Welcom />
       <div className={`${s.doctor_wrapper}`}>
-        <h1>Наши специалисты</h1>
+        <h2>Наши специалисты</h2>
         <div className={s.doctors_list}>
           {doctors.map((doctor, i) => (
             <DoctorPerson key={doctor.id} doctor={doctor} />
