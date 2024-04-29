@@ -82,6 +82,8 @@
         .welcom_wrapper {
             .text {
                 font-size: 18px;
+                max-height: 700px;
+                overflow-y: scroll;
             }
         }
 
