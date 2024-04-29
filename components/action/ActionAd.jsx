@@ -102,7 +102,6 @@ const ActionAd = ({ widgets }) => {
         <div className={`card-img-overlay ${s.overlay}`}>
           <p className={s.paragraph}>
             <i>
-              {" "}
               Улыбайтесь с уверенностью! В клинике Мирастом - доступны акции для
               здоровых и красивых улыбок.
             </i>

@@ -5,6 +5,7 @@ import { getData } from "../utils/fetchData";
 import s from "../styles/Home.module.scss";
 import { DataContext } from "../store/GlobalState";
 import { typography } from "@/utils/typography";
+import ArticlesSlider from "@/components/ArticlesSlider";
 const inter = Inter({ subsets: ["latin"] });
 
 const DoctorPerson = dynamic(() => import("@/components/doctor/DoctorPerson"));
@@ -32,6 +33,9 @@ function Home({ doctorProps, widgetsProps }) {
             <DoctorPerson key={doctor.id} doctor={doctor} />
           ))}
         </div>
+      </div>
+      <div className={'container'}>
+        <ArticlesSlider/>
       </div>
       {auth.user && auth.user.role === "admin" && (
         <AdButton

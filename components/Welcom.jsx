@@ -46,7 +46,7 @@ const Welcom = () => {
             <h3>
               <em>Наша специализация:</em>
             </h3>
-
+{filtered_articles && filtered_articles.length >= 4 && (
             <ul>
               <li>
                 <Link href={`articles/${filtered_articles[0].id}`}>
@@ -89,7 +89,7 @@ const Welcom = () => {
                 </Link>
               </li>{" "}
             </ul>
-
+)}
             <p>
               <Link href="services/">
                 <em>Список всех наших услуг</em>
