@@ -23,7 +23,11 @@ const ArticlesSlider = () => {
         data-testid="article-slider"
       >
         {articles.map((article) => (
-          <ArticlesSliderItem key={article.id} article={article} />
+          <ArticlesSliderItem
+            key={article.id}
+            article={article}
+            id={article.id}
+          />
         ))}
       </div>
     </>

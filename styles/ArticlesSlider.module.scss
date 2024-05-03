@@ -9,7 +9,7 @@
     flex-flow: column;
     justify-content: center;
     align-items: center;
-    gap: clamp(10px, 5vh, 40px)
+    // gap: clamp(10px, 5vh, 40px)
 }
 
 .article_content {
@@ -118,6 +118,7 @@
         transform: translateY(0) scale(1);
         opacity: 1;
         visibility: visible;
+        z-index: 1000000000;
     }
 
     23%,

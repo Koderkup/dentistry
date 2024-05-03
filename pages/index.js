@@ -7,23 +7,36 @@ import { DataContext } from "../store/GlobalState";
 import { typography } from "@/utils/typography";
 import ArticlesSlider from "@/components/ArticlesSlider";
 const inter = Inter({ subsets: ["latin"] });
+import Loading from "@/components/Loading";
 
 const DoctorPerson = dynamic(() => import("@/components/doctor/DoctorPerson"));
 const Welcom = dynamic(() => import("@/components/Welcom"));
 const ActionAd = dynamic(() => import("@/components/action/ActionAd"));
 const AdButton = dynamic(() => import("@/components/AdButton"));
 
-function Home({ doctorProps, widgetsProps }) {
-  const [doctors, setDoctors] = useState(doctorProps);
+function Home(props) {
+  const [doctors, setDoctors] = useState(props.doctorProps);
   const { state, dispatch } = useContext(DataContext);
-  const [widgets, setWidgets] = useState(widgetsProps);
+  const [widgets, setWidgets] = useState(props.widgetsProps);
+  const [loading, setLoading] = useState(true);
   const { auth } = state;
   const { ADD_DOCTOR, DOCTOR_IMAGE, DOCTOR_LINK, ADD_CONTENT_STYLE } =
     typography;
+
+  useEffect(() => {
+    setLoading(false);
+  }, []);
+  if (loading) return <Loading />;
+  if (props.error) {
+  
+    return (
+      <h1 style={{color: 'red'}}>Нет соединения с базой данных. Пожалуйста, попробуйте позже.</h1>
+    );
+  }
   return (
     <>
       <div className="container">
-        <ActionAd widgets={widgets}/>
+        <ActionAd widgets={widgets} />
       </div>
       <Welcom />
       <div className={`${s.doctor_wrapper}`}>
@@ -34,8 +47,8 @@ function Home({ doctorProps, widgetsProps }) {
           ))}
         </div>
       </div>
-      <div className={'container'}>
-        <ArticlesSlider/>
+      <div className={"container"}>
+        <ArticlesSlider />
       </div>
       {auth.user && auth.user.role === "admin" && (
         <AdButton
@@ -50,15 +63,23 @@ function Home({ doctorProps, widgetsProps }) {
 }
 
 export async function getServerSideProps(context) {
-  const res = await getData("doctors");
-  const query = await getData('widgets');
-  return {
-    props: {
-      doctorProps: res.doctors,
-      widgetsProps: query.widgets,
-      results: res.result,
-    },
-  };
+  try {
+    const res = await getData("doctors");
+    const query = await getData("widgets");
+    return {
+      props: {
+        doctorProps: res.doctors,
+        widgetsProps: query.widgets,
+        results: res.result,
+      },
+    };
+  } catch (error) {
+    return {
+      props: {
+        error: true,
+      },
+    };
+  }
 }
 
 export default Home;

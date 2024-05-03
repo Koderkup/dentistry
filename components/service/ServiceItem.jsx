@@ -4,11 +4,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { DataContext } from "@/store/GlobalState";
 import Loading from "../Loading";
-
+import { typography } from "@/utils/typography";
 const ServiceItem = ({ service }) => {
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
   const [isDesktop, setIsDesktop] = useState(false)
+  const {LINK_MOREINFO_COLOR} = typography;
   useLayoutEffect(() => {
     function handleResize() {
       setIsDesktop(window.innerWidth >= 768); 
@@ -27,7 +28,7 @@ const ServiceItem = ({ service }) => {
         <Link
           href={`services/${service.id}`}
           className="btn"
-          style={{ backgroundColor: "#51DED1", color: 'white' }}
+          style={{ backgroundColor: LINK_MOREINFO_COLOR, color: "white" }}
         >
           Узнать больше
         </Link>

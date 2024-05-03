@@ -57,7 +57,8 @@ describe("SubDirectionManager", () => {
       reviews: [],
       widgets: [],
     };
-    const mockDispatch = jest.fn();
+    const dispatch = jest.fn();
+    const mockDispatch = jest.spyOn(React, "useContext").mockReturnValue(dispatch);
     jest
      .spyOn(React, "useContext")
      .mockImplementation(() => ({ state: mockState, dispatch: mockDispatch }));

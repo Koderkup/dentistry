@@ -3,10 +3,11 @@ import Link from "next/link";
 import { useContext } from "react";
 import { DataContext } from "../../store/GlobalState";
 import s from "../../styles/DoctorPerson.module.scss";
-
+import { typography } from "@/utils/typography";
 const DoctorPerson = ({ doctor }) => {
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
+  const {LINK_MOREINFO_COLOR} = typography;
   const doctorLink = () => {
     return (
       <>
@@ -17,7 +18,7 @@ const DoctorPerson = ({ doctor }) => {
             marginRight: "5px",
             flex: 1,
             color: "white",
-            backgroundColor: "#51DED1",
+            backgroundColor: LINK_MOREINFO_COLOR,
           }}
         >
           Узнать больше

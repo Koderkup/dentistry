@@ -2,7 +2,7 @@ import React from "react";
 import s from "../styles/ArticlesSlider.module.scss";
 import Image from "next/image";
 import Link from "next/link";
-const ArticlesSliderItem = ({ article }) => {
+const ArticlesSliderItem = ({ article, id }) => {
   return (
     <>
       <div className={s.card_wrapper}>
@@ -18,7 +18,7 @@ const ArticlesSliderItem = ({ article }) => {
         <div className={s.text_wrapper}>
           <h5 className={s.card_title}>{article.header}</h5>
           <p className={`${s.article_content}`}>{article.content}</p>
-          <Link href={`/articles/${article.id}`}>
+          <Link href={`/articles/${id}`}>
             <small className="text-muted">Читать...</small>
           </Link>
         </div>

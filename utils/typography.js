@@ -49,4 +49,5 @@ export const typography = {
     "Наши сертификаты",
     "Нам можно доверять",
   ],
+  LINK_MOREINFO_COLOR: "#51DED1",
 };
