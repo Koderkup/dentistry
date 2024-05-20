@@ -31,16 +31,16 @@ const CreateContentManager = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (auth.user.role !== "admin")
+    if ((auth.user && auth.user.role !== "admin") || !auth.user)
       return dispatch({
         type: "NOTIFY",
-        payload: { error: "Authentication is not valid." },
+        payload: { error: "Аутентификация не действительна." },
       });
 
     if (!type || !title || !widgetURL)
       return dispatch({
         type: "NOTIFY",
-        payload: { error: "Please add all the fields." },
+        payload: { error: "Пожалуйста запоните все поля." },
       });
 
     let res;

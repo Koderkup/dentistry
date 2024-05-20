@@ -12,7 +12,7 @@ const Welcom = () => {
       <div className={s.content}>
         <div className={s.image_container}>
           <Image
-            src="https://i.postimg.cc/Znt4k0Ng/Screenshot-22.png"
+            src="https://i.postimg.cc/13FMPJPk/all-Photoroom-png-Photoroom.png"
             alt="mirastom_team"
             width={500}
             height={550}
@@ -46,50 +46,50 @@ const Welcom = () => {
             <h3>
               <em>Наша специализация:</em>
             </h3>
-{filtered_articles && filtered_articles.length >= 4 && (
-            <ul>
-              <li>
-                <Link href={`articles/${filtered_articles[0].id}`}>
-                  <img
-                    src="https://i.postimg.cc/ryR6r7Yp/Screenshot-24.png"
-                    alt="Зубы за день"
-                    title="Зубы за день"
-                  />
-                  <strong>Зубы за день</strong>{" "}
-                </Link>
-              </li>
-              <li>
-                <Link href={`articles/${filtered_articles[1].id}`}>
-                  <img
-                    src="https://i.postimg.cc/J4j9TZ8V/Screenshot-25.png"
-                    alt="Технология All-on-4"
-                    title="Технология All-on-4"
-                  />
-                  <strong>Технология All-on-4</strong>{" "}
-                </Link>
-              </li>
-              <li>
-                <Link href={`articles/${filtered_articles[2].id}`}>
-                  <img
-                    src="https://i.postimg.cc/y8B22x6J/Screenshot-26.png"
-                    alt="Имплантация зубов"
-                    title="Имплантация зубов"
-                  />
-                  <strong>Имплантация зубов</strong>{" "}
-                </Link>
-              </li>
-              <li>
-                <Link href={`articles/${filtered_articles[3].id}`}>
-                  <img
-                    src="https://i.postimg.cc/1z325dqs/Screenshot-27.png"
-                    alt="Преображение улыбки"
-                    title="Преображение улыбки"
-                  />
-                  <strong>Преображение улыбки</strong>{" "}
-                </Link>
-              </li>{" "}
-            </ul>
-)}
+            {filtered_articles && filtered_articles.length >= 4 && (
+              <ul>
+                <li>
+                  <Link href={`articles/${filtered_articles[0].id}`}>
+                    <img
+                      src="https://i.postimg.cc/ryR6r7Yp/Screenshot-24.png"
+                      alt="Зубы за день"
+                      title="Зубы за день"
+                    />
+                    <strong>Зубы за день</strong>{" "}
+                  </Link>
+                </li>
+                <li>
+                  <Link href={`articles/${filtered_articles[1].id}`}>
+                    <img
+                      src="https://i.postimg.cc/J4j9TZ8V/Screenshot-25.png"
+                      alt="Технология All-on-4"
+                      title="Технология All-on-4"
+                    />
+                    <strong>Технология All-on-4</strong>{" "}
+                  </Link>
+                </li>
+                <li>
+                  <Link href={`articles/${filtered_articles[2].id}`}>
+                    <img
+                      src="https://i.postimg.cc/y8B22x6J/Screenshot-26.png"
+                      alt="Имплантация зубов"
+                      title="Имплантация зубов"
+                    />
+                    <strong>Имплантация зубов</strong>{" "}
+                  </Link>
+                </li>
+                <li>
+                  <Link href={`articles/${filtered_articles[3].id}`}>
+                    <img
+                      src="https://i.postimg.cc/1z325dqs/Screenshot-27.png"
+                      alt="Преображение улыбки"
+                      title="Преображение улыбки"
+                    />
+                    <strong>Преображение улыбки</strong>{" "}
+                  </Link>
+                </li>{" "}
+              </ul>
+            )}
             <p>
               <Link href="services/">
                 <em>Список всех наших услуг</em>
