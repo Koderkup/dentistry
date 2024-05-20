@@ -65,18 +65,22 @@ const OffsetContent = ({ list }) => {
           </Col>
         ))}
       </Row>
-      <hr />
-      <Row>
-        <Link href={"/create-widget"} style={{ textAlign: "center" }}>
-          <Image
-            width={70}
-            height={70}
-            alt="plus"
-            src={"./assets/plus.svg"}
-            style={{ float: "center" }}
-          />
-        </Link>
-      </Row>
+      {auth.user && auth.user.role === "admin" && (
+        <>
+          <hr />
+          <Row>
+            <Link href={"/create-widget"} style={{ textAlign: "center" }}>
+              <Image
+                width={50}
+                height={50}
+                alt="plus"
+                src={"./assets/plus.svg"}
+                style={{ float: "center" }}
+              />
+            </Link>
+          </Row>
+        </>
+      )}
 
       <Modal show={showModal} onHide={closeModal} centered>
         <Modal.Header closeButton>

@@ -19,6 +19,7 @@ const DoctorPerson = ({ doctor }) => {
             flex: 1,
             color: "white",
             backgroundColor: LINK_MOREINFO_COLOR,
+            maxHeight: '37.8px'
           }}
         >
           Узнать больше
@@ -65,7 +66,7 @@ const DoctorPerson = ({ doctor }) => {
         className="card-img-top"
         alt="doctor`s photo"
         width={300}
-        height={360}
+        height={380}
         style={{ border: "3px solid white" }}
       />
       <div className="card-body d-flex flex-column justify-content-between align-items-center">
