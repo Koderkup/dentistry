@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import s from "../../styles/Action.module.scss";
@@ -7,12 +7,14 @@ import { typography } from "@/utils/typography";
 import OffsetContent from "../OffsetContent";
 const ActionAd = ({ widgets }) => {
   const blurDataURL = "data:image/svg+xml;base64,...";
+
   const {
     IMAGE_DEFAULT_URL,
     EYE_IMAGE_URL,
     TEXT_INFORM_CARD,
     TITLE_INFORM_CARD,
   } = typography;
+
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState(
     Array.from(new Set(widgets.map((widget) => widget.type)))
@@ -47,7 +49,7 @@ const ActionAd = ({ widgets }) => {
               width={100}
               height={100}
               className="img-fluid rounded-start"
-              alt="dettistry-icon"
+              alt="dentistry-icon"
             />
           </div>
           <div className="col-md-8">
@@ -86,19 +88,21 @@ const ActionAd = ({ widgets }) => {
         className="card"
         style={{ backgroundColor: "white", border: "none" }}
       >
-        <Image
-          src="https://i.postimg.cc/fLYqhqzK/action-add-iicf3y.png"
-          className="img-fluid"
-          alt="action-ad"
-          width={900}
-          height={600}
-          rel="preload"
-          as="image"
-          blurDataURL={blurDataURL}
-          placeholder="blur"
-          priority
-          style={{ margin: "auto", width: "100%" }}
-        />
+        <Suspense fallback={<div>Загрузка...</div>}>
+          <Image
+            src="https://i.postimg.cc/fLYqhqzK/action-add-iicf3y.png"
+            className="img-fluid"
+            alt="action-ad"
+            width={900}
+            height={600}
+            rel="preload"
+            as="image"
+            blurDataURL={blurDataURL}
+            placeholder="blur"
+            priority
+            style={{ margin: "auto", width: "100%" }}
+          />
+        </Suspense>
         <div className={`card-img-overlay ${s.overlay}`}>
           <p className={s.paragraph}>
             <i>

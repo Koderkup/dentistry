@@ -34,14 +34,11 @@ const getDoctor = async (req, res) => {
     connection.connect();
 
     const selectDoctorQuery = `SELECT * FROM doctors WHERE id = ?`;
-    connection.query(selectDoctorQuery, [id], (error, result) => {
-      if (error) {
-        throw error;
-      }
+    const [result] = await connection.promise().query(selectDoctorQuery, [id]);
       const doctor = result;
       if (!doctor) return res.status(400).json({ err: "Такого врача нет" });
       res.json({ doctor });
-    });
+
 
     connection.end();
   } catch (err) {

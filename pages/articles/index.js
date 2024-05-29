@@ -3,45 +3,28 @@ import Link from 'next/link';
 import { DataContext } from "@/store/GlobalState";
 import s from '../../styles/Articles.module.scss'
 import ArticleCard from "@/components/ArticleCard";
-
+import AdButton from "@/components/AdButton";
+import { typography } from "@/utils/typography";
 function Articles() {
    const { state, dispatch } = useContext(DataContext);
    const {articles, auth} = state;
+  const {ADD_ARTICLE, ARTICLE_LINK, ARTICLE_IMAGE, ADD_CONTENT_STYLE} = typography;
   return (
-    <div className={s.article}>
+    <>
+      <div className={s.article}>
+        {articles.map((article, i) => (
+          <ArticleCard key={i} content={article} />
+        ))}
+      </div>
       {auth.user && auth.user.role === "admin" && (
-        <div
-          className={s.article_create}
-          style={{
-            maxHeight: "150px",
-            border: "2px solid white",
-            borderRadius: "5px",
-          }}
-        >
-          <h3
-            className="card-title"
-            style={{ textAlign: "center", margin: "auto" }}
-          >
-            Создать новую статью
-          </h3>
-          <div
-            className="d-flex justify-content-around"
-            style={{ paddingBottom: "1%", marginTop: "1%" }}
-          >
-            <button
-              type="button"
-              className="btn btn-primary"
-              style={{ maxWidth: "300px" }}
-            >
-              <Link href={`/articles/create`} style={{color: 'white', textDecoration: 'none'}}>Создать</Link>
-            </button>
-          </div>
-        </div>
+        <AdButton
+          title={ADD_ARTICLE}
+          link={ARTICLE_LINK}
+          image={ARTICLE_IMAGE}
+          style={ADD_CONTENT_STYLE}
+        />
       )}
-      {articles.map((article, i) => (
-        <ArticleCard key={i} content={article} />
-      ))}
-    </div>
+    </>
   );
 }
 

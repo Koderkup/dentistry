@@ -19,7 +19,7 @@ const OffsetContent = ({ list }) => {
   };
 
   return (
-    <div>
+    <div data-testid='offset'>
       <Row>
         {list.map((content) => (
           <Col key={content.id} xs={8} md={8} lg={8} className="mx-auto mb-5">

@@ -1,15 +1,21 @@
 import { useState, useEffect } from "react";
 const useDeviceTypeDetect = () => {
-  const [isMobile, setIsMobile] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(false);
-  const [isTablet, setIsTablet] = useState(false);
-  const [isSmallTablet, setIsSmallTablet] = useState(false);
+  const [deviceType, setDeviceType] = useState(()=>{
+    return {
+      isMobile: false,
+      isSmallTablet: false,
+      isTablet: false,
+      isDesktop: false,
+    };
+  })
   useEffect(() => {
     const handleResize = () => {
-      setIsDesktop(window.innerWidth >= 1280);
-      setIsTablet(window.innerWidth >= 661 && window.innerWidth <= 1280);
-      setIsSmallTablet(window.innerWidth <= 741 && window.innerWidth >= 661);
-      setIsMobile(window.innerWidth <= 661);
+      setDeviceType({
+        isMobile: window.innerWidth <= 661,
+        isSmallTablet: window.innerWidth <= 741 && window.innerWidth >= 661,
+        isTablet: window.innerWidth >= 741 && window.innerWidth <= 1280,
+        isDesktop: window.innerWidth >= 1280,
+      });
       };
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -17,7 +23,7 @@ const useDeviceTypeDetect = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  return { isMobile, isSmallTablet, isTablet, isDesktop };
+  return deviceType;
 };
 
 export default useDeviceTypeDetect;

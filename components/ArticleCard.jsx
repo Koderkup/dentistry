@@ -3,9 +3,16 @@ import Link from "next/link";
 import { useEffect, useState, useContext } from "react";
 import { DataContext } from "@/store/GlobalState";
 import Loading from "@/components/Loading";
+import s from "../styles/ArticleCard.module.scss";
+import { typography } from "@/utils/typography";
+import useFormattingText from "@/hooks/useFormattingText";
+
 const ArticleCard = ({ content }) => {
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
+  const { DELETE_IMAGE, EDIT_IMAGE } = typography;
+  const { paragraphsWithoutHeding } = useFormattingText(content?.content);
+
   if (!content || !content.image) {
     return (
       <div>
@@ -13,48 +20,37 @@ const ArticleCard = ({ content }) => {
       </div>
     );
   }
+
   return (
-    <div className="card" style={{ marginTop: "12px" }}>
-      <div className="row g-0">
-        <div className="col-md-4">
-          <Image
-            src={content.image[0].url}
-            className="card-img"
-            alt="kind of service"
-            width={300}
-            height={300}
-          />
-        </div>
-        <div className="col-md-8">
-          <div className="card-body">
-            <h3 className="card-title" style={{ textAlign: "center" }}>
-              {content.header}
-            </h3>
-            <p className="card-text" style={{ textAlign: "justify" }}>
-              {content.content}
-            </p>
-          </div>
-        </div>
+    <div className={s.container_article} data-testid="articleCard">
+      <Image
+        src={content.image[0].url}
+        className={`${s.article_image}`}
+        alt="article-peace"
+        width={300}
+        height={300}
+      />
+
+      <h3 className={s.article_title} style={{ textAlign: "center" }}>
+        {content.header}
+      </h3>
+      <div className={s.article_text} style={{ textAlign: "justify" }}>
+        {paragraphsWithoutHeding.map((paragraph, index) => (
+          <p key={index}>{paragraph}</p>
+        ))}
       </div>
+
       {auth.user && auth.user.role === "admin" && (
         <div
           className="d-flex justify-content-around"
           style={{ padding: "4%" }}
         >
-          <button
-            type="button"
-            className="btn btn-info"
-            style={{ maxWidth: "200px" }}
-          >
-            <Link
-              href={`/articles/create/${content.id}`}
-              style={{ color: "white", textDecoration: "none" }}
-            >
-              Обновить
+          <button className={s.admin_button}>
+            <Link href={`/articles/create/${content.id}`}>
+              <Image src={EDIT_IMAGE} alt="pencil" width={30} height={30} />
             </Link>
           </button>
           <button
-            className="btn btn-danger"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
             onClick={() =>
@@ -70,8 +66,9 @@ const ArticleCard = ({ content }) => {
                 ],
               })
             }
+            className={s.admin_button}
           >
-            Удалить
+            <Image src={DELETE_IMAGE} alt="delete" width={30} height={30} />
           </button>
         </div>
       )}

@@ -28,17 +28,14 @@ const getDoctors = async (req, res) => {
     connection.connect();
      
     const selectDoctorsQuery = `SELECT * FROM doctors`;
-   connection.query(selectDoctorsQuery, (error, results) => {
-     if (error) {
-       throw error;
-     }
+   const [results] = await connection.promise().query(selectDoctorsQuery);
      const doctors = results;
      res.json({
        status: "success",
        result: doctors.length,
        doctors,
      });
-   });
+
 
    connection.end();
   } catch (err) {

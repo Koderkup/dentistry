@@ -14,12 +14,9 @@ const ArticlesManager = () => {
   };
   const [article, setArticle] = useState(initialState);
   const { header, content } = article;
-
   const [image, setImage] = useState([]);
-
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
-
   const router = useRouter();
   const { id } = router.query;
   const [onEdit, setOnEdit] = useState(false);
@@ -28,8 +25,10 @@ const ArticlesManager = () => {
     if (id) {
       setOnEdit(true);
       getData(`articles/${id}`, auth.token).then((res) => {
-        setArticle(res.article[0]);
-        setImage(res.article[0].image);
+        if (res && res.article && res.article.length > 0) {
+          setArticle(res.article[0]);
+          setImage(res.article[0].image);
+        }
       });
     } else {
       setOnEdit(false);
@@ -105,7 +104,7 @@ const ArticlesManager = () => {
     const imgOldURL = image.filter((img) => img.url);
 
     if (imgNewURL.length > 0) media = await imageUpload(imgNewURL);
-
+    Array.isArray(media) ? media : [];
     let res;
     if (onEdit) {
       res = await putData(
@@ -175,6 +174,7 @@ const ArticlesManager = () => {
                 onChange={handleUploadInput}
                 multiple
                 accept="image/*"
+                data-testid="file-input"
               />
             </div>
           </div>
