@@ -27,18 +27,13 @@ const getWidgets = async (req, res) => {
     connection.connect();
 
     const selectWidgetsQuery = `SELECT * FROM widgets`;
-    connection.query(selectWidgetsQuery, (error, results) => {
-      if (error) {
-        throw error;
-      }
+    const [results] = await connection.promise().query(selectWidgetsQuery);
       const widgets = results;
       res.json({
         status: "success",
         result: widgets.length,
         widgets,
       });
-    });
-
     connection.end();
   } catch (err) {
     return res.status(500).json({ err: err.message });

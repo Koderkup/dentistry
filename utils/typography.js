@@ -12,12 +12,17 @@ export const typography = {
   ADD_SUBSERVICE: "Добавить подуслугу",
   ADD_SUBDIRSERVICE: "+ Направление подуслуги",
   ADD_ACTION: "Объявить акцию",
+  ADD_ARTICLE: "Написать статью",
   ACTION_LINK: "/actions/create",
+  ARTICLE_LINK: '/articles/create',
   ACTION_IMAGE: "/assets/action.svg",
-  SPECIALIZATION_1: "Процедура Зубы за день",
+  ARTICLE_IMAGE: '/assets/article.svg',
+  SPECIALIZATION_1: `Процедура "Зубы за день"`,
   SPECIALIZATION_2: "Процедура All-on-4",
   SPECIALIZATION_3: "Зубные импланты",
   SPECIALIZATION_4: "Преображение улыбки",
+  DELETE_IMAGE: '/assets/delete.svg',
+  EDIT_IMAGE: '/assets/pencil.svg',
 
   ADD_CONTENT_STYLE: {
     position: "fixed",

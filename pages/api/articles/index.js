@@ -28,20 +28,14 @@ const getArticles = async (req, res) => {
     connection.connect();
 
     const selectArticlesQuery = `SELECT * FROM articles`;
-    connection.query(selectArticlesQuery, (error, results) => {
-      if (error) {
-        throw error;
-      }
-      const articles = results;
-      res.json({ articles });
-    });
-
+    const [results] = await connection.promise().query(selectArticlesQuery);
+    const articles = results;
+    res.json({ articles });
     connection.end();
   } catch (err) {
     return res.status(500).json({ err: err.message });
   }
 };
-
 
 const createArticle = async (req, res) => {
   try {
@@ -62,7 +56,7 @@ const createArticle = async (req, res) => {
     const results = await connection.execute(createArticleQuery, [
       header,
       content,
-      image
+      image,
     ]);
     const articles = results;
     res.json({

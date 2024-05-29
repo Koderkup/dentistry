@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Image from "next/image";
 import s from "../../styles/Works.module.scss";
 const Works = () => {
@@ -30,14 +30,16 @@ const Works = () => {
           Эстетическая стоматология: до и после
         </h1>
         <div className={s.works__paragraph_container}>
-          <Image
-            className={s.works__paragraph_container__paragraph_image}
-            // src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1698229332/test/ckcwsacbyfrpncjmfitt.png"
-            src="https://i.postimg.cc/mrm90L4y/ckcwsacbyfrpncjmfitt.png"
-            alt="smile"
-            width={800}
-            height={480}
-          />
+          <Suspense fallback={<div>loading</div>}>
+            <Image
+              className={s.works__paragraph_container__paragraph_image}
+              // src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1698229332/test/ckcwsacbyfrpncjmfitt.png"
+              src="https://i.postimg.cc/mrm90L4y/ckcwsacbyfrpncjmfitt.png"
+              alt="smile"
+              width={800}
+              height={480}
+            />
+          </Suspense>
           <h1 className={s.works__paragraph_container__paragraph_title}>
             Хотите улучшить свою улыбку?
           </h1>
@@ -69,7 +71,7 @@ const Works = () => {
             косметической альтернативы пломбам из серебряной амальгамы.
           </p>
         </div>
-        <div className={s.works__paragraph_container}>
+         <div className={s.works__paragraph_container}>
           <Image
             className={s.works__paragraph_container__paragraph_image}
             // src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1698229741/test/ywgnhi4wo9omj311fzkr.png"
@@ -287,7 +289,7 @@ const Works = () => {
             другую, могут остановить рецессию десен и потерю костной массы, а
             также улучшить эстетику линии десен.
           </p>
-        </div>
+        </div> 
       </div>
       {showArrow && (
         <a href="#" className={s.scroll_to_top} onClick={scrollToTop}>

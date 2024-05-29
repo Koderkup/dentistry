@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -69,23 +69,25 @@ const Header = () => {
               aria-expanded="false"
               onClick={handleMenuClick}
             >
-              <Image
-                src={
-                  auth.user.avatar.url
-                    ? auth.user.avatar.url
-                    : process.env.DEFAULT_USER_IMAGE
-                }
-                alt={auth.user.avatar.url}
-                width={20}
-                height={20}
-                style={{
-                  borderRadius: "50%",
-                  width: "30px",
-                  height: "30px",
-                  transform: "translateY(-3px)",
-                  marginRight: "3px",
-                }}
-              />
+              <Suspense fallback={<div>loading...</div>}>
+                <Image
+                  src={
+                    auth.user.avatar.url
+                      ? auth.user.avatar.url
+                      : process.env.DEFAULT_USER_IMAGE
+                  }
+                  alt={auth.user.avatar.url}
+                  width={20}
+                  height={20}
+                  style={{
+                    borderRadius: "50%",
+                    width: "30px",
+                    height: "30px",
+                    transform: "translateY(-3px)",
+                    marginRight: "3px",
+                  }}
+                />
+              </Suspense>
               {auth.user.name}
             </div>
 
@@ -128,12 +130,14 @@ const Header = () => {
       <nav className={`navbar navbar-expand-xl ${s.header}`}>
         <header className="container-fluid">
           <Link className="navbar-brand" href="/">
-            <Image
-              src="https://i.postimg.cc/KcBtY2Zr/logo-4-Photo-Room-png-Photo-Room.png"
-              width={70}
-              height={70}
-              alt="logo"
-            />
+            <Suspense fallback={<div>loading...</div>}>
+              <Image
+                src="https://i.postimg.cc/KcBtY2Zr/logo-4-Photo-Room-png-Photo-Room.png"
+                width={70}
+                height={70}
+                alt="logo"
+              />
+            </Suspense>
           </Link>
           <button
             className="navbar-toggler"

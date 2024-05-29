@@ -1,0 +1,44 @@
+.container_article {
+    margin: 20px auto;
+    width: 96%;
+    padding: 20px;
+    box-shadow: 2.5px 3px 4px 1px rgba(215, 215, 215, 0.5);
+
+    .article_image {
+        border: 6px solid white;
+        border-radius: 5px;
+        float: left;
+        margin: auto;
+    }
+
+    .article_title {}
+
+    .article_text {}
+
+    .article_text>p {
+        font-size: 1.18rem;
+    }
+
+    .admin_button {
+        background-color: white;
+        border: 1px solid transparent;
+        box-shadow: 2.5px 3px 4px 1px rgba(215, 215, 215, 0.5);
+        border-radius: 5px;
+        width: 6rem;
+        margin: 0 1rem;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .container_article {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .article_image {
+            float: none;
+            width: 100%;
+            height: auto;
+        }
+    }
+}
