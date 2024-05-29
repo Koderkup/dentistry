@@ -1,4 +1,4 @@
-import Articles from "./index";
+import Articles from "../pages/articles/index";
 import React, { useContext } from "react";
 import { render, screen } from "@testing-library/react";
 import { DataContext } from "@/store/GlobalState";

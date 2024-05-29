@@ -1,5 +1,5 @@
 import React from "react";
-import ServiceItem from "./ServiceItem";
+import ServiceItem from "../components/service/ServiceItem";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { DataContext } from "@/store/GlobalState";
 import { toHaveClass, toHaveAttribute } from "@testing-library/jest-dom";

@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import ActionAd from "./ActionAd";
+import ActionAd from "../components/action/ActionAd";
 import { act } from "react-dom/test-utils";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { useRouter } from "next/router";
 import { toHaveClass, toHaveAttribute } from "@testing-library/jest-dom";
 import { DataContext } from "@/store/GlobalState";
-import OffsetContent from "../OffsetContent";
+import OffsetContent from "../components/OffsetContent";
 
 describe("ActionAd", () => {
   const mockWidgets = [

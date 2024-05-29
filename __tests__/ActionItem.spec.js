@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import ActionItem from "./ActionItem";
+import ActionItem from "../components/action/ActionItem";
 import { act } from "react-dom/test-utils";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { useRouter } from "next/router";

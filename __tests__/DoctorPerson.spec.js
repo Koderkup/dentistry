@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import DoctorPerson from "./DoctorPerson";
+import DoctorPerson from "../components/doctor/DoctorPerson";
 import { DataContext } from "@/store/GlobalState";
 import { toHaveClass, toHaveAttribute } from "@testing-library/jest-dom";
 

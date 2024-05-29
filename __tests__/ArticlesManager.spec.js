@@ -1,4 +1,4 @@
-import ArticlesManager from "./[[...id]]";
+import ArticlesManager from "../pages/articles/create/[[...id]]";
 import React, { useContext } from "react";
 import {
   render,
@@ -11,8 +11,8 @@ import {
 import { DataContext } from "@/store/GlobalState";
 import { toHaveClass, toHaveAttribute } from "@testing-library/jest-dom";
 import { useRouter } from "next/router";
-import { postData, getData, putData } from "../../../utils/fetchData";
-import { imageUpload } from "../../../utils/imagesUpload";
+import { postData, getData, putData } from "../utils/fetchData";
+import { imageUpload } from "../utils/imagesUpload";
 const mockState = {
   notify: {},
   auth: {
@@ -29,8 +29,8 @@ const mockState = {
   reviews: [],
   widgets: [],
 };
-jest.mock("../../../utils/fetchData");
-jest.mock("../../../utils/imagesUpload");
+jest.mock("../utils/fetchData");
+jest.mock("../utils/imagesUpload");
 
 jest.spyOn(React, "useContext").mockImplementation(() => ({
   state: mockState,
@@ -49,7 +49,7 @@ describe("ArticlesManager", () => {
     };
     useRouter.mockImplementation(() => mockedRouter);
     jest
-      .spyOn(require("../../../utils/fetchData"), "getData")
+      .spyOn(require("../utils/fetchData"), "getData")
       .mockResolvedValue({
         json: () =>
           Promise.resolve({
@@ -138,13 +138,13 @@ describe("ArticlesManager", () => {
     const mockDispatch = jest.fn();
     const mockImage = [{ url: "old-image-url" }, { url: "new-image-url" }];
     const mockOnEdit = true;
-    jest.mock("../../../utils/imagesUpload", () => ({
+    jest.mock("../utils/imagesUpload", () => ({
       imageUpload: jest.fn(async (mockImage) =>
         mockImage.map((img) => ({ url: `mock-url-${img.url}` }))
       ),
     }));
     jest
-      .spyOn(require("../../../utils/fetchData"), "getData")
+      .spyOn(require("../utils/fetchData"), "getData")
       .mockResolvedValue({
         json: () =>
           Promise.resolve({
@@ -194,7 +194,7 @@ describe("ArticlesManager", () => {
 
       const mockHandleSubmit = jest.fn();
       jest
-        .spyOn(require("./[[...id]]"), "handleSubmit")
+        .spyOn(require("../pages/articles/create/[[...id]]"), "handleSubmit")
         .mockImplementation(mockHandleSubmit);
 
       fireEvent.click(updateButton);
