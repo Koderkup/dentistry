@@ -6,7 +6,7 @@ import { postData, getData, putData } from "../../../utils/fetchData";
 import { useRouter } from "next/router";
 import s from "../../../styles/DoctorsManager.module.scss";
 import { MdClose } from "react-icons/md";
-
+import { typography } from "@/utils/typography";
 const SubservicesManager = () => {
   const initialState = {
     subtitle: "",
@@ -22,7 +22,7 @@ const SubservicesManager = () => {
   const router = useRouter();
   const { id } = router.query;
   const [onEdit, setOnEdit] = useState(false);
-
+  const { LINK_MOREINFO_COLOR } = typography;
   useEffect(() => {
     if (id) {
       setOnEdit(true);
@@ -179,7 +179,11 @@ const SubservicesManager = () => {
             className="d-block my-4 w-100 p-2"
             value={article}
           />
-          <button type="submit" className="btn btn-info my-2 px-4">
+          <button
+            type="submit"
+            className="btn my-2 px-4"
+            style={{ backgroundColor: LINK_MOREINFO_COLOR }}
+          >
             {onEdit ? "Обновить" : "Создать"}
           </button>
         </div>

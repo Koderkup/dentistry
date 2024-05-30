@@ -4,12 +4,15 @@
 
 .delete_btn {
     margin: 0.5%;
-    border: 1px solid red;
+    box-shadow: 2.5px 3px 4px 1px rgba(215, 215, 215, 0.5);
     padding: 1%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
+}
+.price_form {
+    box-shadow: 2.5px 3px 4px 1px rgba(215, 215, 215, 0.5);
 }
 
 @media screen and (max-width: 320px) {

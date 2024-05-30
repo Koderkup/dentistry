@@ -6,7 +6,7 @@ import { postData, getData, putData } from "../../../utils/fetchData";
 import { useRouter } from "next/router";
 import s from "../../../styles/DoctorsManager.module.scss";
 import { MdClose } from "react-icons/md";
-
+import { typography } from "@/utils/typography";
 const SubDirectionManager = () => {
   const initialState = {
     dirtitle: "",
@@ -22,14 +22,16 @@ const SubDirectionManager = () => {
   const router = useRouter();
   const { id } = router.query;
   const [onEdit, setOnEdit] = useState(false);
-
+  const { LINK_MOREINFO_COLOR } = typography;
   useEffect(() => {
     if (id) {
       setOnEdit(true);
-      getData(`subservice-direction/subdirection/${id}`, auth.token).then((res) => {
-        setSubDirection(res.subServiceDirection[0]);
-        setDirImage(res.subServiceDirection[0].dirimage);
-      });
+      getData(`subservice-direction/subdirection/${id}`, auth.token).then(
+        (res) => {
+          setSubDirection(res.subServiceDirection[0]);
+          setDirImage(res.subServiceDirection[0].dirimage);
+        }
+      );
     } else {
       setOnEdit(false);
       setSubDirection(initialState);
@@ -180,7 +182,7 @@ const SubDirectionManager = () => {
             className="d-block my-4 w-100 p-2"
             value={dirarticle}
           />
-          <button type="submit" className="btn btn-info my-2 px-4">
+          <button type="submit" className="btn my-2 px-4" style={{backgroundColor: LINK_MOREINFO_COLOR}}>
             {onEdit ? "Обновить" : "Создать"}
           </button>
         </div>

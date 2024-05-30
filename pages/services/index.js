@@ -10,6 +10,7 @@ import { FaPhone } from "react-icons/fa";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import AdButton from "@/components/AdButton";
 import { typography } from "@/utils/typography";
+import AdminLink from "@/components/AdminLink";
 const Services = ({ serviceProps, subServicesProps }) => {
   const [services, setServices] = useState(serviceProps);
   const [subservices, setSubservices] = useState(subServicesProps);
@@ -17,40 +18,7 @@ const Services = ({ serviceProps, subServicesProps }) => {
   const { auth } = state;
   const { ADD_SERVICE, SEVICE_LINK, SERVICE_IMAGE, ADD_CONTENT_STYLE, A } =
     typography;
-  const adminLink = (id, title, item=[]) => {
-    return (
-      <div className={s.admin_link}>
-        <Link
-          href={`services/create/${id}`}
-          className="btn btn-info"
-          style={{ width: "160px", margin: '5px' }}
-        >
-          Редактировать
-        </Link>
-        <button
-          className="btn btn-danger"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
-          onClick={() =>
-            dispatch({
-              type: "ADD_MODAL",
-              payload: [
-                {
-                  data: [item],
-                  id: id,
-                  title: title,
-                  type: "ADD_SERVICE",
-                },
-              ],
-            })
-          }
-          style={{ width: "160px", margin: '5px' }}
-        >
-          Удалить
-        </button>
-      </div>
-    );
-  };
+  
   return (
     <>
       <>
@@ -109,13 +77,19 @@ const Services = ({ serviceProps, subServicesProps }) => {
                       alt="service"
                       width={400}
                       height={600}
+                      style={{height: 'auto'}}
                     />
                     <div className="carousel-caption d-md-block">
                       <div className={s.sliderLabel}>
                         <p className={s.slider_title}>{service.title}</p>
                       </div>
                       {auth.user || (auth.user && auth.user.role === "admin")
-                        ? adminLink(service.id, service.title, service)
+                        ? (<AdminLink
+                            url={`services/create/${service.id}`}
+                            content={service}
+                            type={"ADD_SERVICE"}
+                            header={service.title}
+                          />)
                         : null}
                     </div>
                   </div>

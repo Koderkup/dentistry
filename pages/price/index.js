@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { DataContext } from "../../store/GlobalState";
 import { getData, postData } from "@/utils/fetchData";
 import s from "../../styles/Price.module.scss";
+import { typography } from "@/utils/typography";
 const Price = ({ priceProps }) => {
   const initialState = {
     title: "",
@@ -16,6 +17,7 @@ const Price = ({ priceProps }) => {
   const [selectedItems, setSelectedItems] = useState([]);
   const { auth } = state;
   const { title, price, serviceId } = pricesDto;
+  const { LINK_MOREINFO_COLOR } = typography;
 
   useEffect(() => {
     setServiceTitles(Array.from(new Set(prices.map((price) => price.service))));
@@ -189,10 +191,10 @@ const Price = ({ priceProps }) => {
       {auth.user && auth.user.role === "admin" && (
         <form
           style={{
-            border: "2px solid #2192ED",
             padding: "1em",
             borderRadius: "5px",
           }}
+          className={s.price_form}
           onSubmit={handleSubmit}
         >
           <div className="mb-3">
@@ -240,7 +242,11 @@ const Price = ({ priceProps }) => {
                 ))}
             </select>
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button
+            type="submit"
+            className="btn"
+            style={{ backgroundColor: LINK_MOREINFO_COLOR }}
+          >
             Создать
           </button>
         </form>

@@ -24,7 +24,7 @@ const DoctorPerson = ({ doctor }) => {
         <h6 className="card-title text-center">{doctor.fullname}</h6>
         <p className="card-text text-center">{doctor.proff}</p>
         {!auth.user || (auth.user && auth.user.role !== "admin")
-          ? ViewLink(`doctors/${doctor.id}`)
+          ? (<ViewLink url={`doctors/${doctor.id}`} />)
           : null}
         <div className="d-flex flex-column mx-0" style={{ gap: "8px" }}>
           {auth.user && auth.user.role === "admin" ? (

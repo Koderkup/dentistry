@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from "next/link";
 import { typography } from '@/utils/typography';
-const ViewLink = (url) => {
+const ViewLink = ({url}) => {
      const { LINK_MOREINFO_COLOR } = typography;
   return (
       <>

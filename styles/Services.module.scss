@@ -12,7 +12,7 @@
 }
 
 .sliderLabel {
-    margin-top: -30%;
+    margin-top: -12%;
     width: 40%;
     float: right;
     color: black;
@@ -55,7 +55,6 @@
 
 @media screen and (max-width: 968px) {
     .sliderLabel {
-        margin-top: -30%;
         width: 40%;
         float: right;
 
@@ -69,7 +68,6 @@
             font-size: 24px;
             font-weight: 500;
             line-height: 0.9;
-            margin-bottom: 5px;
         }
     }
 
@@ -82,7 +80,6 @@
 
 @media screen and (max-width: 500px) {
     .sliderLabel {
-        margin-top: -50%;
         width: 60%;
         float: right;
         padding-left: 28px;

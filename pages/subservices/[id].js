@@ -6,7 +6,7 @@ import { getData } from "@/utils/fetchData";
 import { DataContext } from "../../store/GlobalState";
 import AdButton from "@/components/AdButton";
 import { typography } from "@/utils/typography";
-
+import AdminLink from "@/components/AdminLink";
 const SubservicePage = ({ subservice, directions }) => {
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
@@ -15,42 +15,8 @@ const SubservicePage = ({ subservice, directions }) => {
     SUBSEVICE_LINK,
     SUBSERVICE_IMAGE,
     ADD_CONTENT_STYLE,
+    LINK_MOREINFO_COLOR,
   } = typography;
-
-  const adminLink = (id, title, item) => {
-    return (
-      <div className={s.admin_link}>
-        <Link
-          href={`/subservices/create/${id}`}
-          className="btn btn-info"
-          style={{ width: "160px", margin: "5px" }}
-        >
-          Редактировать
-        </Link>
-        <button
-          className="btn btn-danger"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
-          onClick={() =>
-            dispatch({
-              type: "ADD_MODAL",
-              payload: [
-                {
-                  data: item,
-                  id: id,
-                  title: title,
-                  type: "ADD_SUBSERVICE",
-                },
-              ],
-            })
-          }
-          style={{ width: "160px", margin: "5px" }}
-        >
-          Удалить
-        </button>
-      </div>
-    );
-  };
 
   return (
     <>
@@ -121,11 +87,12 @@ const SubservicePage = ({ subservice, directions }) => {
         </div>
         {auth.user && auth.user.role === "admin" && (
           <button
-            className="btn btn-info mt-2"
+            className="btn mt-2"
             type="button"
             data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasRight"
             aria-controls="offcanvasRight"
+            style={{ backgroundColor: LINK_MOREINFO_COLOR }}
           >
             Изменить подуслугу
           </button>
@@ -148,7 +115,12 @@ const SubservicePage = ({ subservice, directions }) => {
             ></button>
           </div>
           <div className="offcanvas-body">
-            {adminLink(subservice[0].id, subservice[0].subtitle, subservice)}
+            {(<AdminLink
+              url={`/subservices/create/${subservice[0].id}`}
+              content={subservice}
+              type={"ADD_SUBSERVICE"}
+              header={subservice[0].subtitle}
+            />)}
           </div>
         </div>
       </div>

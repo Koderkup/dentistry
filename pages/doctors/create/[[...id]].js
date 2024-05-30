@@ -4,9 +4,9 @@ import { DataContext } from "../../../store/GlobalState";
 import { imageUpload } from "../../../utils/imagesUpload";
 import { postData, getData, putData } from "../../../utils/fetchData";
 import { useRouter } from "next/router";
-import s from '../../../styles/DoctorsManager.module.scss'
+import s from "../../../styles/DoctorsManager.module.scss";
 import { MdClose } from "react-icons/md";
-
+import { typography } from "@/utils/typography";
 const DoctorsManager = () => {
   const initialState = {
     sirname: "",
@@ -16,7 +16,7 @@ const DoctorsManager = () => {
   };
   const [doctor, setDoctor] = useState(initialState);
   const { sirname, fullname, proff, description } = doctor;
-
+  const { LINK_MOREINFO_COLOR } = typography;
   const [avatar, setAvatar] = useState([]);
 
   const { state, dispatch } = useContext(DataContext);
@@ -95,13 +95,7 @@ const DoctorsManager = () => {
         payload: { error: "Authentication is not valid." },
       });
 
-    if (
-      !sirname ||
-      !fullname ||
-      !proff ||
-      !description ||
-      avatar.length === 0
-    )
+    if (!sirname || !fullname || !proff || !description || avatar.length === 0)
       return dispatch({
         type: "NOTIFY",
         payload: { error: "Please add all the fields." },
@@ -194,7 +188,11 @@ const DoctorsManager = () => {
             className="d-block my-4 w-100 p-2"
             value={description}
           />
-          <button type="submit" className="btn btn-info my-2 px-4">
+          <button
+            type="submit"
+            className="btn my-2 px-4"
+            style={{ backgroundColor: LINK_MOREINFO_COLOR }}
+          >
             {onEdit ? "Обновить" : "Создать"}
           </button>
         </div>
@@ -218,7 +216,10 @@ const DoctorsManager = () => {
           <div className="row img-up mx-0">
             {avatar.map((ava, index) => (
               <div key={index} className="file_img my-1">
-                <p onClick={() => deleteImage(index)} style={{float: 'right'}}>
+                <p
+                  onClick={() => deleteImage(index)}
+                  style={{ float: "right" }}
+                >
                   <MdClose style={{ fontSize: "32px", color: "red" }} />
                 </p>
                 <img
