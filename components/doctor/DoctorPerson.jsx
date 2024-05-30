@@ -3,62 +3,12 @@ import Link from "next/link";
 import { useContext } from "react";
 import { DataContext } from "../../store/GlobalState";
 import s from "../../styles/DoctorPerson.module.scss";
-import { typography } from "@/utils/typography";
+import ViewLink from "../ViewLink";
+import AdminLink from "../AdminLink";
 const DoctorPerson = ({ doctor }) => {
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
-  const {LINK_MOREINFO_COLOR} = typography;
-  const doctorLink = () => {
-    return (
-      <>
-        <Link
-          href={`doctors/${doctor.id}`}
-          className="btn btn-info flex-fill"
-          style={{
-            marginRight: "5px",
-            flex: 1,
-            color: "white",
-            backgroundColor: LINK_MOREINFO_COLOR,
-            maxHeight: '37.8px'
-          }}
-        >
-          Узнать больше
-        </Link>
-      </>
-    );
-  };
-  const adminLink = () => {
-    return (
-      <>
-        <Link
-          href={`doctors/create/${doctor.id}`}
-          className="btn btn-info flex-fill"
-        >
-          Редактактировать
-        </Link>
-        <button
-          className="btn btn-danger flex-fill"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
-          onClick={() =>
-            dispatch({
-              type: "ADD_MODAL",
-              payload: [
-                {
-                  data: [doctor],
-                  id: doctor.id,
-                  title: doctor.sirname,
-                  type: "ADD_DOCTOR",
-                },
-              ],
-            })
-          }
-        >
-          Удалить
-        </button>
-      </>
-    );
-  };
+  
   return (
     <div className={`card ${s.doctor_person}`} style={{ width: "19rem" }}>
       <Image
@@ -74,10 +24,17 @@ const DoctorPerson = ({ doctor }) => {
         <h6 className="card-title text-center">{doctor.fullname}</h6>
         <p className="card-text text-center">{doctor.proff}</p>
         {!auth.user || (auth.user && auth.user.role !== "admin")
-          ? doctorLink()
+          ? ViewLink(`doctors/${doctor.id}`)
           : null}
         <div className="d-flex flex-column mx-0" style={{ gap: "8px" }}>
-          {auth.user && auth.user.role === "admin" ? adminLink() : null}
+          {auth.user && auth.user.role === "admin" ? (
+            <AdminLink
+              url={`doctors/create/${doctor.id}`}
+              content={doctor}
+              type={"ADD_DOCTOR"}
+              header={doctor.sirname}
+            />
+          ) : null}
         </div>
       </div>
     </div>

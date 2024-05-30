@@ -52,7 +52,7 @@ describe("DoctorPerson", () => {
     );
     const adminLink = screen.getByRole("link");
     expect(adminLink).toHaveAttribute("href", "/doctors/create/1");
-    const deletBtn = screen.getByRole("button");
+    const deletBtn = screen.getByTestId("admin-delete");
     expect(deletBtn).toBeInTheDocument();
     fireEvent.click(deletBtn);
     expect(mockDispatch).toHaveBeenCalled();

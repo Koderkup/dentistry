@@ -6,6 +6,7 @@ import Loading from "@/components/Loading";
 import s from "../styles/ArticleCard.module.scss";
 import { typography } from "@/utils/typography";
 import useFormattingText from "@/hooks/useFormattingText";
+import AdminLink from "./AdminLink";
 
 const ArticleCard = ({ content }) => {
   const { state, dispatch } = useContext(DataContext);
@@ -41,36 +42,14 @@ const ArticleCard = ({ content }) => {
       </div>
 
       {auth.user && auth.user.role === "admin" && (
-        <div
-          className="d-flex justify-content-around"
-          style={{ padding: "4%" }}
-        >
-          <button className={s.admin_button}>
-            <Link href={`/articles/create/${content.id}`}>
-              <Image src={EDIT_IMAGE} alt="pencil" width={30} height={30} />
-            </Link>
-          </button>
-          <button
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
-            onClick={() =>
-              dispatch({
-                type: "ADD_MODAL",
-                payload: [
-                  {
-                    data: [content],
-                    id: content.id,
-                    title: content.header,
-                    type: "ADD_ARTICLE",
-                  },
-                ],
-              })
-            }
-            className={s.admin_button}
-          >
-            <Image src={DELETE_IMAGE} alt="delete" width={30} height={30} />
-          </button>
-        </div>
+        <>
+          <AdminLink
+            url={`/articles/create/${content.id}`}
+            content={content}
+            type={"ADD_ARTICLE"}
+            header={content.header}
+          />
+        </>
       )}
     </div>
   );
