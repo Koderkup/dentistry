@@ -46,7 +46,6 @@ const Contacts = () => {
           <div className="carousel-inner">
             <div className="carousel-item active">
               <Image
-                // src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1701784681/test/enter_ifnkmi.jpg"
                 src="https://i.postimg.cc/LXNZRvvJ/enter-ifnkmi.jpg"
                 className="d-block w-100"
                 alt="location"
@@ -56,7 +55,6 @@ const Contacts = () => {
             </div>
             <div className="carousel-item">
               <Image
-                // src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1699188690/test/Screenshot_4_ys9mbp.png"
                 src="https://i.postimg.cc/HLm2kZ0z/Screenshot-4-ys9mbp.png"
                 className="d-block w-100"
                 alt="location"
@@ -66,7 +64,6 @@ const Contacts = () => {
             </div>
             <div className="carousel-item">
               <Image
-                // src="https://res.cloudinary.com/dlr2olc8r/image/upload/v1699188701/test/Screenshot_3_eru9e4.png"
                 src="https://i.postimg.cc/4dkmgqz4/Screenshot-3-eru9e4.png"
                 className="d-block w-100"
                 alt="location"

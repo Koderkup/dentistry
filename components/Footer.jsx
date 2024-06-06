@@ -11,6 +11,7 @@ const Footer = () => {
   return (
     <footer
       className={`text-center text-lg-start bg-gray text-muted ${s.footer}`}
+      data-testid="footer"
     >
       <section className="d-flex justify-content-center p-4 border-bottom">
         <div className="me-5 d-none d-lg-block">
@@ -72,7 +73,7 @@ const Footer = () => {
                 <i className="fas fa-gem me-3 text-secondary"></i>
                 Мирастом
               </h6>
-              <div>
+              <div data-testid="scedule">
                 <p>Время работы:</p>
                 <p>Пн-Пт: 9:00 - 20:00</p>
                 <p>Суббота: 9:00 - 14:00 (ПО ЗАПИСИ)</p>

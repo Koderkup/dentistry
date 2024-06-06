@@ -12,7 +12,11 @@ const UserReviewForm = ({ review, checked, handleSelectedReview }) => {
     const stars = [];
     for (let i = 0; i < rating; i++) {
       stars.push(
-        <MdStar style={{ color: "gold", fontSize: "30px" }} key={i} />
+        <MdStar
+          style={{ color: "gold", fontSize: "30px" }}
+          key={i}
+          data-testid="star-svg"
+        />
       );
     }
     return stars;
@@ -27,6 +31,7 @@ const UserReviewForm = ({ review, checked, handleSelectedReview }) => {
       onSubmit={(e) => {
         e.preventDefault();
       }}
+      data-testid="form"
     >
       <legend>
         <p>

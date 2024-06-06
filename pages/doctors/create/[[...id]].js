@@ -30,8 +30,10 @@ const DoctorsManager = () => {
     if (id) {
       setOnEdit(true);
       getData(`doctors/${id}`, auth.token).then((res) => {
+        if(res && res.doctor && res.doctor.length>0) {
         setDoctor(res.doctor[0]);
         setAvatar(res.doctor[0].avatar);
+        }
       });
     } else {
       setOnEdit(false);
@@ -165,13 +167,13 @@ const DoctorsManager = () => {
             </div>
 
             <div className="col-sm-6">
-              <label htmlFor="proff">Проффесиональное направление</label>
+              <label htmlFor="proff">Профессиональное направление</label>
               <input
                 type="text"
                 name="proff"
                 value={proff}
                 id="proff"
-                placeholder="Проффесиональное направление"
+                placeholder="Профессиональное направление"
                 className="d-block w-100 p-2"
                 onChange={handleChangeInput}
               />
@@ -199,9 +201,7 @@ const DoctorsManager = () => {
 
         <div className="col-md-6 my-4">
           <div className="input-group mb-3">
-            <div className="input-group-prepend">
-              {/* <span className="input-group-text">Загрузить</span> */}
-            </div>
+            <div className="input-group-prepend"></div>
             <div className="custom-file border rounded">
               <input
                 type="file"
@@ -209,6 +209,7 @@ const DoctorsManager = () => {
                 onChange={handleUploadInput}
                 multiple
                 accept="image/*"
+                data-testid="file-input"
               />
             </div>
           </div>
