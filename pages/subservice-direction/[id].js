@@ -7,6 +7,7 @@ import { DataContext } from "../../store/GlobalState";
 import AdButton from "@/components/AdButton";
 import { typography } from "@/utils/typography";
 import AdminLink from "@/components/AdminLink";
+import useFormattingText from "@/hooks/useFormattingText";
 const SubserviceDirectionPage = ({ subdirection }) => {
   const {
     ADD_SUBDIRSERVICE,
@@ -17,39 +18,39 @@ const SubserviceDirectionPage = ({ subdirection }) => {
   } = typography;
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
-  
+  const { paragraphsWithoutHeding } = useFormattingText(
+    subdirection[0].dirarticle
+  );
   return (
     <>
       <div className="container">
         <div className="row">
           <h1>{subdirection[0].dirtitle}</h1>
         </div>
-        <div className="row">
-          <div className="col-lg-12 col-md-12">
-            <p style={{ textAlign: "justify" }}>
-              {subdirection[0].description}
-            </p>
-          </div>
+        <div className="row" style={{padding: '2.5%'}}>
+          <section className={`${s.text_article}`}>
+            <Image
+              src={subdirection[0].dirimage[0].url}
+              alt="subdirection title"
+              width={200}
+              height={300}
+              className={`float-right col-lg-3 col-md-4 col-sm-12 ${s.image_subservice}`}
+            />
+            {paragraphsWithoutHeding.map((item, i) => (
+              <p
+                style={{
+                  textAlign: "justify",
+                  fontSize: "1.2rem",
+                  textIndent: "30px",
+                }}
+                key={i}
+              >
+                {item}
+              </p>
+            ))}
+          </section>
         </div>
-        <div className="row">
-          <h2>{subdirection[0].subtitle}</h2>
-        </div>
-        <div className="row">
-          <Image
-            src={subdirection[0].dirimage[0].url}
-            alt="subdirection title"
-            width={200}
-            height={300}
-            className={`float-right col-lg-3 col-md-4 col-sm-12 ${s.image_subservice}`}
-            style={{ margin: "auto", borderRadius: "50%" }}
-          />
-          <p
-            className={`col-lg-8 col-md-12 col-sm-12`}
-            style={{ textAlign: "justify" }}
-          >
-            {subdirection[0].dirarticle}
-          </p>
-        </div>
+        <div className="row"></div>
         {auth.user && auth.user.role === "admin" && (
           <button
             className="btn mt-2"

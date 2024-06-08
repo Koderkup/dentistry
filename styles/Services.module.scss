@@ -12,7 +12,7 @@
 }
 
 .sliderLabel {
-    margin-top: -12%;
+    margin-top: -22%;
     width: 40%;
     float: right;
     color: black;
@@ -31,6 +31,10 @@
     }
 }
 
+.carouselInner {
+    height: 596px;
+}
+
 .img {
     width: 60%;
 }
@@ -46,12 +50,7 @@
     border: none;
 }
 
-@media screen and (max-width: 768px) {
-    .img {
-        max-height: 350px;
-    }
 
-}
 
 @media screen and (max-width: 968px) {
     .sliderLabel {
@@ -75,6 +74,20 @@
         width: 50%;
         max-height: 250px;
     }
+        .carouselInner {
+            height: 250px;
+        }
+
+        .sliderLabel {
+            margin-top: -12%;
+        }
+
+}
+
+@media screen and (max-width: 768px) {
+    .img {
+        max-height: 350px;
+    }
 
 }
 
@@ -83,6 +96,7 @@
         width: 60%;
         float: right;
         padding-left: 28px;
+        margin-top: -12%;
 
         p {
             font-size: 14px;
@@ -101,5 +115,7 @@
         width: 59%;
         max-height: 280px;
     }
-
+.carouselInner {
+    height: 175px;
+}
 }
