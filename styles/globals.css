@@ -14,7 +14,7 @@ body {
             /* IE/Edge */
             user-select: none;
             /* Standard */
-            background-color: rgba(248,247,242,0.1);
+            /* background-color: rgba(248,247,242,0.1); */
                     overflow: auto !important;
 }
 

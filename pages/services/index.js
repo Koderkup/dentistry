@@ -65,11 +65,11 @@ const Services = ({ serviceProps, subServicesProps }) => {
                   );
                 })}
               </div>
-              <div className="carousel-inner">
+              <div className={`carousel-inner ${s.carouselInner}`}>
                 {services.map((service, index) => (
                   <div
                     key={service.id}
-                    className={`carousel-item ${index === 0 ? "active" : ""}`}
+                    className={`carousel-item ${index === 0 ? "active" : ""} ${s.carouselItem}`}
                   >
                     <Image
                       src={service.image[0].url}

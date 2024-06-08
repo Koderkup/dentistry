@@ -9,7 +9,6 @@
     &__title {
         text-align: center;
         width: 100%;
-        color: #51DED1;
     }
 
     &__paragraph_container {
@@ -28,13 +27,11 @@
 
         &__paragraph_title {
             text-align: center;
-            color: #51DED1;
         }
 
         &__paragraph_text {
             text-align: justify;
-            font-size: 1.5em;
-            color: #948FA5;
+            font-size: 1.2rem;
         }
     }
 }
@@ -58,5 +55,12 @@
 @media screen and (max-width: 1000px) {
     .works__paragraph_container {
         width: 100%;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .works__paragraph_container__paragraph_text {
+        box-shadow: 2.5px 3px 4px 1px rgba(215, 215, 215, 0.5);
+        padding: 2%;
     }
 }
