@@ -1,3 +1,5 @@
+@import './colors';
+
 .about {
     margin-top: 24px;
 }
@@ -8,6 +10,11 @@
     justify-content: center;
     align-items: center;
     gap: 0;
+}
+
+.welcom_image {
+    width: 100%;
+    height: 1000px;
 }
 
 .about_text p {
@@ -24,10 +31,184 @@
     margin: 10px;
 }
 
-.image_container {
+.slide_description_wrapper {
+    display: grid;
+    margin: auto;
+    width: 100%;
+    grid-template-columns: 1fr 1000px 1fr;
+    grid-template-rows: 100px 170px 50px 1fr 100px;
+    background-image: url("https://i.postimg.cc/RF8dgK0m/Screenshot-9.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.about_image {
+    display: none;
+}
+
+.slogan {
+    align-self: flex-start;
     display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    margin-left: 50px;
+    grid-row: 2;
+    grid-column: 2;
+
+}
+
+.video {
+    grid-column: 2/3;
+    grid-row: 4/5;
+    width: 1000px;
+    height: 615px;
+    margin: auto;
+    justify-self: start;
+}
+
+
+.clinica {
+    color: white;
+    font-size: 2rem;
+    background-color: $teal;
+    padding: 10px;
+    font-weight: 700;
+    text-align: left;
+    text-transform: uppercase;
+    width: 411px;
+    white-space: nowrap;
+    margin-bottom: 14px;
+}
+
+.dentistry {
+    font-family: 'Roboto', sans-serif;
+    margin: 0 0 10px;
+    margin-bottom: 0;
+    border-color: #ffffff;
+    color: #ffffff;
+    max-width: 100%;
+    font-weight: normal;
+    line-height: 0.78;
+    text-transform: uppercase;
+    word-break: break-word;
+    font-size: 60px;
+    white-space: nowrap;
+}
+
+.premium {
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+    text-transform: uppercase;
+    word-break: break-word;
+    box-sizing: border-box;
+    font-weight: 700;
+    display: block;
+    max-width: 700px;
+    padding-top: 20px;
+    line-height: 30px;
+    font-size: 30px;
+    white-space: nowrap;
+}
+
+.about_anouncement {
+    display: flex;
+    flex-flow: row wrap;
     justify-content: center;
-    overflow: hidden;
+    align-items: center;
+    gap: 24px;
+}
+
+.image_anouncement {
+    margin: 12px;
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 1s, transform 1s ease;
+    height: auto;
+}
+
+.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.about_text {
+    margin-top: 10px;
+}
+
+@media screen and (max-width: 1400px) {
+    .image_anouncement {
+        width: 340px;
+    }
+}
+
+@media screen and (max-width: 1315px) {
+    .video {
+        width: 845px;
+        height: 519px;
+    }
+
+    .image_anouncement {
+        width: 340px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .clinica {
+        font-size: 1.7rem;
+        font-weight: 500;
+        width: 340px;
+    }
+
+    .dentistry {
+        font-size: 45px;
+    }
+
+    .premium {}
+
+    .video {
+        width: 618px;
+        height: 380px;
+        margin-left: -1px;
+    }
+
+    .slogan {
+        margin-left: -1px;
+    }
+
+    .image_anouncement {
+        width: 300px;
+    }
+}
+
+@media (max-width: 1068px) {
+    .about_image {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .slide_description_wrapper {
+        background-image: none;
+        background-color: $dark_blue;
+        display: flex;
+        flex-flow: column;
+    }
+
+    .slogan {
+        margin: 12px auto;
+    }
+
+    .video {
+        margin: 12px auto;
+    }
+
+}
+
+@media screen and (max-width:1019px) {
+    .image_anouncement {
+        width: 360px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -35,13 +216,38 @@
         font-size: 20px;
     }
 
-    .welcom_image {
-        width: 100%;
-        height: auto;
+    .clinica {
+        font-size: 1.4rem;
+        font-weight: 500;
+        width: 284px;
+    }
+
+    .dentistry {
+        font-size: 35px;
+    }
+
+    .premium {
+        font-size: 1.6rem;
+    }
+
+    .video {
+        width: 550px;
+        height: 337px;
     }
 
     .about_text p {
-        font-size: 20px;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 628px) {
+    .video {
+        width: 450px;
+        height: 276px;
+    }
+
+    .image_anouncement {
+        width: 360px;
     }
 }
 
@@ -56,7 +262,44 @@
         height: auto;
     }
 
+    .video {
+        width: 400px;
+        height: 245px;
+    }
+
     .about_text p {
-        font-size: 18px;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 430px) {
+    .slogan {
+        margin: 6px auto;
+    }
+
+    .clinica {
+        font-size: 1.25rem;
+        font-weight: 500;
+        width: 254px;
+    }
+
+    .dentistry {
+        font-size: 30px;
+    }
+
+    .premium {
+        font-size: 1.25rem;
+    }
+
+    .video {
+        width: 350px;
+        height: 214px;
+    }
+}
+
+@media screen and (max-width:362px) {
+    .video {
+        width: 315px;
+        height: 201px;
     }
 }
