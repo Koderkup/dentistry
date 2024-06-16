@@ -60,7 +60,10 @@ const Header = () => {
 
     return (
       <>
-        <div className="d-flex align-items-center col-lg-12 col-md-12 col-sm-12" data-testid="logged-router">
+        <div
+          className="d-flex align-items-center col-lg-12 col-md-12 col-sm-12"
+          data-testid="logged-router"
+        >
           <div className="nav-item dropdown">
             <div
               className={`nav-link dropdown-toggle fs-4`}
@@ -127,173 +130,185 @@ const Header = () => {
   };
   return (
     <>
-      <nav className={`navbar navbar-expand-xl ${s.header}`}>
-        <header className="container-fluid">
-          <Link className="navbar-brand" href="/">
-            <Suspense fallback={<div>loading...</div>}>
-              <Image
-                src="https://i.postimg.cc/KcBtY2Zr/logo-4-Photo-Room-png-Photo-Room.png"
-                width={70}
-                height={70}
-                alt="logo"
-              />
-            </Suspense>
-          </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div
-            className="collapse navbar-collapse justify-content-between"
-            id="navbarNavDropdown"
-          >
-            <ul className={`navbar-nav`}>
-              <li
-                className={`nav-item ${
-                  router.pathname === "/" ? s.active : ""
-                } ${s.navbar}`}
-              >
-                <Link
-                  className="nav-link fs-4 active"
-                  aria-current="page"
-                  href="/"
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          zIndex: 10000,
+          width: "100%",
+          backgroundColor: "white",
+        }}
+      >
+        <nav className={`navbar navbar-expand-xl ${s.header}`}>
+          <header className="container-fluid">
+            <Link className="navbar-brand" href="/">
+              <Suspense fallback={<div>loading...</div>}>
+                <Image
+                  src="https://i.postimg.cc/KcBtY2Zr/logo-4-Photo-Room-png-Photo-Room.png"
+                  width={70}
+                  height={70}
+                  alt="logo"
+                />
+              </Suspense>
+            </Link>
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavDropdown"
+              aria-controls="navbarNavDropdown"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div
+              className="collapse navbar-collapse justify-content-between"
+              id="navbarNavDropdown"
+            >
+              <ul className={`navbar-nav`}>
+                <li
+                  className={`nav-item ${
+                    router.pathname === "/" ? s.active : ""
+                  } ${s.navbar}`}
                 >
-                  Главная
-                </Link>
-              </li>
-              <li
-                className={`nav-item ${
-                  router.pathname === "/services" ? s.active : ""
-                }`}
-              >
-                <Link className={`nav-link fs-4`} href="/services">
-                  Услуги
-                </Link>
-              </li>
-              <li
-                className={`nav-item ${
-                  router.pathname === "/works" ? s.active : ""
-                }`}
-              >
-                <Link
-                  className={`nav-link fs-4 `}
-                  href="/works"
-                  style={{ whiteSpace: "nowrap" }}
+                  <Link
+                    className="nav-link fs-4 active"
+                    aria-current="page"
+                    href="/"
+                  >
+                    Главная
+                  </Link>
+                </li>
+                <li
+                  className={`nav-item ${
+                    router.pathname === "/services" ? s.active : ""
+                  }`}
                 >
-                  Наши работы
-                </Link>
-              </li>
-              <li
-                className={`nav-item ${
-                  router.pathname === "/contacts" ? s.active : ""
-                }`}
-              >
-                <Link className={`nav-link fs-4`} href="/contacts">
-                  Контакты
-                </Link>
-              </li>
-              <li
-                className={`nav-item ${
-                  router.pathname === "/reviews" ? s.active : ""
-                }`}
-              >
-                <Link className={`nav-link fs-4`} href="/reviews">
-                  Отзывы
-                </Link>
-              </li>
-              <li
-                className={`nav-item ${
-                  router.pathname === "/about" ? s.active : ""
-                }`}
-              >
-                <Link
-                  className={`nav-link fs-4 `}
-                  href="/about"
-                  style={{ whiteSpace: "nowrap" }}
+                  <Link className={`nav-link fs-4`} href="/services">
+                    Услуги
+                  </Link>
+                </li>
+                <li
+                  className={`nav-item ${
+                    router.pathname === "/works" ? s.active : ""
+                  }`}
                 >
-                  О нас
-                </Link>
-              </li>
-              <li
-                className={`nav-item ${
-                  router.pathname === "/price" ? s.active : ""
-                }`}
-              >
-                <Link
-                  className={`nav-link fs-4 `}
-                  href="/price"
-                  style={{ whiteSpace: "nowrap" }}
+                  <Link
+                    className={`nav-link fs-4 `}
+                    href="/works"
+                    style={{ whiteSpace: "nowrap" }}
+                  >
+                    Наши работы
+                  </Link>
+                </li>
+                <li
+                  className={`nav-item ${
+                    router.pathname === "/contacts" ? s.active : ""
+                  }`}
                 >
-                  Цены
-                </Link>
-              </li>
-              <li className={`nav-item dropdown`}>
-                <Link
-                  className={`nav-link dropdown-toggle fs-4 ${s.useful}`}
-                  href="/articles passHref"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  style={{ color: "darkgray" }}
+                  <Link className={`nav-link fs-4`} href="/contacts">
+                    Контакты
+                  </Link>
+                </li>
+                <li
+                  className={`nav-item ${
+                    router.pathname === "/reviews" ? s.active : ""
+                  }`}
                 >
-                  Полезное
-                </Link>
-                <ul className="dropdown-menu" style={{ maxWidth: "500px" }}>
-                  {articles.map((article) => (
-                    <li key={article.id}>
-                      <Link
-                        style={{
-                          maxWidth: "100%",
-                          overflow: "hidden",
-                          whiteSpace: "wrap",
-                        }}
-                        className="dropdown-item fs-4"
-                        href={`/articles/${article.id}`}
-                      >
-                        {article.header}
+                  <Link className={`nav-link fs-4`} href="/reviews">
+                    Отзывы
+                  </Link>
+                </li>
+                <li
+                  className={`nav-item ${
+                    router.pathname === "/about" ? s.active : ""
+                  }`}
+                >
+                  <Link
+                    className={`nav-link fs-4 `}
+                    href="/about"
+                    style={{ whiteSpace: "nowrap" }}
+                  >
+                    О нас
+                  </Link>
+                </li>
+                <li
+                  className={`nav-item ${
+                    router.pathname === "/price" ? s.active : ""
+                  }`}
+                >
+                  <Link
+                    className={`nav-link fs-4 `}
+                    href="/price"
+                    style={{ whiteSpace: "nowrap" }}
+                  >
+                    Цены
+                  </Link>
+                </li>
+                <li className={`nav-item dropdown`}>
+                  <Link
+                    className={`nav-link dropdown-toggle fs-4 ${s.useful}`}
+                    href="/articles passHref"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    style={{ color: "darkgray" }}
+                  >
+                    Полезное
+                  </Link>
+                  <ul className="dropdown-menu" style={{ maxWidth: "500px" }}>
+                    {articles.map((article) => (
+                      <li key={article.id}>
+                        <Link
+                          style={{
+                            maxWidth: "100%",
+                            overflow: "hidden",
+                            whiteSpace: "wrap",
+                          }}
+                          className="dropdown-item fs-4"
+                          href={`/articles/${article.id}`}
+                        >
+                          {article.header}
+                          <div className="dropdown-divider"></div>
+                        </Link>
+                      </li>
+                    ))}
+                    <li>
+                      <Link className="dropdown-item fs-4" href="/articles">
+                        Все статьи
                         <div className="dropdown-divider"></div>
                       </Link>
                     </li>
-                  ))}
-                  <li>
-                    <Link className="dropdown-item fs-4" href="/articles">
-                      Все статьи
-                      <div className="dropdown-divider"></div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item fs-4" href="/question">
-                      Задайте нам вопрос
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-            <div className={s.login_button}>
-              {Object.keys(auth).length === 0 ? (
-                <Link
-                  className={"nav-link fs-4" + isActive("/login")}
-                  href="/login"
-                  style={{ whiteSpace: "nowrap" }}
-                >
-                  <FaUserAlt />
-                  {!auth.user && "Войти"}
-                </Link>
-              ) : (
-                loggedRouter()
-              )}
+                    <li>
+                      <Link className="dropdown-item fs-4" href="/question">
+                        Задайте нам вопрос
+                      </Link>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              <div className={s.login_button}>
+                {Object.keys(auth).length === 0 ? (
+                  <Link
+                    className={"nav-link fs-4" + isActive("/login")}
+                    href="/login"
+                    style={{ whiteSpace: "nowrap" }}
+                  >
+                    <FaUserAlt />
+                    {!auth.user && "Войти"}
+                  </Link>
+                ) : (
+                  loggedRouter()
+                )}
+              </div>
             </div>
-          </div>
-        </header>
-      </nav>
-      <div className={s.border}></div>
+          </header>
+        </nav>
+        <div className={s.border}></div>
+      </div>
+      <div style={{ width: "100%", height: "100px" }}></div>
     </>
   );
 };
