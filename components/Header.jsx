@@ -135,7 +135,7 @@ const Header = () => {
           position: "fixed",
           top: 0,
           left: 0,
-          zIndex: 10000,
+          zIndex: 100000000000,
           width: "100%",
           backgroundColor: "white",
         }}
