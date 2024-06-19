@@ -14,15 +14,15 @@ export const typography = {
   ADD_ACTION: "Объявить акцию",
   ADD_ARTICLE: "Написать статью",
   ACTION_LINK: "/actions/create",
-  ARTICLE_LINK: '/articles/create',
+  ARTICLE_LINK: "/articles/create",
   ACTION_IMAGE: "/assets/action.svg",
-  ARTICLE_IMAGE: '/assets/article.svg',
+  ARTICLE_IMAGE: "/assets/article.svg",
   SPECIALIZATION_1: `Процедура "Зубы за день"`,
   SPECIALIZATION_2: "Процедура All-on-4",
   SPECIALIZATION_3: "Зубные импланты",
   SPECIALIZATION_4: "Преображение улыбки",
-  DELETE_IMAGE: '/assets/delete.svg',
-  EDIT_IMAGE: '/assets/pencil.svg',
+  DELETE_IMAGE: "/assets/delete.svg",
+  EDIT_IMAGE: "/assets/pencil.svg",
 
   ADD_CONTENT_STYLE: {
     position: "fixed",
@@ -55,4 +55,9 @@ export const typography = {
     "Нам можно доверять",
   ],
   LINK_MOREINFO_COLOR: "#51DED1",
+  CONTACTS_IMAGE_LOCATION_URL: [
+    "https://i.postimg.cc/LXNZRvvJ/enter-ifnkmi.jpg",
+    "https://i.postimg.cc/FF2GBBND/evistor-stairs.png",
+    "https://i.postimg.cc/Z0t9x3kx/Screenshot-11.png",
+  ],
 };

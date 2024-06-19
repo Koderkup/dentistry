@@ -69,7 +69,9 @@ const Services = ({ serviceProps, subServicesProps }) => {
                 {services.map((service, index) => (
                   <div
                     key={service.id}
-                    className={`carousel-item ${index === 0 ? "active" : ""} ${s.carouselItem}`}
+                    className={`carousel-item ${index === 0 ? "active" : ""} ${
+                      s.carouselItem
+                    }`}
                   >
                     <Image
                       src={service.image[0].url}
@@ -77,20 +79,21 @@ const Services = ({ serviceProps, subServicesProps }) => {
                       alt="service"
                       width={400}
                       height={600}
-                      style={{height: 'auto'}}
+                      style={{ height: "auto" }}
                     />
                     <div className="carousel-caption d-md-block">
                       <div className={s.sliderLabel}>
                         <p className={s.slider_title}>{service.title}</p>
                       </div>
-                      {auth.user || (auth.user && auth.user.role === "admin")
-                        ? (<AdminLink
-                            url={`services/create/${service.id}`}
-                            content={service}
-                            type={"ADD_SERVICE"}
-                            header={service.title}
-                          />)
-                        : null}
+                      {auth.user ||
+                      (auth.user && auth.user.role === "admin") ? (
+                        <AdminLink
+                          url={`services/create/${service.id}`}
+                          content={service}
+                          type={"ADD_SERVICE"}
+                          header={service.title}
+                        />
+                      ) : null}
                     </div>
                   </div>
                 ))}
@@ -104,7 +107,7 @@ const Services = ({ serviceProps, subServicesProps }) => {
                 <span>
                   <FiChevronLeft
                     style={{
-                      color: "#34A0A0",
+                      color: "#51DED1",
                       fontWeight: "bold",
                       fontSize: "45px",
                     }}
@@ -121,7 +124,7 @@ const Services = ({ serviceProps, subServicesProps }) => {
                 <span>
                   <FiChevronRight
                     style={{
-                      color: "#34A0A0",
+                      color: "#51DED1",
                       fontWeight: "bold",
                       fontSize: "45px",
                     }}

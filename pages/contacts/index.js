@@ -1,10 +1,29 @@
+import React, { useState, useRef } from "react";
 import s from "../../styles/Contacts.module.scss";
 import Map from "../../components/Map";
 import Image from "next/image";
+import Carousel from "@/components/Carousel";
+import { typography } from "@/utils/typography";
+import useDeviceTypeDetect from "@/hooks/useDeviceTypeDetect";
+import { PiEyeSlashThin } from "react-icons/pi";
+import { PiEyeThin } from "react-icons/pi";
 const Contacts = () => {
+  const [visible, setVisible] = useState(false);
+  const { CONTACTS_IMAGE_LOCATION_URL } = typography;
+  const { isDesktop } = useDeviceTypeDetect();
+  const imageRef = useRef([]);
+
+  const handleCloseClick = () => {
+    setVisible(false);
+    imageRef.current.forEach((img) => img.classList.remove(`${s.show}`));
+  };
+  const handleOpenClick = (index) => {
+    setVisible(true);
+    imageRef.current[index].classList.add(`${s.show}`);
+  };
   return (
     <div className="container">
-      <div className={s.container}>
+      <div className={s.head_container}>
         <div className={s.info_text}>
           <h1>Контактная информация</h1>
           <p>Адрес: г. Витебск, ул. Фрунзе, 81/1</p>
@@ -15,88 +34,57 @@ const Contacts = () => {
           <Map />
         </div>
       </div>
-      <div className="container">
-        <div
-          id="carouselExampleIndicators"
-          className="carousel slide"
-          data-bs-ride="carousel"
-        >
-          <div className="carousel-indicators">
-            <button
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to="0"
-              className="active"
-              aria-current="true"
-              aria-label="Slide 1"
-            ></button>
-            <button
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to="1"
-              aria-label="Slide 2"
-            ></button>
-            <button
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to="2"
-              aria-label="Slide 3"
-            ></button>
+      <div className={`container ${s.carousel_container}`}>
+        {!isDesktop ? (
+          <Carousel>
+            {CONTACTS_IMAGE_LOCATION_URL.map((src, i) => (
+              <div
+                data-testid="carousel-item"
+                className={`carousel-item ${i === 0 ? "active" : ""} ${
+                  s.carousel_image
+                }`}
+                key={src}
+              >
+                <Image
+                  src={src}
+                  className={`d-block w-100 ${s.image}`}
+                  alt="location"
+                  width={400}
+                  height={800}
+                />
+              </div>
+            ))}
+          </Carousel>
+        ) : (
+          <div className={s.line_item} data-testid="line-item">
+            {CONTACTS_IMAGE_LOCATION_URL.map((src, i) => (
+              <div className={s.carousel_container} key={src}>
+                <Image
+                  ref={(el) => (imageRef.current[i] = el)}
+                  src={src}
+                  className={s.image_desktop}
+                  alt="location"
+                  width={480}
+                  height={700}
+                />
+                {!visible && (
+                  <PiEyeThin
+                    data-testid="PiEyeThin"
+                    className={s.eye_icon}
+                    onClick={() => handleOpenClick(i)}
+                  />
+                )}
+              </div>
+            ))}
           </div>
-          <div className="carousel-inner">
-            <div className="carousel-item active">
-              <Image
-                src="https://i.postimg.cc/LXNZRvvJ/enter-ifnkmi.jpg"
-                className="d-block w-100"
-                alt="location"
-                width={400}
-                height={600}
-              />
-            </div>
-            <div className="carousel-item">
-              <Image
-                src="https://i.postimg.cc/HLm2kZ0z/Screenshot-4-ys9mbp.png"
-                className="d-block w-100"
-                alt="location"
-                width={500}
-                height={500}
-              />
-            </div>
-            <div className="carousel-item">
-              <Image
-                src="https://i.postimg.cc/4dkmgqz4/Screenshot-3-eru9e4.png"
-                className="d-block w-100"
-                alt="location"
-                width={500}
-                height={500}
-              />
-            </div>
-          </div>
-          <button
-            className="carousel-control-prev"
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="prev"
-          >
-            <span
-              className="carousel-control-prev-icon"
-              aria-hidden="true"
-            ></span>
-            <span className="visually-hidden">Назад</span>
-          </button>
-          <button
-            className="carousel-control-next"
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="next"
-          >
-            <span
-              className="carousel-control-next-icon"
-              aria-hidden="true"
-            ></span>
-            <span className="visually-hidden">Вперёд</span>
-          </button>
-        </div>
+        )}
+        {visible && (
+          <PiEyeSlashThin
+            data-testid="PiEyeSlashThin"
+            className={`${s.close} ${s.eye_icon}`}
+            onClick={handleCloseClick}
+          />
+        )}
       </div>
     </div>
   );
