@@ -302,7 +302,6 @@ const Header = () => {
         </nav>
         <div className={s.border}></div>
       </div>
-      <div style={{ width: "100%", height: "100px" }}></div>
     </>
   );
 };
