@@ -1,39 +1,48 @@
-.header{
-    position: fixed;
-    left:0;
+@import './colors.scss';
+
+.header_wrapper {
+    position: sticky;
     top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    background-color: $white;
+    overflow: auto;
+    max-height: 100vh;
 }
+
+.header {
+    position: sticky;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
 .active {
     text-decoration: underline;
 }
+
 .login_button {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    color: darkgray;
+    color: $darkgray;
     margin-right: 12%;
     gap: 30px;
 }
+
 .useful {
-    color: darkgray;
+    color: $darkgray;
     font-size: 32px;
 }
 
 .admin_menu {
-    color: darkgray;
-}
-.navbar {
-
-}
-
-.header {
-    width: 100%;
-    // background-color: rgba(143,231,243, 0.5);
+    color: $darkgray;
 }
 
 .border {
     margin: auto;
     width: 94%;
     height: 2px;
-    background-color: rgba(143,231,243, 0.5);
+    background-color: $teal;
 }

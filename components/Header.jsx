@@ -130,16 +130,7 @@ const Header = () => {
   };
   return (
     <>
-      <div
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          zIndex: 100,
-          width: "100%",
-          backgroundColor: "white",
-        }}
-      >
+      <div className={s.header_wrapper}>
         <nav className={`navbar navbar-expand-xl ${s.header}`}>
           <header className="container-fluid">
             <Link className="navbar-brand" href="/">
@@ -258,7 +249,10 @@ const Header = () => {
                   >
                     Полезное
                   </Link>
-                  <ul className="dropdown-menu" style={{ maxWidth: "500px" }}>
+                  <ul
+                    className="dropdown-menu"
+                    style={{ maxWidth: "500px", overflowY: "auto" }}
+                  >
                     {articles.map((article) => (
                       <li key={article.id}>
                         <Link
