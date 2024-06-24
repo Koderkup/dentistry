@@ -4,9 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && npm run generate-robots && npm run generate-sitemap",
-    "generate-robots": "node robots.config.js",
-    "generate-sitemap": "node generate-sitemap.xml.config.js",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
