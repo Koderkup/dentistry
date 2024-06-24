@@ -1,24 +1,22 @@
-const fs = require("fs");
-const path = require("path");
-const { getData } = require("@/utils/fetchData");
-
-async function generateSitemap() {
-  const { articles } = await getData("articles");
-  const { doctors } = await getData("doctors");
-  const { services } = await getData("services");
-  const { subServices } = await getData("subservices");
-  const { subServiceDirections } = await getData(
-    "subservice-direction/subdirection"
-  );
-
-  const articleIds = articles.map((article) => article.id);
-  const doctorIds = doctors.map((doctor) => doctor.id);
-  const serviceIds = services.map((service) => service.id);
-  const subServiceIds = subServices.map((subService) => subService.id);
-  const subServiceDirectionIds = subServiceDirections.map(
-    (subServiceDirection) => subServiceDirection.id
-  );
-
+"use client";
+import { getData } from "@/utils/fetchData";
+import path from "path";
+export const { articles } = await getData("articles");
+export const { doctors } = await getData("doctors");
+export const { services } = await getData("services");
+export const { subServices } = await getData("subservices");
+export const { subServiceDirections } = await getData(
+  "subservice-direction/subdirection"
+);
+export const articleIds = articles.map((article) => article.id);
+export const doctorIds = doctors.map((doctor) => doctor.id);
+export const serviceIds = services.map((service) => service.id);
+export const subServiceIds = subServices.map((subService) => subService.id);
+export const subServiceDirectionIds = subServiceDirections.map(
+  (subServiceDirection) => subServiceDirection.id
+);
+export async function getStaticProps() {
+  const fs = require("fs");
   const pagesDirectory = path.join(process.cwd(), "pages");
   const staticPaths = fs
     .readdirSync(pagesDirectory)
@@ -48,9 +46,8 @@ async function generateSitemap() {
     .map((staticPagePath) => {
       return `${process.env.BASE_URL}/${staticPagePath.split(".")[0]}`;
     });
-
   staticPaths.unshift(process.env.BASE_URL);
-
+  
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     ${staticPaths
@@ -117,9 +114,15 @@ async function generateSitemap() {
                 )
                 .join("")}
   </urlset>`;
-
   const sitemapPath = path.join(process.cwd(), "public", "sitemap.xml");
   fs.writeFileSync(sitemapPath, sitemap);
-}
 
-generateSitemap();
+  return {
+    props: {},
+  };
+}
+const Sitemap = () => {
+  return null;
+};
+
+export default Sitemap;

@@ -1,20 +1,13 @@
-import { getData } from "@/utils/fetchData";
+"use client";
 import path from "path";
-export const { articles } = await getData("articles");
-export const { doctors } = await getData("doctors");
-export const { services } = await getData("services");
-export const { subServices } = await getData("subservices");
-export const { subServiceDirections } = await getData(
-  "subservice-direction/subdirection"
-);
-export const articleIds = articles.map((article) => article.id);
-export const doctorIds = doctors.map((doctor) => doctor.id);
-export const serviceIds = services.map((service) => service.id);
-export const subServiceIds = subServices.map((subService) => subService.id);
-export const subServiceDirectionIds = subServiceDirections.map(
-  (subServiceDirection) => subServiceDirection.id
-);
-export async function generateRobotsTxt() {
+import {
+  articleIds,
+  doctorIds,
+  serviceIds,
+  subServiceIds,
+  subServiceDirectionIds,
+} from "./sitemap-generate.xml.jsx";
+export async function getStaticProps() {
   const fs = require("fs");
   const pagesDirectory = path.join(process.cwd(), "pages");
   const staticPaths = fs
@@ -48,7 +41,7 @@ export async function generateRobotsTxt() {
     });
   staticPaths.unshift("Allow: /");
   const articlesPath = articleIds.map((id) => `Allow: /articles/${id}`);
-  const doctorsPath = doctorIds.map((id) => `Allow: /doctors/${id}`);
+  const doctorsPath = doctorIds.map((id)=>(`Allow: /doctors/${id}`))
   const servicesPath = serviceIds.map((id) => `Allow: /services/${id}`);
   const subServicePath = subServiceIds.map((id) => `Allow: /subservices/${id}`);
   const subServiceDirectionPath = subServiceDirectionIds.map(
@@ -63,7 +56,7 @@ export async function generateRobotsTxt() {
     ...subServiceDirectionPath,
   ];
   const allPagesString = allPaths.join("\n");
-
+  
   const robotsText = `
 User-agent: *
 Allow: /
@@ -97,5 +90,14 @@ Sitemap: ${process.env.BASE_URL}/sitemap.xml
 
   const robotsPath = path.join(process.cwd(), "public", "robots.txt");
   fs.writeFileSync(robotsPath, robotsText);
+
+  return {
+    props: {},
+  };
 }
-generateRobotsTxt();
+
+const Robots = () => {
+  return null;
+};
+
+export default Robots;
