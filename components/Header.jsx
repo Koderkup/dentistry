@@ -250,8 +250,7 @@ const Header = () => {
                     Полезное
                   </Link>
                   <ul
-                    className="dropdown-menu"
-                    style={{ maxWidth: "500px", overflowY: "auto" }}
+                    className={`dropdown-menu ${s.dropdown}`}
                   >
                     {articles.map((article) => (
                       <li key={article.id}>
