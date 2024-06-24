@@ -1,4 +1,4 @@
-"use client";
+
 import { getData } from "@/utils/fetchData";
 import path from "path";
 export const { articles } = await getData("articles");
