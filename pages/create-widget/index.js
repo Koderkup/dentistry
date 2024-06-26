@@ -55,13 +55,14 @@ const CreateContentManager = () => {
       <Head>
         <title>Widget Manager</title>
       </Head>
-      <form className="row" onSubmit={handleSubmit}>
+      <form className="row" onSubmit={handleSubmit} data-testid="form">
         <div className="col-md-8">
           <div className="row">
             <div className="col-sm-12">
               <label htmlFor="title">Тип</label>
               <div className="mb-3">
                 <select
+                data-testid="select"
                   className="form-select"
                   aria-label="Default select example"
                   value={widget.type}
