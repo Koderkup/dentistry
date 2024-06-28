@@ -28,9 +28,10 @@ function Home(props) {
   }, []);
   if (loading) return <Loading />;
   if (props.error) {
-  
     return (
-      <h1 style={{color: 'red'}}>Нет соединения с базой данных. Пожалуйста, попробуйте позже.</h1>
+      <h1 style={{ color: "red" }}>
+        Нет соединения с базой данных. Пожалуйста, попробуйте позже.
+      </h1>
     );
   }
   return (
