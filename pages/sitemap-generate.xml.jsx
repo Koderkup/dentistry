@@ -41,7 +41,7 @@ export async function getStaticProps() {
       ].includes(staticPage);
     })
     .map((staticPagePath) => {
-      return `${process.env.BASE_URL}/${staticPagePath.split(".")[0]}`;
+      return `${process.env.BASE_URL}${staticPagePath.split(".")[0]}`;
     });
   staticPaths.unshift(process.env.BASE_URL);
 
