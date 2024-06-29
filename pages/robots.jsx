@@ -1,22 +1,20 @@
 import { getData } from "@/utils/fetchData";
+import { fetchUrlParams } from "@/utils/fetchUrlParams";
 import path from "path";
-// export const { articles } = await getData("articles");
-// export const { doctors } = await getData("doctors");
-// export const { services } = await getData("services");
-// export const { subServices } = await getData("subservices");
-// export const { subServiceDirections } = await getData(
-//   "subservice-direction/subdirection"
-// );
-// export const articleIds = articles.map((article) => article.id);
-// export const doctorIds = doctors.map((doctor) => doctor.id);
-// export const serviceIds = services.map((service) => service.id);
-// export const subServiceIds = subServices.map((subService) => subService.id);
-// export const subServiceDirectionIds = subServiceDirections.map(
-//   (subServiceDirection) => subServiceDirection.id
-// );
+
 export async function getStaticProps() {
   const fs = require("fs");
   const pagesDirectory = path.join(process.cwd(), "pages");
+  const data = await fetchUrlParams();
+  const { articles, doctors, services, subServices, subServiceDirections } =
+    data;
+  const articleIds = articles.map((article) => article.id);
+  const doctorIds = doctors.map((doctor) => doctor.id);
+  const serviceIds = services.map((service) => service.id);
+  const subServiceIds = subServices.map((subService) => subService.id);
+  const subServiceDirectionIds = subServiceDirections.map(
+    (subServiceDirection) => subServiceDirection.id
+  );
   const staticPaths = fs
     .readdirSync(pagesDirectory)
     .filter((staticPage) => {
@@ -47,20 +45,20 @@ export async function getStaticProps() {
       return `Allow: /${staticPagePath.split(".")[0]}`;
     });
   staticPaths.unshift("Allow: /");
-  // const articlesPath = articleIds.map((id) => `Allow: /articles/${id}`);
-  // const doctorsPath = doctorIds.map((id)=>(`Allow: /doctors/${id}`))
-  // const servicesPath = serviceIds.map((id) => `Allow: /services/${id}`);
-  // const subServicePath = subServiceIds.map((id) => `Allow: /subservices/${id}`);
-  // const subServiceDirectionPath = subServiceDirectionIds.map(
-  //   (id) => `Allow: /subservice-direction/subdirection/${id}`
-  // );
+  const articlesPath = articleIds.map((id) => `Allow: /articles/${id}`);
+  const doctorsPath = doctorIds.map((id)=>(`Allow: /doctors/${id}`))
+  const servicesPath = serviceIds.map((id) => `Allow: /services/${id}`);
+  const subServicePath = subServiceIds.map((id) => `Allow: /subservices/${id}`);
+  const subServiceDirectionPath = subServiceDirectionIds.map(
+    (id) => `Allow: /subservice-direction/subdirection/${id}`
+  );
   const allPaths = [
     ...staticPaths,
-    // ...articlesPath,
-    // ...doctorsPath,
-    // ...servicesPath,
-    // ...subServicePath,
-    // ...subServiceDirectionPath,
+    ...articlesPath,
+    ...doctorsPath,
+    ...servicesPath,
+    ...subServicePath,
+    ...subServiceDirectionPath,
   ];
   const allPagesString = allPaths.join("\n");
 
@@ -92,7 +90,7 @@ Disallow: /articles/create
 Host: ${process.env.BASE_URL}
 
 # Sitemaps
-Sitemap: ${process.env.BASE_URL}/sitemap.xml
+Sitemap: ${process.env.BASE_URL}sitemap.xml
   `;
 
   const robotsPath = path.join(process.cwd(), "public", "robots.txt");
