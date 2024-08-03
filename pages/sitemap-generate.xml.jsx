@@ -3,7 +3,7 @@ import { fetchUrlParams } from "@/utils/fetchUrlParams";
 import path from "path";
 
 export async function getStaticProps() {
-  const fs = require("fs");
+  const fs = require("fs/promises");
   const data = await fetchUrlParams();
   const { articles, doctors, services, subServices, subServiceDirections } =
     data;
@@ -15,8 +15,8 @@ export async function getStaticProps() {
     (subServiceDirection) => subServiceDirection.id
   );
   const pagesDirectory = path.join(process.cwd(), "pages");
-  const staticPaths = fs
-    .readdirSync(pagesDirectory)
+  const staticPages = await fs.readdir(pagesDirectory);
+  const staticPaths = staticPages
     .filter((staticPage) => {
       return ![
         "api",
@@ -112,7 +112,7 @@ export async function getStaticProps() {
                 .join("")}
   </urlset>`;
   const sitemapPath = path.join(process.cwd(), "public", "sitemap.xml");
-  fs.writeFileSync(sitemapPath, sitemap);
+  fs.writeFile(sitemapPath, sitemap);
 
   return {
     props: {},

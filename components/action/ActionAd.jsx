@@ -84,14 +84,11 @@ const ActionAd = ({ widgets }) => {
 
   return (
     <div className="container" style={{ width: "100%" }}>
-      <div
-        className="card"
-        style={{ backgroundColor: "white", border: "none" }}
-      >
+      <div className={s.advertising}>
         <Suspense fallback={<div>Загрузка...</div>}>
           <Image
-            src="https://i.postimg.cc/fLYqhqzK/action-add-iicf3y.png"
-            className="img-fluid"
+            src="https://i.postimg.cc/W40t5t7t/Screenshot-13-1.png"
+            className=""
             alt="action-ad"
             width={900}
             height={600}
@@ -100,32 +97,18 @@ const ActionAd = ({ widgets }) => {
             blurDataURL={blurDataURL}
             placeholder="blur"
             priority
-            style={{ margin: "auto", width: "100%" }}
+            style={{ width: "50%", height: "auto" }}
           />
         </Suspense>
-        <div className={`card-img-overlay ${s.overlay}`}>
+        <div className={`${s.overlay}`}>
           <p className={s.paragraph}>
             <i>
               Улыбайтесь с уверенностью! В клинике Мирастом - доступны акции для
               здоровых и красивых улыбок.
             </i>
           </p>
-          <button
-            type="button"
-            className="btn btn-light"
-            style={{
-              backgroundColor: "rgba(248,249,250, 0.5)",
-              width: "200px",
-            }}
-          >
-            <Link
-              href="/actions"
-              style={{
-                textDecoration: "none",
-              }}
-            >
-              Узнать больше
-            </Link>
+          <button type="button" className={`btn ${s.link}`}>
+            <Link href="/actions">Узнать больше</Link>
           </button>
         </div>
       </div>

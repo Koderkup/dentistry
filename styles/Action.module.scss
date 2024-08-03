@@ -1,21 +1,26 @@
+@import './colors';
+
+.advertising {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
 .overlay {
     display: flex;
     flex-flow: column;
     width: 45%;
     left: 700px;
-    top: 500px;
     justify-content: center;
     gap: 20px;
 }
 
-.overlay a {
-    font-size: 24px;
-}
-
 .paragraph {
-    font-size: 30px;
+    font-size: 1.5rem;
     padding: 5px;
-    font-weight: 700;
+    font-weight: 600;
+    line-height: 1.15;
 }
 
 .action_card_container {
@@ -34,30 +39,29 @@
     background-image: url('https://i.postimg.cc/0jHB23x9/Screenshot-3.png');
     background-position: contain center;
     background-repeat: no-repeat;
+    background-size: 100%;
     height: 700px;
     padding: 5%;
     background-attachment: fixed;
 }
 
 .promo {
-    height: 100px;
-    text-align: center;
     display: flex;
-    align-items: flex-end;
     justify-content: center;
-    color: #101B3E;
+    color: $dark_blue;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 10px 20px;
 }
 
 
 .colored_marker_list li {
-    color: #015765;
+    color: $esmerald;
     margin: 3%;
     line-height: 1;
 }
 
 .colored_marker_list li span {
-    color: #015765;
+    color: $esmerald;
 }
 
 .gift_image {
@@ -67,11 +71,28 @@
 .action_image {
     margin: 0 auto 20px auto;
     width: 100%;
-    height: calc(0.5*100vw);
+    height: 50vw;
     background-repeat: no-repeat;
     background-position: center center;
     background-image: url('https://i.postimg.cc/yx835qd8/action-1.png');
     background-size: cover;
+}
+
+.link {
+    text-decoration: none;
+    clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
+    max-width: 200px;
+    background-color: #F2F4F3;
+    padding-bottom: 10px;
+
+}
+
+.link a {
+    text-decoration: none;
+    text-align: left;
+    vertical-align: middle;
+    font-size: 1.3rem;
+
 }
 
 @media screen and (min-width: 1300px) {
@@ -117,7 +138,7 @@
 
     .action_image {
         background-size: contain center;
-        height: 400px;
+        height: 50vw;
         width: 98%;
     }
 
@@ -132,7 +153,7 @@
     }
 
     .paragraph {
-        font-size: 20px;
+        font-size: 1.2rem;
         font-weight: 500;
         line-height: 1;
         border: none;
@@ -140,7 +161,11 @@
     }
 
     .overlay a {
-        font-size: 20px;
+        font-size: 1.1rem;
+    }
+
+    .link {
+        max-width: 180px;
     }
 
     .banner {
@@ -158,8 +183,8 @@
         background-size: contain;
         background-position: center;
         background-image: url('https://i.postimg.cc/2y0znrJQ/action-board-small.png');
-        width: 96%;
-        height: calc(0.5*100vw);
+        width: 100%;
+        height: 50vw;
     }
 
     .colored_marker_list li {
@@ -183,9 +208,20 @@
     }
 }
 
+@media screen and (max-width: 368px) {
+
+    .paragraph,
+    .link a {
+        font-size: 1rem;
+    }
+
+    .link a {
+        white-space: nowrap;
+    }
+}
+
 @media screen and (max-width: 320px) {
     .colored_marker_list li span {
         font-size: 8px;
-
     }
 }

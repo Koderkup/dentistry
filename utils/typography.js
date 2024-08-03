@@ -23,6 +23,10 @@ export const typography = {
   SPECIALIZATION_4: "Преображение улыбки",
   DELETE_IMAGE: "/assets/delete.svg",
   EDIT_IMAGE: "/assets/pencil.svg",
+  ADD_REVIEW: 'Оставьте отзыв',
+  REVIEW_LINK: '#',
+  REVIEW_IMAGE: '/assets/feedback.svg',
+  PUBLISH_IMAGE: '/assets/publish-icon.svg',
 
   ADD_CONTENT_STYLE: {
     position: "fixed",

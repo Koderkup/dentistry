@@ -16,7 +16,7 @@ const DoctorPerson = ({ doctor }) => {
         className="card-img-top"
         alt="doctor`s photo"
         width={300}
-        height={380}
+        height={400}
         style={{ border: "3px solid white" }}
       />
       <div className="card-body d-flex flex-column justify-content-between align-items-center">
