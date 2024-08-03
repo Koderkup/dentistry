@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { DataContext } from "../store/GlobalState";
 import { deleteItem, deleteItems, updateItem } from "../store/Actions";
 import { deleteData, deleteDataArray, patchData } from "../utils/fetchData";
@@ -86,13 +86,15 @@ const Modal = () => {
 
   const deleteSubServiceDirection = (item) => {
     dispatch(deleteItem(item.data, item.id, item.type));
-    deleteData(`subservice-direction/subdirection/${item.id}`, auth.token).then((res) => {
-      if (res.err) {
-        return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+    deleteData(`subservice-direction/subdirection/${item.id}`, auth.token).then(
+      (res) => {
+        if (res.err) {
+          return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+        }
+        router.back();
+        return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
       }
-      router.back();
-      return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
-    });
+    );
   };
 
   const deletePrices = (item) => {
@@ -115,13 +117,11 @@ const Modal = () => {
 
   const publicReview = (item) => {
     dispatch(updateItem([item], item.id, item.data, item.type));
-   patchData(`reviews/${item.id}`, item.data, auth.token).then((res) =>{
-    if(res.err)
-    return dispatch({ type: "NOTIFY", payload: { error: res.err } });
-
-    console.log(res)
-  return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
-   })
+    patchData(`reviews/${item.id}`, item.data, auth.token).then((res) => {
+      if (res.err)
+        return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+      return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
+    });
   };
 
   const handleSubmit = () => {
@@ -134,7 +134,8 @@ const Modal = () => {
         if (item.type === "ADD_PRICE") deletePrices(item);
         if (item.type === "ADD_ACTION") deleteAction(item);
         if (item.type === "ADD_ARTICLE") deleteArticle(item);
-        if (item.type === "ADD_SUBSERVICE_DIRECTION") deleteSubServiceDirection(item);
+        if (item.type === "ADD_SUBSERVICE_DIRECTION")
+          deleteSubServiceDirection(item);
         if (item.type === "ADD_WIDGET") deleteWidget(item);
         if (item.type === "DELETE_REVIEW") deleteReview(item);
         if (item.type === "ADD_REVIEW") publicReview(item);
@@ -160,7 +161,13 @@ const Modal = () => {
               {Array.isArray(modal) && modal.length !== 0 ? modal[0].title : ""}
             </h5>
           </div>
-          <div className="modal-body">Вы действительно хотите удалить?</div>
+          <div className="modal-body">
+            {Array.isArray(modal) &&
+            modal.length !== 0 &&
+            modal[0].message !== undefined
+              ? modal[0].message
+              : "Вы действительно хотите удалить?"}
+          </div>
           <div className="modal-footer">
             <button
               type="button"

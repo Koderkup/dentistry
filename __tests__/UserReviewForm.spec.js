@@ -61,8 +61,8 @@ describe("UserReviewForm", () => {
     expect(screen.getByText("Рейтинг услуги:")).toBeInTheDocument();
     expect(screen.getAllByTestId("star-svg")).toHaveLength(5);
     expect(screen.getByRole("checkbox")).toBeInTheDocument();
-    expect(screen.getByText("Удалить")).toBeInTheDocument();
-    expect(screen.getByText("Опубликовать")).toBeInTheDocument();
+    expect(screen.getByAltText("trash")).toBeInTheDocument();
+    expect(screen.getByAltText("public")).toBeInTheDocument();
   });
 
   it("updates the text correctly", () => {

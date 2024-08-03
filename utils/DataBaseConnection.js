@@ -22,5 +22,4 @@ class DatabaseConnection {
     return this.connection;
   }
 }
-
 export default DatabaseConnection;

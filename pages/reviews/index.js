@@ -1,4 +1,5 @@
 import { useState, useContext, useEffect } from "react";
+import Image from "next/image";
 import s from "../../styles/Reviews.module.scss";
 import UserReviewForm from "@/components/UserReviewForm";
 import Pagination from "@/components/Pagination";
@@ -6,6 +7,9 @@ import { DataContext } from "../../store/GlobalState";
 import { getData, postData } from "../../utils/fetchData";
 import usePagination from "@/hooks/usePagination";
 import ReCAPTCHA from "react-google-recaptcha";
+import AdButton from "@/components/AdButton";
+import { typography } from "@/utils/typography";
+import RemoveSelected from "@/components/RemoveSelected";
 function Reviews({ reviewsProps }) {
   const initialState = { name: "", comment: "", rating: 5, avatar: "woman" };
   const [userComment, setUserComment] = useState(initialState);
@@ -19,6 +23,7 @@ function Reviews({ reviewsProps }) {
   const [delivary, setDelivary] = useState(true);
   const [formData, setFormData] = useState({ recaptchaResponse: "" });
   const [selectedReviewsForRemove, setSelectedReviewsForRemove] = useState([]);
+  const [visibilatyReviewForm, setVisibilatyReviewForm] = useState(false);
   const {
     firstContentIndex,
     lastContentIndex,
@@ -29,9 +34,21 @@ function Reviews({ reviewsProps }) {
     totalPages,
   } = usePagination({
     contentPerPage: 5,
-    count: reviews.length,
+    count: Array.isArray(reviews) ? reviews.length : 0,
   });
-
+  const {
+    ADD_REVIEW,
+    REVIEW_IMAGE,
+    REVIEW_LINK,
+    ADD_CONTENT_STYLE,
+    DELETE_IMAGE,
+  } = typography;
+  const handleOpenReviewForm = () => {
+    setVisibilatyReviewForm(true);
+  };
+  const handleCloseReviewForm = () => {
+    setVisibilatyReviewForm(false);
+  };
   const handleStartDateChange = (e) => {
     setStartDate(e.target.value);
   };
@@ -56,30 +73,44 @@ function Reviews({ reviewsProps }) {
     updateCheckedStatusAll(!checked);
   };
   useEffect(() => {
-    const removeIds = reviews
+    const removeIds = (Array.isArray(reviews) ? reviews : [])
       .filter((review) => review.checked)
       .map((review) => review.id);
     setSelectedReviewsForRemove(removeIds);
   }, [reviews]);
+
   useEffect(() => {
-    const start = new Date(reviews[0].timestamp);
-    const end = new Date(reviews[reviews.length - 1].timestamp);
-    setStartDate(
-      start.getFullYear() + "-" + (start.getMonth() + 1) + "-" + start.getDate()
-    );
-    setEndDate(
-      end.getFullYear() + "-" + (end.getMonth() + 1) + "-" + end.getDate()
-    );
+    if (Array.isArray(reviews) && reviews.length > 0) {
+      const start = new Date(reviews[0].timestamp);
+      const end = new Date(reviews[reviews.length - 1].timestamp);
+      setStartDate(
+        start.getFullYear() +
+          "-" +
+          String(start.getMonth() + 1).padStart(2, "0") +
+          "-" +
+          start.getDate()
+      );
+      setEndDate(
+        end.getFullYear() +
+          "-" +
+          String(end.getMonth() + 1).padStart(2, "0") +
+          "-" +
+          end.getDate()
+      );
+    }
   }, []);
 
   useEffect(() => {
-    const filteredReviews = reviewsProps
+    const startDateObj = new Date(startDate);
+    const endDateObj = new Date(endDate);
+    endDateObj.setHours(23, 59, 59);
+    const filteredReviews = (Array.isArray(reviewsProps) ? reviewsProps : [])
       .filter((review) => {
         const reviewDate = new Date(review.timestamp);
-        const startDateObj = new Date(startDate);
-        const endDateObj = new Date(endDate);
-        endDateObj.setHours(23, 59, 59);
         return reviewDate >= startDateObj && reviewDate <= endDateObj;
+      })
+      .filter((review) => {
+        return auth.user && auth.user.role === "admin" ? review : review.view;
       })
       .sort((a, b) => {
         const dateA = new Date(a.timestamp);
@@ -87,10 +118,10 @@ function Reviews({ reviewsProps }) {
         return dateB - dateA;
       });
     setReviews(filteredReviews);
-  }, [startDate, endDate]);
+  }, [startDate, endDate, reviewsProps]);
 
   useEffect(() => {
-    const allChecked = reviews
+    const allChecked = (Array.isArray(reviews) ? reviews : [])
       .slice(firstContentIndex, lastContentIndex)
       .every((element) => element.checked);
     setChecked(allChecked);
@@ -110,7 +141,12 @@ function Reviews({ reviewsProps }) {
         const res = await postData("/reviews", userComment);
         if (res.status == "success") {
           setDelivary(true);
-          return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
+          return dispatch({
+            type: "NOTIFY",
+            payload: {
+              success: `Ваш отзыв отпрален на модерацию status: ${res.msg}`,
+            },
+          });
         }
         if (res.err) {
           return dispatch({ type: "NOTIFY", payload: { error: res.err } });
@@ -140,190 +176,203 @@ function Reviews({ reviewsProps }) {
     });
     setReviews(updatedReviews);
   };
+  const showHideData = (e) => {
+    const elem = e.target.parentNode;
+    if (!elem.style.right) {
+      elem.style.right = "-199px";
+    }
+    elem.style.right = elem.style.right === "-199px" ? "10px" : "-199px";
+  };
   return (
-    <div className="container">
-      <h1>Поделитесь своими впечатлениями</h1>
-      <form
-        style={{ maxWidth: "700px", margin: "auto" }}
-        onSubmit={handleSubmit}
-      >
-        <div className="mb-3">
-          <label htmlFor="exampleInputName" className="form-label">
-            Введите своё имя
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="exampleInputName"
-            aria-describedby="nameHelp"
-            name="name"
-            value={name}
-            onChange={handleChangeInput}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="exampleFormControlTextarea1" className="form-label">
-            Оставьте свой комментарий
-          </label>
-          <textarea
-            className="form-control"
-            id="exampleFormControlTextarea1"
-            rows="5"
-            name="comment"
-            value={comment}
-            onChange={handleChangeInput}
-            required
-          ></textarea>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="exampleInputNumber" className="form-label">
-            Оцените наши услуги
-          </label>
-          <input
-            type="number"
-            className="form-control"
-            id="exampleInputNumber"
-            aria-describedby="numberHelp"
-            name="rating"
-            value={rating}
-            onChange={handleChangeInput}
-            min="0"
-            max="5"
-          />
-        </div>
-        <label htmlFor="flexRadioDefault1">Выберите пол:</label>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="avatar"
-            id="flexRadioDefault1"
-            value="woman"
-            onChange={handleChangeInput}
-            checked
-          />
-          <label className="form-check-label" htmlFor="flexRadioDefault1">
-            Женский
-          </label>
-        </div>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="radio"
-            name="avatar"
-            id="flexRadioDefault2"
-            value="man"
-            onChange={handleChangeInput}
-          />
-          <label className="form-check-label" htmlFor="flexRadioDefault2">
-            Мужской
-          </label>
-        </div>
-        <div className={s.ReCAPTCHA}>
-          <button
-            type="submit"
-            className="btn btn-primary"
-            style={{ maxHeight: "50px" }}
-            disabled={delivary}
+    <>
+      <div className="container" style={{ minWidth: "100vw" }}>
+        {visibilatyReviewForm && (
+          <form
+            style={{ maxWidth: "700px", margin: "auto" }}
+            onSubmit={handleSubmit}
+            className={s.review_form}
           >
-            Опубликовать
-          </button>
-          <ReCAPTCHA
-            sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
-            onChange={handleRecaptchaChange}
-          />
-        </div>
-      </form>
-      {auth.user && auth.user.role === "admin" && (
-        <>
-          <hr />
-          <div
-            className="mb-3 d-flex justify-content-between"
-            style={{ margin: "auto", maxWidth: "540px" }}
-          >
+            <h3>Поделитесь своими впечатлениями</h3>
+            <Image
+              src="./assets/close_cross.svg"
+              width={40}
+              height={40}
+              alt="cross"
+              className={s.review_form_cross}
+              onClick={handleCloseReviewForm}
+            />
+            <div className="mb-3">
+              <label htmlFor="exampleInputName" className="form-label">
+                Введите своё имя
+              </label>
+              <input
+                type="text"
+                data-testid="name"
+                className="form-control"
+                id="exampleInputName"
+                aria-describedby="nameHelp"
+                name="name"
+                value={name}
+                onChange={handleChangeInput}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label
+                htmlFor="exampleFormControlTextarea1"
+                className="form-label"
+              >
+                Оставьте свой комментарий
+              </label>
+              <textarea
+                className="form-control"
+                id="exampleFormControlTextarea1"
+                rows="5"
+                data-testid="comment"
+                name="comment"
+                value={comment}
+                onChange={handleChangeInput}
+                required
+              ></textarea>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="exampleInputNumber" className="form-label">
+                Оцените наши услуги
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                id="exampleInputNumber"
+                aria-describedby="numberHelp"
+                name="rating"
+                data-testid="rating"
+                value={rating}
+                onChange={handleChangeInput}
+                min="0"
+                max="5"
+              />
+            </div>
+            <label htmlFor="flexRadioDefault1">Выберите пол:</label>
             <div className="form-check">
               <input
-                type="checkbox"
-                className="form-check-input mx-1"
-                id="exampleCheck1"
-                onChange={handleSelectionAll}
-                checked={checked}
-                style={{ width: "25px", height: "25px" }}
+                className="form-check-input"
+                type="radio"
+                name="avatar"
+                id="flexRadioDefault1"
+                value="woman"
+                onChange={handleChangeInput}
+                checked
               />
-              <label className="form-check-label" htmlFor="exampleCheck1">
-                Выбрать все
+              <label className="form-check-label" htmlFor="flexRadioDefault1">
+                Женский
               </label>
             </div>
-            <button
-              className="btn btn-danger"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
-              onClick={() =>
-                dispatch({
-                  type: "ADD_MODAL",
-                  payload: [
-                    {
-                      data: selectedReviewsForRemove,
-                      id: selectedReviewsForRemove.length,
-                      title: `Выбрано для удаления ${selectedReviewsForRemove.length} отзывов`,
-                      type: "DELETE_REVIEWS",
-                    },
-                  ],
-                })
-              }
-            >
-              Удалить выбранное
-            </button>
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="avatar"
+                id="flexRadioDefault2"
+                value="man"
+                onChange={handleChangeInput}
+              />
+              <label className="form-check-label" htmlFor="flexRadioDefault2">
+                Мужской
+              </label>
+            </div>
+            <div className={s.ReCAPTCHA}>
+              <button
+                type="submit"
+                className="btn btn-primary"
+                style={{ maxHeight: "50px" }}
+                disabled={delivary}
+              >
+                Опубликовать
+              </button>
+              <ReCAPTCHA
+                data-testid="recaptcha"
+                sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+                onChange={handleRecaptchaChange}
+              />
+            </div>
+          </form>
+        )}
+        {!visibilatyReviewForm && (
+          <div className={s.reviewForm_wrapper}>
+            <Image
+              className={s.preReviewForm}
+              src={"https://i.postimg.cc/L8ZL90y2/md-rev-bg.png"}
+              width={700}
+              height={500}
+              alt="pleased client"
+            />
+            <Image
+              className={s.title}
+              src={"./assets/reviews-heading.svg"}
+              width={600}
+              height={400}
+              alt="reviews"
+            />
           </div>
-        </>
-      )}
-      <hr />
-      <h1>Комментарии наших клиентов</h1>
-      <p>Сортировать по дате:</p>
-      <div className={s.data_inputs}>
-        <span>
-          С:
+        )}
+        <div className={s.data_inputs}>
+          <span className={s.data_inputs_before} onClick={showHideData}>
+            Сортировать
+          </span>
+          <span>
+            <i>С:</i>
+          </span>
           <input
             type="date"
             value={startDate}
             onChange={handleStartDateChange}
           />
-        </span>
-        <span>
-          По:
+          <span>
+            <i>По:</i>
+          </span>
           <input type="date" value={endDate} onChange={handleEndDateChange} />
+        </div>
+        <div className={s.reviews_wrapper}>
+          {(Array.isArray(reviews) ? reviews : [])
+            .slice(firstContentIndex, lastContentIndex + 1)
+            .map((review) => {
+              return (
+                <UserReviewForm
+                  key={review.id}
+                  review={review}
+                  checked={review.checked}
+                  handleSelectedReview={handleSelectedReview}
+                />
+              );
+            })}
+        </div>
+        <span>
+          {page}/{totalPages}
         </span>
+        <Pagination
+          totalPages={totalPages}
+          page={page}
+          setPage={setPage}
+          nextPage={nextPage}
+          prevPage={prevPage}
+        />
       </div>
-      <hr />
-      {reviews
-        .slice(firstContentIndex, lastContentIndex)
-        .filter((review) => {
-          return auth.user && auth.user.role === 'admin'
-            ? review
-            : review.view;
-        })
-        .map((review) => {
-          return (
-            <UserReviewForm
-              key={review.id}
-              review={review}
-              checked={review.checked}
-              handleSelectedReview={handleSelectedReview}
-            />
-          );
-        })}
-      <span>
-        {page}/{totalPages}
-      </span>
-      <Pagination
-        totalPages={totalPages}
-        page={page}
-        setPage={setPage}
-        nextPage={nextPage}
-        prevPage={prevPage}
-      />
-    </div>
+      {auth.user && auth.user.role === "admin" ? (
+        <RemoveSelected
+          handleSelectionAll={handleSelectionAll}
+          selectedReviewsForRemove={selectedReviewsForRemove}
+          checked={checked}
+        />
+      ) : (
+        <AdButton
+          title={ADD_REVIEW}
+          link={REVIEW_LINK}
+          image={REVIEW_IMAGE}
+          style={ADD_CONTENT_STYLE}
+          onClick={handleOpenReviewForm}
+        />
+      )}
+    </>
   );
 }
 

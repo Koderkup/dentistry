@@ -3,7 +3,7 @@ import { fetchUrlParams } from "@/utils/fetchUrlParams";
 import path from "path";
 
 export async function getStaticProps() {
-  const fs = require("fs");
+  const fs = require("fs/promises");
   const pagesDirectory = path.join(process.cwd(), "pages");
   const data = await fetchUrlParams();
   const { articles, doctors, services, subServices, subServiceDirections } =
@@ -15,8 +15,8 @@ export async function getStaticProps() {
   const subServiceDirectionIds = subServiceDirections.map(
     (subServiceDirection) => subServiceDirection.id
   );
-  const staticPaths = fs
-    .readdirSync(pagesDirectory)
+  const staticPages = await fs.readdir(pagesDirectory);
+  const staticPaths = staticPages
     .filter((staticPage) => {
       return ![
         "api",
@@ -46,7 +46,7 @@ export async function getStaticProps() {
     });
   staticPaths.unshift("Allow: /");
   const articlesPath = articleIds.map((id) => `Allow: /articles/${id}`);
-  const doctorsPath = doctorIds.map((id)=>(`Allow: /doctors/${id}`))
+  const doctorsPath = doctorIds.map((id) => `Allow: /doctors/${id}`);
   const servicesPath = serviceIds.map((id) => `Allow: /services/${id}`);
   const subServicePath = subServiceIds.map((id) => `Allow: /subservices/${id}`);
   const subServiceDirectionPath = subServiceDirectionIds.map(
@@ -94,7 +94,7 @@ Sitemap: ${process.env.BASE_URL}sitemap.xml
   `;
 
   const robotsPath = path.join(process.cwd(), "public", "robots.txt");
-  fs.writeFileSync(robotsPath, robotsText);
+  fs.writeFile(robotsPath, robotsText);
 
   return {
     props: {},

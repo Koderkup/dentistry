@@ -1,4 +1,4 @@
-import React, { useContext, Suspense } from "react";
+import React, { useContext, Suspense, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -8,6 +8,9 @@ import { DataContext } from "../store/GlobalState";
 import Cookie from "js-cookie";
 
 const Header = () => {
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [visible, setVisible] = useState(true);
+  const [dropDown, setDropDown] = useState(false);
   const router = useRouter();
   const { state, dispatch } = useContext(DataContext);
   const { auth, articles } = state;
@@ -18,6 +21,19 @@ const Header = () => {
       return "";
     }
   };
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!dropDown) {
+        const currentScrollPos = window.scrollY;
+        setVisible(prevScrollPos > currentScrollPos || prevScrollPos < 70);
+        setPrevScrollPos(currentScrollPos);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [prevScrollPos, visible, dropDown]);
   const handleLogout = () => {
     Cookie.remove("refreshtoken", { path: "api/auth/accessToken" });
     localStorage.removeItem("firstLogin");
@@ -128,9 +144,12 @@ const Header = () => {
       </>
     );
   };
+  const handleClick = () => {
+    setDropDown(!dropDown);
+  };
   return (
     <>
-      <div className={s.header_wrapper}>
+      <div className={`${s.header_wrapper} ${visible ? "" : s.hide}`}>
         <nav className={`navbar navbar-expand-xl ${s.header}`}>
           <header className="container-fluid">
             <Link className="navbar-brand" href="/">
@@ -151,6 +170,7 @@ const Header = () => {
               aria-controls="navbarNavDropdown"
               aria-expanded="false"
               aria-label="Toggle navigation"
+              onClick={handleClick}
             >
               <span className="navbar-toggler-icon"></span>
             </button>
@@ -249,9 +269,7 @@ const Header = () => {
                   >
                     Полезное
                   </Link>
-                  <ul
-                    className={`dropdown-menu ${s.dropdown}`}
-                  >
+                  <ul className={`dropdown-menu ${s.dropdown}`}>
                     {articles.map((article) => (
                       <li key={article.id}>
                         <Link
