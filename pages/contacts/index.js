@@ -70,6 +70,7 @@ const Contacts = () => {
                 {!visible && (
                   <PiEyeThin
                     data-testid="PiEyeThin"
+                    style={{ color: "white" }}
                     className={s.eye_icon}
                     onClick={() => handleOpenClick(i)}
                   />
@@ -81,6 +82,7 @@ const Contacts = () => {
         {visible && (
           <PiEyeSlashThin
             data-testid="PiEyeSlashThin"
+            style={{ color: "white" }}
             className={`${s.close} ${s.eye_icon}`}
             onClick={handleCloseClick}
           />

@@ -30,18 +30,23 @@ const SubservicePage = ({ subservice, directions }) => {
         </div>
         <div className="row">
           <div className="col-lg-12 col-md-12">
-            {paragraphsWithoutHedingForService.map((item, i) => (
-              <p
-                style={{
-                  textAlign: "justify",
-                  fontSize: "1.2rem",
-                  textIndent: "30px",
-                }}
-                key={i}
-              >
-                {item}
-              </p>
-            ))}
+            {paragraphsWithoutHedingForService.map((item, i) => {
+              const trimmedItem = item.trim();
+              const isBold = trimmedItem.startsWith("*");
+              const content = isBold ? trimmedItem.slice(1) : trimmedItem;
+              return (
+                <p
+                  style={{
+                    textAlign: "justify",
+                    fontSize: "1.2rem",
+                    textIndent: "30px",
+                  }}
+                  key={i}
+                >
+                  {isBold ? <b>{content}</b> : content}
+                </p>
+              );
+            })}
           </div>
         </div>
         <div className="row">
@@ -55,18 +60,24 @@ const SubservicePage = ({ subservice, directions }) => {
             height={300}
             className={`float-right col-lg-3 col-md-4 col-sm-12 ${s.image_subservice}`}
           />
-          {paragraphsWithoutHedingForSubService.map((item, i) => (
-            <p
-              style={{
-                textAlign: "justify",
-                fontSize: "1.2rem",
-                textIndent: "30px",
-              }}
-              key={i}
-            >
-              {item}
-            </p>
-          ))}
+          {paragraphsWithoutHedingForSubService.map((item, i) => {
+            const trimmedItem = item.trim();
+            const isBold = trimmedItem.startsWith("*");
+            const content = isBold ? trimmedItem.slice(1) : trimmedItem;
+
+            return (
+              <p
+                style={{
+                  textAlign: "justify",
+                  fontSize: "1.2rem",
+                  textIndent: "30px",
+                }}
+                key={i}
+              >
+                {isBold ? <b>{content}</b> : content}
+              </p>
+            );
+          })}
         </section>
         <div className={`${s.directions} row`}>
           {directions.map((direction) => (

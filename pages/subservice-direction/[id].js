@@ -36,18 +36,23 @@ const SubserviceDirectionPage = ({ subdirection }) => {
               height={300}
               className={`float-right col-lg-3 col-md-4 col-sm-12 ${s.image_subservice}`}
             />
-            {paragraphsWithoutHeding.map((item, i) => (
-              <p
-                style={{
-                  textAlign: "justify",
-                  fontSize: "1.2rem",
-                  textIndent: "30px",
-                }}
-                key={i}
-              >
-                {item}
-              </p>
-            ))}
+            {paragraphsWithoutHeding.map((item, i) => {
+              const trimmedItem = item.trim();
+              const isBold = trimmedItem.startsWith("*");
+              const content = isBold ? trimmedItem.slice(1) : trimmedItem;
+              return (
+                <p
+                  style={{
+                    textAlign: "justify",
+                    fontSize: "1.2rem",
+                    textIndent: "30px",
+                  }}
+                  key={i}
+                >
+                  {isBold ? <b>{content}</b> : content}
+                </p>
+              );
+            })}
           </section>
         </div>
         <div className="row"></div>

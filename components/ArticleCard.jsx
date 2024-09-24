@@ -36,9 +36,23 @@ const ArticleCard = ({ content }) => {
         {content.header}
       </h3>
       <div className={s.article_text} style={{ textAlign: "justify" }}>
-        {paragraphsWithoutHeding.map((paragraph, index) => (
-          <p key={index}>{paragraph}</p>
-        ))}
+        {paragraphsWithoutHeding.map((item, i) => {
+          const trimmedItem = item.trim();
+          const isBold = trimmedItem.startsWith("*");
+          const content = isBold ? trimmedItem.slice(1) : trimmedItem;
+          return (
+            <p
+              style={{
+                textAlign: "justify",
+                fontSize: "1.2rem",
+                textIndent: "30px",
+              }}
+              key={i}
+            >
+              {isBold ? <b>{content}</b> : content}
+            </p>
+          );
+        })}
       </div>
 
       {auth.user && auth.user.role === "admin" && (
