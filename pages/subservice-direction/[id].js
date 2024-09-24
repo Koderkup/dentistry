@@ -43,7 +43,7 @@ const SubserviceDirectionPage = ({ subdirection }) => {
               return (
                 <p
                   style={{
-                    textAlign: "justify",
+                    textAlign: "left",
                     fontSize: "1.2rem",
                     textIndent: "30px",
                   }}

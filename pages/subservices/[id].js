@@ -37,7 +37,7 @@ const SubservicePage = ({ subservice, directions }) => {
               return (
                 <p
                   style={{
-                    textAlign: "justify",
+                    textAlign: "left",
                     fontSize: "1.2rem",
                     textIndent: "30px",
                   }}
@@ -68,7 +68,7 @@ const SubservicePage = ({ subservice, directions }) => {
             return (
               <p
                 style={{
-                  textAlign: "justify",
+                  textAlign: "left",
                   fontSize: "1.2rem",
                   textIndent: "30px",
                 }}
