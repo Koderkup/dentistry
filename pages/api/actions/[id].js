@@ -57,7 +57,7 @@ const updateAction = async (req, res) => {
     }
     const { id } = req.query;
     const { title, info, image } = req.body;
-    if (!title || !info || image.length === 0)
+    if (!title || !info /*|| image.length === 0*/)
       return res.status(500).json({ err: "Incomplete data" });
     const connection = mysql.createConnection({
       host: process.env.DB_HOST,
@@ -72,7 +72,7 @@ const updateAction = async (req, res) => {
       }
     });
     const updateActionQuery =
-      "UPDATE actions SET title=?, info=?, image=? WHERE id=?";
+      "UPDATE actions SET title=?, info=?, image=?, timestamp=CURRENT_TIMESTAMP WHERE id=?";
     await connection.execute(updateActionQuery, [title, info, image, id]);
     res.json({ msg: "Акция успешно обновлена" });
     connection.end();

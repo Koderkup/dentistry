@@ -59,19 +59,22 @@ function ActionItem({ action }) {
     <div className={`card ${s.action_card}`} style={{ width: "18rem" }}>
       <Image
         // src={action.image[0].url}
-        src={'./assets/logo_mirastom.svg'}
+        src={"./assets/logo_mirastom.svg"}
         className="img-fluid rounded-start rounded-end"
         alt="action_image"
         width={120}
         height={120}
-        style={{ margin: 'auto' }}
+        style={{ margin: "auto" }}
       />
       <div className="card-body">
-        <h5 className="card-title" style={{ maxHeight: "96px" }}>
+        <h5
+          className="card-title"
+          style={{ maxHeight: "96px", overflow: "hidden" }}
+        >
           {action.title}
         </h5>
         <p className={`card-text ${s.action_text}`}>{action.info}</p>
-        <ul className="list-group list-group-flush">
+        <ul className={`list-group list-group-flush ${s.timestamp}`}>
           <li
             className="list-group-item"
             style={{ borderRadius: "40px", color: "red" }}

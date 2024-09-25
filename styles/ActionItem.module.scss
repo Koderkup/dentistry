@@ -2,12 +2,18 @@
     // background-image: url('../public/assets/action_background.png');
     // background-attachment: cover;
     // background-size: 100% 100%;
+    position: reletive;
 }
 
 .action_text {
     max-height: 150px;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.timestamp {
+    position: absolute;
+    bottom: 70px;
 }
 
 @media screen and (max-width: 1000px) {

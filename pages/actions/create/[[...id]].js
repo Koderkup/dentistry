@@ -93,7 +93,7 @@ const ActionsManager = () => {
         payload: { error: "Authentication is not valid." },
       });
 
-    if (!title || !info || image.length === 0)
+    if (!title || !info /*|| image.length === 0*/)
       return dispatch({
         type: "NOTIFY",
         payload: { error: "Please add all the fields." },
