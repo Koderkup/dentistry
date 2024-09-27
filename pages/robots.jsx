@@ -47,7 +47,7 @@ export async function getStaticProps() {
   staticPaths.unshift("Allow: /");
   const articlesPath = articleIds.map((id) => `Allow: /articles/${id}`);
   const doctorsPath = doctorIds.map((id) => `Allow: /doctors/${id}`);
-  const servicesPath = serviceIds.map((id) => `Allow: /services/${id}`);
+  //const servicesPath = serviceIds.map((id) => `Allow: /services/${id}`);
   const subServicePath = subServiceIds.map((id) => `Allow: /subservices/${id}`);
   const subServiceDirectionPath = subServiceDirectionIds.map(
     (id) => `Allow: /subservice-direction/subdirection/${id}`
@@ -56,7 +56,7 @@ export async function getStaticProps() {
     ...staticPaths,
     ...articlesPath,
     ...doctorsPath,
-    ...servicesPath,
+    //...servicesPath,
     ...subServicePath,
     ...subServiceDirectionPath,
   ];

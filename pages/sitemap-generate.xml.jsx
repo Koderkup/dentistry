@@ -78,16 +78,6 @@ export async function getStaticProps() {
       </url>`
           )
           .join("")}
-          ${serviceIds
-            .map(
-              (id) => `<url>
-        <loc>${process.env.BASE_URL}services/${id}</loc>
-        <lastmod>${new Date().toISOString()}</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>1.0</priority>
-      </url>`
-            )
-            .join("")}
             ${subServiceIds
               .map(
                 (id) => `<url>
@@ -123,3 +113,15 @@ const Sitemap = () => {
 };
 
 export default Sitemap;
+
+
+//  ${serviceIds
+//             .map(
+//               (id) => `<url>
+//         <loc>${process.env.BASE_URL}services/${id}</loc>
+//         <lastmod>${new Date().toISOString()}</lastmod>
+//         <changefreq>monthly</changefreq>
+//         <priority>1.0</priority>
+//       </url>`
+//             )
+//             .join("")}
