@@ -93,7 +93,7 @@ export async function getStaticProps() {
                   (id) => `<url>
         <loc>${
           process.env.BASE_URL
-        }subservice-direction/subdirection/${id}</loc>
+        }subservice-direction/${id}</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>1.0</priority>

@@ -50,7 +50,7 @@ export async function getStaticProps() {
   //const servicesPath = serviceIds.map((id) => `Allow: /services/${id}`);
   const subServicePath = subServiceIds.map((id) => `Allow: /subservices/${id}`);
   const subServiceDirectionPath = subServiceDirectionIds.map(
-    (id) => `Allow: /subservice-direction/subdirection/${id}`
+    (id) => `Allow: /subservice-direction/${id}`
   );
   const allPaths = [
     ...staticPaths,
