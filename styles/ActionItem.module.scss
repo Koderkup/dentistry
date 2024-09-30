@@ -2,7 +2,6 @@
     // background-image: url('../public/assets/action_background.png');
     // background-attachment: cover;
     // background-size: 100% 100%;
-    position: reletive;
 }
 
 .action_text {
@@ -11,10 +10,6 @@
     text-overflow: ellipsis;
 }
 
-.timestamp {
-    position: absolute;
-    bottom: 40px;
-}
 
 @media screen and (max-width: 1000px) {
     .action_image {
