@@ -1,18 +1,18 @@
 import Head from "next/head";
 
-export default function Meta() {
+export default function Meta({title, description, keywords}) {
   return (
     <Head>
       <title>
-        Стоматология Мирастом - Витебск | Услуги, лечение зубов, профилактика
+        {title}
       </title>
       <meta
         name="description"
-        content="Стоматология Мирастом – качественные стоматологические услуги в Витебске. Мы предлагаем широкий спектр лечения и профилактики заболеваний полости рта. Запишитесь на прием прямо сейчас!"
+        content={description}
       />
       <meta
         name="keywords"
-        content="Стоматология Витебска, стоматологические услуги, лечение зубов, профилактика стоматологических заболеваний"
+        content={keywords}
       />
       <meta name="author" content="Мирастом" />
       <meta
